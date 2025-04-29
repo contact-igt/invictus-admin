@@ -1,12 +1,11 @@
 import Stack from '@mui/material/Stack';
-import PetTipsSection from 'components/sections/pettips';
-
-const PetTips = () => {
+import UsersSection from 'components/sections/petusers';
+const Users = () => {
   return (
     <Stack direction="column" width="100%" minHeight="100vh" p={3.5} spacing={3.5}>
-      <PetTipsSection />
+      <UsersSection />
     </Stack>
   );
 };
 
-export default PetTips;
+export default Users;

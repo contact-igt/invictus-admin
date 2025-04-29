@@ -11,6 +11,7 @@ import Image from 'components/base/Image';
 import LogoImg from 'assets/images/Logo.png';
 // import LanguageSelect from './LanguageSelect';
 import ProfileMenu from './ProfileMenu';
+import { useAuth } from 'redux/selectors/auth/authSelector';
 
 interface TopbarProps {
   isClosing: boolean;
@@ -19,6 +20,8 @@ interface TopbarProps {
 }
 
 const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
+  const { user } = useAuth();
+
   const handleDrawerToggle = () => {
     if (!isClosing) {
       setMobileOpen(!mobileOpen);
@@ -85,7 +88,7 @@ const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
             <IconifyIcon icon="solar:bell-outline" />
           </Badge>
         </IconButton>
-        <ProfileMenu />
+        <ProfileMenu user={user}/>
       </Stack>
     </Stack>
   );

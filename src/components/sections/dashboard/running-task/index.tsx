@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
@@ -14,7 +15,7 @@ const chartData = [
   },
 ];
 
-const RunningTask = () => {
+const RunningTask = ({usersLength}: any) => {
   return (
     <Stack
       component={Paper}
@@ -26,10 +27,10 @@ const RunningTask = () => {
     >
       <Box width={1} maxWidth={130}>
         <Typography variant="subtitle1" fontWeight={600} color="info.lighter">
-          Running Task
+          Total Users
         </Typography>
         <Typography variant="h3" fontWeight={600} color="info.lighter" mt={2.5}>
-          65
+          {usersLength} Users
         </Typography>
       </Box>
       <Stack spacing={2} alignItems="center" width={1}>
@@ -39,7 +40,7 @@ const RunningTask = () => {
             100
           </Typography>
           <Typography variant="subtitle2" color="text.disabled" mt={0.5}>
-            Task
+            Pets
           </Typography>
         </Box>
       </Stack>

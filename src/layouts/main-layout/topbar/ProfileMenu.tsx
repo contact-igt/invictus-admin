@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { Avatar3 } from 'data/images';
 import Menu from '@mui/material/Menu';
@@ -10,6 +11,10 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconifyIcon from 'components/base/IconifyIcon';
+import { clearAuthData } from 'redux/slices/auth/authSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import path from '../../../routes/paths';
 
 interface MenuItems {
   id: number;
@@ -35,22 +40,19 @@ const menuItems: MenuItems[] = [
   },
   {
     id: 4,
-    title: 'Switch Account',
-    icon: 'hugeicons:user-switch',
-  },
-  {
-    id: 5,
     title: 'Help Center',
     icon: 'carbon:help',
   },
   {
-    id: 6,
+    id: 5,
     title: 'Logout',
     icon: 'hugeicons:logout-03',
   },
 ];
 
-const ProfileMenu = () => {
+const ProfileMenu = ({user}: any) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -60,6 +62,11 @@ const ProfileMenu = () => {
 
   const handleProfileMenuClose = () => {
     setAnchorEl(null);
+  };  
+
+  const logout = () => {
+    dispatch(clearAuthData());
+    navigate(path.signin);
   };
 
   return (
@@ -72,7 +79,7 @@ const ProfileMenu = () => {
         disableRipple
       >
         <Avatar
-          src={Avatar3}
+          src={user && user?.profile_picture || Avatar3}
           sx={{
             height: 48,
             width: 48,
@@ -99,13 +106,13 @@ const ProfileMenu = () => {
       >
         <Box p={1}>
           <MenuItem onClick={handleProfileMenuClose} sx={{ '&:hover': { bgcolor: 'info.light' } }}>
-            <Avatar src={Avatar3} sx={{ mr: 1, height: 42, width: 42 }} />
+            <Avatar src={user && user?.profile_picture || Avatar3} sx={{ mr: 1, height: 42, width: 42 }} />
             <Stack direction="column">
               <Typography variant="body2" color="text.primary" fontWeight={600}>
-                Alex Stanton
+                {user && user?.username}
               </Typography>
               <Typography variant="caption" color="text.secondary" fontWeight={400}>
-                alex@example.com
+              {user && user?.email}
               </Typography>
             </Stack>
           </MenuItem>
@@ -115,8 +122,14 @@ const ProfileMenu = () => {
 
         <Box p={1}>
           {menuItems.map((item) => {
+              const handleClick = () => {
+                handleProfileMenuClose();
+                if (item.title === 'Logout') {
+                  logout(); // call your logout function here
+                }
+              };
             return (
-              <MenuItem key={item.id} onClick={handleProfileMenuClose} sx={{ py: 1 }}>
+              <MenuItem key={item.id} onClick={handleClick} sx={{ py: 1 }}>
                 <ListItemIcon sx={{ mr: 1, color: 'text.secondary', fontSize: 'h5.fontSize' }}>
                   <IconifyIcon icon={item.icon} />
                 </ListItemIcon>

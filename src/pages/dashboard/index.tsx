@@ -7,8 +7,13 @@ import UpcomingTask from 'components/sections/dashboard/upcoming-task';
 import WeekCalendar from 'components/sections/dashboard/week-calendar';
 import TaskOverview from 'components/sections/dashboard/task-overview';
 import MonthlyMentors from 'components/sections/dashboard/monthly-mentors';
+import { DashboardApis } from 'services/dashboard';
+import { useQuery } from 'react-query';
 
 const Dashboard = () => {
+  const { getAllUsers } = new DashboardApis();
+  const { data: usersData } = useQuery(["users"], getAllUsers);
+  
   return (
     <Stack direction={{ xs: 'column', md: 'row' }}>
       <Stack p={3.5} spacing={3.5} direction="column" width={{ xs: 1, md: 'calc(100% - 460px)' }}>
@@ -17,17 +22,13 @@ const Dashboard = () => {
           spacing={3.5}
           direction={{ xs: 'column', sm: 'row', md: 'column', xl: 'row' }}
         >
-          <RunningTask />
+          <RunningTask usersLength={usersData?.users?.length}/>
           <Activity />
         </Stack>
 
         <MonthlyMentors />
         <UpcomingTask />
         <TaskOverview />
-{/* 
-        <Box display={{ xs: 'none', md: 'block' }}>
-          <Footer />
-        </Box> */}
       </Stack>
 
       <Box
@@ -49,10 +50,6 @@ const Dashboard = () => {
           <WeekCalendar />
           <TaskToday />
         </Stack>
-
-        {/* <Box display={{ xs: 'block', md: 'none' }}>
-          <Footer />
-        </Box> */}
       </Box>
     </Stack>
   );
