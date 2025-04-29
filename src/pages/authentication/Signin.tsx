@@ -11,13 +11,19 @@ import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
 import LogoImg from 'assets/images/Logo.png';
-
-interface User {
-  [key: string]: string;
-}
+import { useLoginMutation } from './hooks/useLogin';
+import { useSnackbar } from 'notistack';
+import { User } from '../../services/auth/script';
+import { setAuthData } from 'redux/slices/auth/authSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
-  const [user, setUser] = useState<User>({ email: '', password: '' });
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const { mutate, isLoading } = useLoginMutation();
+  const { enqueueSnackbar } = useSnackbar();
+  const [user, setUser] = useState<User>({ email: '', password: '', role: 'admin' });
   const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +32,27 @@ const Signin = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
+    mutate(user, {
+      onSuccess: (data) => {
+        if (!data || data.success === false) {
+          enqueueSnackbar(data?.message || 'Login failed', { variant: 'error' });
+          return;
+        }
+    
+        enqueueSnackbar('Login successful', { variant: 'success' });
+        dispatch(setAuthData({
+          token: data.accessToken,
+          refreshToken: data.refreshToken,
+          user: data.user,
+        }));
+        navigate('/');
+      },
+      onError: (error) => {
+        enqueueSnackbar(error?.response?.data?.message || 'Something went wrong', {
+          variant: 'error',
+        });
+      },
+    });
   };
 
   return (
@@ -130,8 +156,8 @@ const Signin = () => {
           </Link>
         </Stack>
 
-        <Button style={{marginBottom: '20px'}} type="submit" variant="contained" size="medium" fullWidth>
-          Sign In
+        <Button style={{marginBottom: '20px'}} type="submit" variant="contained" size="medium" fullWidth disabled={isLoading}>
+          {isLoading ? 'Signing In...' : 'Sign In'}
         </Button>
       </Stack>
     </>
