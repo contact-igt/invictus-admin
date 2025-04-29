@@ -24,10 +24,6 @@ const Dashboard = () => {
         <MonthlyMentors />
         <UpcomingTask />
         <TaskOverview />
-{/* 
-        <Box display={{ xs: 'none', md: 'block' }}>
-          <Footer />
-        </Box> */}
       </Stack>
 
       <Box
@@ -49,10 +45,6 @@ const Dashboard = () => {
           <WeekCalendar />
           <TaskToday />
         </Stack>
-
-        {/* <Box display={{ xs: 'block', md: 'none' }}>
-          <Footer />
-        </Box> */}
       </Box>
     </Stack>
   );

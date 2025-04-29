@@ -38,14 +38,9 @@ const sitemap: MenuItem[] = [
   {
     id: 'users',
     subheader: 'Users',
-    path: '#!',
+    path: paths.users,
     icon: 'mynaui:user-hexagon',
-  },
-  {
-    id: 'messages',
-    subheader: 'Messages',
-    path: '#!',
-    icon: 'mage:message-dots',
+    active: true,
   },
   {
     id: 'settings',

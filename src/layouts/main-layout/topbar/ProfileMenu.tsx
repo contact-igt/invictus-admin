@@ -35,16 +35,11 @@ const menuItems: MenuItems[] = [
   },
   {
     id: 4,
-    title: 'Switch Account',
-    icon: 'hugeicons:user-switch',
-  },
-  {
-    id: 5,
     title: 'Help Center',
     icon: 'carbon:help',
   },
   {
-    id: 6,
+    id: 5,
     title: 'Logout',
     icon: 'hugeicons:logout-03',
   },

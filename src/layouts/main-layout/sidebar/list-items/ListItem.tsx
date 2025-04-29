@@ -19,15 +19,6 @@ const ListItem = ({ subheader, icon, path, active }: MenuItem) => {
   };
   
 
-
-
-  console.log(comingPath, 'comingPath');
-  console.log(currentPath, 'currentPath');
-  console.log(currentPath === comingPath, 'coming');
-  
-  
-  
-
   return (
     <ListItemButton
       component={Link}
