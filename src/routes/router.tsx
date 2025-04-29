@@ -6,6 +6,7 @@ import MainLayout from 'layouts/main-layout';
 import AuthLayout from 'layouts/auth-layout';
 import Splash from 'components/loader/Splash';
 import PageLoader from 'components/loader/PageLoader';
+import UpcomingEvents from 'pages/upcoming-events';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -68,6 +69,22 @@ const router = createBrowserRouter(
             {
               path: paths.users,
               element: <Users />,
+            },
+          ],
+        },
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <Outlet />
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.events,
+              element: <UpcomingEvents />,
             },
           ],
         },

@@ -32,7 +32,7 @@ const sitemap: MenuItem[] = [
     id: 'Pet Tips',
     subheader: 'Pet Tips',
     path: paths.pettips,
-    icon: 'hugeicons:book-open-01',
+    icon: 'mdi:paw',
     active: true,
   },
   {
@@ -43,10 +43,10 @@ const sitemap: MenuItem[] = [
     active: true,
   },
   {
-    id: 'settings',
-    subheader: 'Settings',
-    path: '#!',
-    icon: 'hugeicons:settings-01',
+    id: 'events',
+    subheader: 'Future Events',
+    path: paths.events,
+    icon: 'mdi:calendar-clock',
   },
   // {
   //   id: 'authentication',
