@@ -2,9 +2,7 @@ import { useState, ChangeEvent } from 'react';
 import { tasks } from 'data/tasks';
 import TaskCard from './TipsCard';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { InputAdornment, Stack, TextField } from '@mui/material';
-import IconifyIcon from 'components/base/IconifyIcon';
+import PageTitle from 'components/common/PageTitle';
 
 const PetTipsResponsive = () => {
   const [searchText, setSearchText] = useState('');
@@ -22,27 +20,7 @@ const PetTipsResponsive = () => {
 
   return (
     <>
-       <Stack alignItems="center" justifyContent="space-between">
-        <Typography variant="h4" component="h2" minWidth={200}>
-          Pet Tips
-        </Typography>
-        <TextField
-          variant="filled"
-          size="small"
-          placeholder="Search Tips"
-          value={searchText}
-          onChange={handleInputChange}
-          sx={{ width: 1, maxWidth: 300 }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconifyIcon icon="mynaui:search" />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Stack>
-
+      <PageTitle title="Pet Tips" searchText={searchText} handleInputChange={handleInputChange} />
       <Grid container spacing={2}>
         {filteredTasks.map((task) => (
           <Grid key={task.id} item xs={12} sm={6} md={4} lg={3}>

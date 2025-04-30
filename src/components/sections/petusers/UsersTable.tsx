@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
-import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, useGridApiRef, GridApi, GridCellParams } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
 import ActionMenu from './ActionMenu';
-import { users, User } from 'data/users';
 import { Box } from '@mui/material';
+import { UserProps } from 'services/user/script';
 
-const columns: GridColDef<User>[] = [
+const columns: GridColDef<UserProps>[] = [
   {
-    field: 'avatar',
+    field: 'profile_picture',
     headerName: 'Avatar',
     sortable: false,
     align: 'center',
@@ -25,14 +26,14 @@ const columns: GridColDef<User>[] = [
           paddingY: '8px',
         }}
       >
-        <Avatar alt={params.row.name} src={params.value as string} sx={{ width: 36, height: 36 }} />
+        <Avatar alt={params.row.username} src={params.value as string} sx={{ width: 36, height: 36 }} />
       </Box>
     ),
     flex: 1,
     minWidth: 80,
   },
   {
-    field: 'name',
+    field: 'username',
     headerName: 'Name',
     flex: 2,
     minWidth: 150,
@@ -48,39 +49,65 @@ const columns: GridColDef<User>[] = [
     headerAlign: 'left',
   },
   {
-    field: 'phone',
+    field: 'phone_number',
     headerName: 'Phone Number',
     flex: 1.5,
     minWidth: 150,
     align: 'left',
     headerAlign: 'left',
+    valueGetter: (params) => `+971-${params}`,
   },
   {
-    field: 'profileType',
-    headerName: 'Profile Type',
+    field: 'profile_types',
+    headerName: 'Profile Type(s)',
     flex: 1.5,
     minWidth: 150,
     align: 'left',
     headerAlign: 'left',
+    valueGetter: (params) => {
+      const values = params as string[];
+      if (!Array.isArray(values)) return '';
+  
+      return values
+        .map((str: string) =>
+          str
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        )
+        .join(', ');
+    },
   },
   {
-    field: 'joinDate',
+    field: 'created_at',
     headerName: 'Join Date',
     flex: 1,
     minWidth: 120,
     align: 'left',
     headerAlign: 'left',
-    valueFormatter: () => '15 Sept 2020',
+    valueFormatter: (params: GridCellParams) => {      
+      const raw = params as unknown as string;
+      if (!raw) return '';
+      const date = new Date(raw);
+      const day = date.getDate();
+      const monthNames = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'
+      ];
+      const month = monthNames[date.getMonth()];
+      const year = date.getFullYear();
+      return `${day} ${month} ${year}`;
+    },
   },
   {
-    field: 'status',
-    headerName: 'Status',
+    field: 'role',
+    headerName: 'Role',
     flex: 1,
     minWidth: 120,
     align: 'center',
     headerAlign: 'center',
     renderCell: (params) => {
-      const color = params.value === 'active' ? 'success' : 'warning';
+      const color = params.value === 'user' ? 'success' : 'warning';
       return <Chip label={params.value} size="small" color={color} />;
     },
   },
@@ -98,10 +125,13 @@ const columns: GridColDef<User>[] = [
 
 interface UsersTableProps {
   searchText: string;
+  usersData: UserProps[];
 }
 
-const UsersTable = ({ searchText }: UsersTableProps) => {
+const UsersTable = ({ searchText, usersData }: UsersTableProps) => {
   const apiRef = useGridApiRef<GridApi>();
+  console.log(usersData, 'usersData');
+  
 
   useEffect(() => {
     apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((word) => word !== ''));
@@ -110,7 +140,7 @@ const UsersTable = ({ searchText }: UsersTableProps) => {
   return (
     <DataGrid
       apiRef={apiRef}
-      rows={users}
+      rows={usersData}
       columns={columns}
       pageSizeOptions={[5, 10, 20]}
       initialState={{ pagination: { paginationModel: { pageSize: 5 } } }}

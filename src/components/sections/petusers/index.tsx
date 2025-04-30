@@ -1,47 +1,33 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, Suspense } from 'react';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconifyIcon from 'components/base/IconifyIcon';
 import UsersTable from './UsersTable';
+import PageTitle from 'components/common/PageTitle';
+import { useQuery } from 'react-query';
+import { UserApis } from 'services/user';
+import PageLoader from 'components/loader/PageLoader';
 
-const TaskOverview = () => {
+const UsersSection = () => {
+  const { getAllUsers } = new UserApis();
+  const { data: usersData, isLoading } = useQuery(["all-users"], getAllUsers);
   const [searchText, setSearchText] = useState('');
+  
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
 
-  return (
-    <Stack direction="column" spacing={1} width={1}>
-      <Stack alignItems="center" justifyContent="space-between">
-        <Typography variant="h4" component="h2" minWidth={200}>
-          Our Users
-        </Typography>
-        <TextField
-          variant="filled"
-          size="small"
-          placeholder="Search User"
-          value={searchText}
-          onChange={handleInputChange}
-          sx={{ width: 1, maxWidth: 250 }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconifyIcon icon={'mynaui:search'} />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Stack>
+  if(isLoading) return <Suspense fallback={<PageLoader />}></Suspense>
 
+  return (
+    
+    <Stack direction="column" spacing={1} width={1}>
+      <PageTitle title="Users" searchText={searchText} handleInputChange={handleInputChange} />
       <Paper sx={{ mt: 1.5, p: 0, pb: 0.75, minHeight: 411, width: 1 }}>
-        <UsersTable searchText={searchText} />
+        <UsersTable searchText={searchText} usersData={usersData?.users}/>
       </Paper>
     </Stack>
   );
 };
 
-export default TaskOverview;
+export default UsersSection;
