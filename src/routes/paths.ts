@@ -8,6 +8,7 @@ export const rootPaths = {
 export default {
   dashboard: `/${rootPaths.pageRoot}/dashboard`,
   pettips: `/${rootPaths.pageRoot}/pettips`,
+  petTipDetail: `/${rootPaths.pageRoot}/pettips/pettips-details/:tipId`,
   users: `/${rootPaths.pageRoot}/users`,
   events: `/${rootPaths.pageRoot}/upcoming-events`,
   mentors: `/${rootPaths.pageRoot}/mentors`,

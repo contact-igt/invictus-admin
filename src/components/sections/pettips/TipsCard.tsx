@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
@@ -20,10 +21,13 @@ const TipCard: FC<TipCardProps> = ({ data }) => {
 
   return (
     <Card
+      component={RouterLink}
+      to={`pettips-details/${data.id}`}
       sx={{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
+        textDecoration: 'none',
         userSelect: 'none',
         boxShadow: '0 1px 4px rgba(0,0,0,0.1)',
         transition: 'box-shadow 0.3s, transform 0.3s',
@@ -32,7 +36,7 @@ const TipCard: FC<TipCardProps> = ({ data }) => {
           transform: 'translateY(-4px)',
         },
         borderRadius: 2,
-        cursor: 'pointer',
+        color: 'inherit',
       }}
     >
       <CardMedia component="img" height="140" image={data.image} alt={data.title} />

@@ -48,6 +48,7 @@ const UsersSection = () => {
       <Stack direction="column" spacing={1} width={1}>
         <PageTitle
           title="Users"
+          btnText="User"
           searchText={searchText}
           handleInputChange={handleInputChange}
           openModal={handleOpenUserAddModal}

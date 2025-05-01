@@ -3,7 +3,15 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActions, InputAdornment, Stack, TextField } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
 
-const PageTitle = ({ title, isSearchEnable = true, isAddEnable = true, searchText, handleInputChange, openModal }: any) => {
+const PageTitle = ({
+  title,
+  btnText,
+  isSearchEnable = true,
+  isAddEnable = true,
+  searchText,
+  handleInputChange,
+  openModal,
+}: any) => {
   return (
     <>
       <Stack alignItems="center" justifyContent="space-between">
@@ -40,7 +48,7 @@ const PageTitle = ({ title, isSearchEnable = true, isAddEnable = true, searchTex
                 startIcon={<IconifyIcon icon="gridicons:plus-small" />}
                 fullWidth
               >
-                {`Add ${title}`}
+                {`Add ${btnText}`}
               </Button>
             </CardActions>
           )}

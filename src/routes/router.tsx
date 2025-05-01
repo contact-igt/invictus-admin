@@ -6,13 +6,14 @@ import MainLayout from 'layouts/main-layout';
 import AuthLayout from 'layouts/auth-layout';
 import Splash from 'components/loader/Splash';
 import PageLoader from 'components/loader/PageLoader';
-import UpcomingEvents from 'pages/upcoming-events';
 import ProtectedRoute from './security';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
 const PetTips = lazy(() => import('pages/pettips'));
 const Users = lazy(() => import('pages/users'));
+const UpcomingEvents = lazy(() => import('pages/upcoming-events'));
+const PetTipsDetails = lazy(() => import('pages/pettips/pettips-details/PetTipsDetails'));
 const Signin = lazy(() => import('pages/authentication/Signin'));
 
 const router = createBrowserRouter(
@@ -57,6 +58,10 @@ const router = createBrowserRouter(
             {
               path: paths.pettips,
               element: <PetTips />,
+            },
+            {
+              path: paths.petTipDetail,
+              element: <PetTipsDetails />,
             },
           ],
         },
