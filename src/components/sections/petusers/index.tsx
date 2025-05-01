@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, ChangeEvent, useMemo, useCallback } from 'react';
+import { useState, ChangeEvent } from 'react';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import UsersTable from './UsersTable';
@@ -11,9 +11,11 @@ import { Popup } from 'components/common/Popup';
 import UserForm from './UserForm';
 
 const UsersSection = () => {
-  const userApis = useMemo(() => new UserApis(), []);
-  const getAllUsers = useCallback(() => userApis.getAllUsers(), [userApis]);
-  const { data: usersData, isLoading } = useQuery(['all-users'], getAllUsers);
+  const { getAllUsers } = new UserApis();
+  const { data: usersData, isLoading } = useQuery(['all-users'], getAllUsers, {
+    staleTime: 1000 * 60 * 3,
+  });
+
   const [searchText, setSearchText] = useState('');
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);

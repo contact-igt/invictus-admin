@@ -11,8 +11,10 @@ import { DashboardApis } from 'services/dashboard';
 import { useQuery } from 'react-query';
 
 const Dashboard = () => {
-  const { getAllUsers } = new DashboardApis();
-  const { data: usersData } = useQuery(["users"], getAllUsers);
+    const { getAllUsers } = new DashboardApis();
+    const { data: usersData } = useQuery(['all-users'], getAllUsers, {
+      staleTime: 1000 * 60 * 3,
+    });
   
   return (
     <Stack direction={{ xs: 'column', md: 'row' }}>
