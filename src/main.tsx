@@ -9,6 +9,8 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { QueryClientProvider, QueryClient } from "react-query";
 import { SnackbarProvider } from 'notistack';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from './redux/store';
 
 const queryClient = new QueryClient();
 
@@ -16,12 +18,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
     <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
     <SnackbarProvider maxSnack={3}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <RouterProvider router={router} />
     </ThemeProvider>
     </SnackbarProvider>
+    </PersistGate>
     </Provider>
     </QueryClientProvider>
   </React.StrictMode>,
