@@ -48,20 +48,16 @@ const sitemap: MenuItem[] = [
     path: paths.events,
     icon: 'mdi:calendar-clock',
   },
-  // {
-  //   id: 'authentication',
-  //   subheader: 'Authentication',
-  //   icon: 'mynaui:lock-password',
-  //   active: true,
-  //   items: [
-  //     {
-  //       name: 'Sign In',
-  //       pathName: 'signin',
-  //       icon: '',
-  //       path: paths.signin,
-  //     }
-  //   ],
-  // },
+  {
+    id: 'notifications',
+    subheader: 'Notifications',
+    icon: 'solar:bell-outline',
+  },
+  {
+    id: "helpcenter",
+    subheader: 'Help Center',
+    icon: 'carbon:help',
+  },
 ];
 
 export default sitemap;

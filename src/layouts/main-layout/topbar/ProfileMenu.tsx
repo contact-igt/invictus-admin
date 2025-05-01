@@ -34,16 +34,6 @@ const menuItems: MenuItems[] = [
     icon: 'hugeicons:account-setting-02',
   },
   {
-    id: 3,
-    title: 'Notifications',
-    icon: 'solar:bell-outline',
-  },
-  {
-    id: 4,
-    title: 'Help Center',
-    icon: 'carbon:help',
-  },
-  {
     id: 5,
     title: 'Logout',
     icon: 'hugeicons:logout-03',
