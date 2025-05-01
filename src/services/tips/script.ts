@@ -8,3 +8,7 @@ export interface Tip {
   created_at: string;
   updated_at: string;
 }
+
+export interface PetTipsDetailsProps {
+  tipId: number;
+}
