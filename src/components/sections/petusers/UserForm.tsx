@@ -60,7 +60,7 @@ const UserForm = ({ isEdit, userData }: UserForm) => {
   };
 
   return (
-    <Stack width={500} flexDirection="column" p={4}>
+    <Stack width={500} flexDirection="column" p={2}>
       <Typography align="left" variant="h4">
         {isEdit ? 'Edit User' : 'Add User'}
       </Typography>

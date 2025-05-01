@@ -7,8 +7,8 @@ const { login } = new AuthApis();
 export const useLoginMutation = () => {
   return useMutation({
     mutationFn: (data: User) => login(data),
-    onSuccess: (data) => {
-      console.log('Login success:', data);
+    onSuccess: () => {
+      // console.log('Login success:', data);
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
