@@ -30,7 +30,6 @@ const UsersSection = () => {
   };
 
   const handleOpenUserEditModal = (id: number) => {
-    console.log(id);
     const user = usersData?.users?.find((user: any) => user.id === id);
     setSelectedUser(user);
     setOpenEditModal(!openEditModal);
