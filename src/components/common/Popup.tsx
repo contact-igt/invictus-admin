@@ -39,8 +39,8 @@ export const Popup = ({ children, open, onClose }: any) => {
           sx={{
             cursor: 'pointer',
             position: 'absolute',
-            top: -30,
-            right: -30,
+            top: 30,
+            right: 20,
             fontSize: 30,
           }}
         />
