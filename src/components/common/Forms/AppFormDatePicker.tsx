@@ -43,7 +43,7 @@ const AppFormDateTimePicker: React.FC<AppFormDateTimePickerProps> = ({
   const showDateTime = showDate && showTime && !timeName;
 
   return (
-    <Box display="flex" mb="10px" mt="30px" gap={2}>
+    <Box display="flex" mb="10px" mt="10px" gap={2}>
       {showDateTime ? (
         <Box flex={1}>
           <DateTimePicker

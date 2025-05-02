@@ -6,7 +6,7 @@ import { eventValidationSchema } from 'schemas/validations';
 import AppFormButton from 'components/common/Forms/AppFormButton';
 import AppFormTextArea from 'components/common/Forms/AppFormTextArea';
 import AppFormDateTimePicker from 'components/common/Forms/AppFormDatePicker';
-import { EventsFormProps,PetTypes } from 'services/pet/script';
+import { EventsFormProps, PetTypes } from 'services/pet/script';
 import AppFormSelect from 'components/common/Forms/AppFormSelectFeild';
 
 const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
@@ -15,7 +15,7 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
   };
 
   return (
-    <Stack width={500} flexDirection="column" p={2}>
+    <Stack width={500} flexDirection="column" p={2} overflow={'scroll'} height={600}>
       <Typography align="left" variant="h4">
         {isEdit ? 'Edit Event' : 'Add Event'}
       </Typography>
@@ -25,9 +25,12 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             event_title: '',
             event_description: '',
             full_address: '',
-            start_date_time: null,
-            end_date_time: null,
-            pet_types: null,
+            start_date: null,
+            start_time: null,
+            end_date: null,
+            end_time: null,
+            pin_location: '',
+            pet_types: [],
           }}
           validationSchema={eventValidationSchema}
           onSubmit={handleSubmit}
@@ -59,6 +62,7 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             variant="standard"
             rows={4}
           />
+
           <AppFormTextField
             name="full_address"
             label="Full Address"
@@ -67,9 +71,29 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             variant="standard"
           />
 
-          <AppFormDateTimePicker dateName="start_date_time" dateLabel="Start Date & Time" />
+          <AppFormTextField
+            name="pin_location"
+            label="Pin Location Link"
+            placeholder="Copy Here Pin Location Link"
+            icon="mdi:map-marker-radius"
+            variant="standard"
+          />
+          <Stack fontSize={"13px"} fontFamily={'Plus Jakarta Sans, sans-serif'} fontWeight={400}>
+            Event Timings
+          </Stack>
+          <AppFormDateTimePicker
+            dateName="start_date"
+            timeName="start_time"
+            dateLabel="Start Date"
+            timeLabel="Start Time"
+          />
 
-          <AppFormDateTimePicker dateName="end_date_time" dateLabel="Start Date & Time" />
+          <AppFormDateTimePicker
+            dateName="end_date"
+            timeName="end_time"
+            dateLabel="End Date"
+            timeLabel="End Time"
+          />
 
           <AppFormButton label="Submit" type="submit" fullWidth={true} size="medium" />
         </AppForm>

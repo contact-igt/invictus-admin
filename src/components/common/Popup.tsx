@@ -39,9 +39,17 @@ export const Popup = ({ children, open, onClose }: any) => {
           sx={{
             cursor: 'pointer',
             position: 'absolute',
-            top: 30,
-            right: 20,
+            top: -15,
+            right: -15,
             fontSize: 30,
+            color: '#000',
+            backgroundColor: '#fff',
+            borderRadius: '50%',
+            padding: 0.8,
+            '&:hover': {
+              backgroundColor: '#000',
+              color: '#fff',
+            },
           }}
         />
         {children}

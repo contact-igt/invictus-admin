@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';

@@ -23,7 +23,7 @@ const PageTitle = ({
             <TextField
               variant="filled"
               size="small"
-              placeholder="Search Tips"
+              placeholder={`Search ${title}`}
               value={searchText}
               onChange={handleInputChange}
               sx={{ width: 1, maxWidth: 300 }}
