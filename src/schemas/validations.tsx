@@ -38,5 +38,5 @@ export const eventValidationSchema = Yup.object({
     .required('Full address is required')
     .max(255, 'Address must be at most 255 characters'),
 
-  pin_location: Yup.string().required('Location link is required').url('Enter a valid URL'),
+  // pin_location: Yup.string().required('Location link is required').url('Enter a valid URL'),
 });

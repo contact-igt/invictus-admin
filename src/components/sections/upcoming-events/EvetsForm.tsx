@@ -9,7 +9,7 @@ import AppFormTextArea from 'components/common/Forms/AppFormTextArea';
 const EventsForm = ({ isEdit }: any) => {
   const handleSubmit = (values: any) => {
     console.log('Form Values:', values);
-  };
+  }; 
 
   return (
     <Stack width={500} flexDirection="column" p={2}>
@@ -22,7 +22,6 @@ const EventsForm = ({ isEdit }: any) => {
             event_title: '',
             event_description: '',
             full_address: '',
-            pin_location: '',
           }}
           validationSchema={eventValidationSchema}
           onSubmit={handleSubmit}
