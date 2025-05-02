@@ -13,7 +13,7 @@ const PetTipsResponsive: FC = () => {
   const { data: tipsData, isLoading } = useQuery<Tip[], Error>(['tips'], getAllTips, {
     staleTime: 1000 * 60 * 3,
   });
-
+  
   const [searchText, setSearchText] = useState<string>('');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +23,7 @@ const PetTipsResponsive: FC = () => {
   if (isLoading) return <PageLoader />;
 
   const tipsArray: Tip[] = tipsData ?? [];
+  
 
   const filteredTips = tipsArray.filter((tip) => {
     const search = searchText.toLowerCase();
