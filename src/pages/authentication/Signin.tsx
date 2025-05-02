@@ -12,17 +12,11 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
 import LogoImg from 'assets/images/Logo.png';
 import { useLoginMutation } from './hooks/useLogin';
-import { useSnackbar } from 'notistack';
 import { User } from '../../services/auth/script';
-import { setAuthData } from 'redux/slices/auth/authSlice';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Signin = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate();
   const { mutate, isLoading } = useLoginMutation();
-  const { enqueueSnackbar } = useSnackbar();
   const [user, setUser] = useState<User>({ email: '', password: '', role: 'admin' });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -32,27 +26,7 @@ const Signin = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate(user, {
-      onSuccess: (data) => {
-        if (!data || data.success === false) {
-          enqueueSnackbar(data?.message || 'Login failed', { variant: 'error' });
-          return;
-        }
-    
-        enqueueSnackbar('Login successful', { variant: 'success' });
-        dispatch(setAuthData({
-          token: data.accessToken,
-          refreshToken: data.refreshToken,
-          user: data.user,
-        }));
-        navigate('/');
-      },
-      onError: (error) => {
-        enqueueSnackbar(error?.response?.data?.message || 'Something went wrong', {
-          variant: 'error',
-        });
-      },
-    });
+    mutate(user);
   };
 
   return (
@@ -90,7 +64,7 @@ const Signin = () => {
           autoFocus
           required
           InputProps={{
-            sx:{
+            sx: {
               marginTop: '30px !important',
             },
             startAdornment: (
@@ -113,9 +87,9 @@ const Signin = () => {
           required
           label="Password"
           InputProps={{
-            sx:{
+            sx: {
               marginTop: '30px !important',
-              },
+            },
             startAdornment: (
               <InputAdornment position="start">
                 <IconifyIcon icon="hugeicons:lock-key" />
@@ -156,8 +130,25 @@ const Signin = () => {
           </Link>
         </Stack>
 
-        <Button style={{marginBottom: '20px'}} type="submit" variant="contained" size="medium" fullWidth disabled={isLoading}>
-          {isLoading ? 'Signing In...' : 'Sign In'}
+        <Button
+          style={{ marginBottom: '20px' }}
+          type="submit"
+          variant="contained"
+          size="medium"
+          fullWidth
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <ThreeDots
+              height="30"
+              width="30"
+              color="#E1801C"
+              radius="9"
+              ariaLabel="three-dots-loading"
+            />
+          ) : (
+            'Sign In'
+          )}
         </Button>
       </Stack>
     </>

@@ -13,8 +13,19 @@ const AuthLayout = ({ children }: PropsWithChildren) => {
       width={1}
       minHeight="100vh"
       position="relative"
+      bgcolor="primary.main"
     >
-      <Paper sx={{ px: 3, py: 2, width: 1, maxWidth: 450 }}>{children}</Paper>
+      <Paper
+        sx={{
+          px: 3,
+          py: 2,
+          width: 1,
+          maxWidth: 450,
+          boxshadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+        }}
+      >
+        {children}
+      </Paper>
     </Stack>
   );
 };

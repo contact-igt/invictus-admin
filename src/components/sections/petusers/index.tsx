@@ -1,4 +1,5 @@
-import { useState, ChangeEvent, Suspense } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, ChangeEvent } from 'react';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import UsersTable from './UsersTable';
@@ -6,27 +7,67 @@ import PageTitle from 'components/common/PageTitle';
 import { useQuery } from 'react-query';
 import { UserApis } from 'services/user';
 import PageLoader from 'components/loader/PageLoader';
+import { Popup } from 'components/common/Popup';
+import UserForm from './UserForm';
 
 const UsersSection = () => {
   const { getAllUsers } = new UserApis();
-  const { data: usersData, isLoading } = useQuery(["all-users"], getAllUsers);
+  const { data: usersData, isLoading } = useQuery(['all-users'], getAllUsers, {
+    staleTime: 1000 * 60 * 3,
+  });
+
   const [searchText, setSearchText] = useState('');
-  
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<any>(null);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
 
-  if(isLoading) return <Suspense fallback={<PageLoader />}></Suspense>
+  const handleOpenUserAddModal = () => {
+    setOpenAddModal(!openAddModal);
+  };
+
+  const handleOpenUserEditModal = (id: number) => {
+    const user = usersData?.users?.find((user: any) => user.id === id);
+    setSelectedUser(user);
+    setOpenEditModal(!openEditModal);
+  };
+
+  const handleCloseUserEditModal = () => {
+    setOpenEditModal(false);
+    setSelectedUser(null);
+  };
+
+  if (isLoading) return <PageLoader />
 
   return (
-    
-    <Stack direction="column" spacing={1} width={1}>
-      <PageTitle title="Users" searchText={searchText} handleInputChange={handleInputChange} />
-      <Paper sx={{ mt: 1.5, p: 0, pb: 0.75, minHeight: 411, width: 1 }}>
-        <UsersTable searchText={searchText} usersData={usersData?.users}/>
-      </Paper>
-    </Stack>
+    <>
+      <Stack direction="column" spacing={1} width={1}>
+        <PageTitle
+          title="Users"
+          btnText="User"
+          searchText={searchText}
+          handleInputChange={handleInputChange}
+          openModal={handleOpenUserAddModal}
+        />
+        <Paper sx={{ mt: 1.5, p: 0, pb: 0.75, minHeight: 411, width: 1 }}>
+          <UsersTable
+            searchText={searchText}
+            usersData={usersData?.users}
+            handleEdit={(id) => handleOpenUserEditModal(id)}
+          />
+        </Paper>
+      </Stack>
+      <Popup open={openAddModal} onClose={handleOpenUserAddModal}>
+        <UserForm />
+      </Popup>
+
+      <Popup open={openEditModal} onClose={handleCloseUserEditModal}>
+        <UserForm isEdit={true} userData={selectedUser} />
+      </Popup>
+    </>
   );
 };
 

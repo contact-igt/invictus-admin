@@ -3,7 +3,15 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActions, InputAdornment, Stack, TextField } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
 
-const PageTitle = ({ title, isSearchEnable = true, isAddEnable = true, searchText, handleInputChange }: any) => {
+const PageTitle = ({
+  title,
+  btnText,
+  isSearchEnable = true,
+  isAddEnable = true,
+  searchText,
+  handleInputChange,
+  openModal,
+}: any) => {
   return (
     <>
       <Stack alignItems="center" justifyContent="space-between">
@@ -15,7 +23,7 @@ const PageTitle = ({ title, isSearchEnable = true, isAddEnable = true, searchTex
             <TextField
               variant="filled"
               size="small"
-              placeholder="Search Tips"
+              placeholder={`Search ${title}`}
               value={searchText}
               onChange={handleInputChange}
               sx={{ width: 1, maxWidth: 300 }}
@@ -29,7 +37,7 @@ const PageTitle = ({ title, isSearchEnable = true, isAddEnable = true, searchTex
             />
           )}
           {isAddEnable && (
-            <CardActions disableSpacing sx={{ marginLeft: 3, width: '210px' }}>
+            <CardActions disableSpacing sx={{ marginLeft: 3, width: '210px' }} onClick={openModal}>
               <Button
                 variant="contained"
                 size="medium"
@@ -40,7 +48,7 @@ const PageTitle = ({ title, isSearchEnable = true, isAddEnable = true, searchTex
                 startIcon={<IconifyIcon icon="gridicons:plus-small" />}
                 fullWidth
               >
-                {`Add ${title}`}
+                {`Add ${btnText}`}
               </Button>
             </CardActions>
           )}

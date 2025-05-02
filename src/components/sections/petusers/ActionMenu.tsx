@@ -27,7 +27,11 @@ const actions: Action[] = [
   },
 ];
 
-const ActionMenu = () => {
+interface ActionMenuProps {
+  onEdit: () => void;
+}
+
+const ActionMenu = ({onEdit}: ActionMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -69,7 +73,13 @@ const ActionMenu = () => {
       >
         {actions.map((actionItem) => {
           return (
-            <MenuItem key={actionItem.id} onClick={handleActionItemClick}>
+            <MenuItem
+              key={actionItem.id}
+              onClick={() => {
+                handleActionItemClick();
+                if (actionItem.title === 'Edit') onEdit();
+              }}
+            >
               <ListItemIcon sx={{ mr: 1, fontSize: 'h5.fontSize' }}>
                 <IconifyIcon
                   icon={actionItem.icon}
