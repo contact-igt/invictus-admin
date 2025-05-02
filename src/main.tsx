@@ -6,12 +6,13 @@ import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { theme } from 'theme/theme.ts';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { store, persistor } from './redux/store';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { SnackbarProvider } from 'notistack';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { SnackbarProvider } from 'notistack';
 import { PersistGate } from 'redux-persist/integration/react';
-import { persistor } from './redux/store';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <SnackbarProvider maxSnack={3}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <RouterProvider router={router} />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <RouterProvider router={router} />
+              </LocalizationProvider>
               {process.env.NODE_ENV === 'development' && (
                 <ReactQueryDevtools initialIsOpen={false} />
               )}
