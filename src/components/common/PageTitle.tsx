@@ -13,48 +13,64 @@ const PageTitle = ({
   openModal,
 }: any) => {
   return (
-    <>
-      <Stack alignItems="center" justifyContent="space-between">
-        <Typography variant="h4" component="h2" minWidth={200}>
-          {title}
-        </Typography>
-        <Stack alignItems="center">
-          {isSearchEnable && (
-            <TextField
-              variant="filled"
-              size="small"
-              placeholder={`Search ${title}`}
-              value={searchText}
-              onChange={handleInputChange}
-              sx={{ width: 1, maxWidth: 300 }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconifyIcon icon="mynaui:search" />
-                  </InputAdornment>
-                ),
+    <Stack
+      direction={{ xs: 'column', sm: 'row' }}
+      spacing={2}
+      alignItems={{ xs: 'flex-start', sm: 'center' }}
+      justifyContent="space-between"
+      flexWrap="wrap"
+      mb={2}
+    >
+      <Typography variant="h4" component="h2" minWidth={200}>
+        {title}
+      </Typography>
+
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={2}
+        alignItems={{ xs: 'stretch', sm: 'center' }}
+        width={{ xs: '100%', sm: 'auto' }}
+      >
+        {isSearchEnable && (
+          <TextField
+            variant="filled"
+            size="small"
+            placeholder={`Search ${title}`}
+            value={searchText}
+            onChange={handleInputChange}
+            sx={{ width: { xs: '100%', sm: 300 } }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconifyIcon icon="mynaui:search" />
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
+
+        {isAddEnable && (
+          <CardActions
+            disableSpacing
+            sx={{ p: 0, width: { xs: '100%', sm: 210 } }}
+            onClick={openModal}
+          >
+            <Button
+              variant="contained"
+              size="medium"
+              startIcon={<IconifyIcon icon="gridicons:plus-small" />}
+              fullWidth
+              sx={{
+                color: 'primary.info',
+                '& .MuiButton-startIcon': { mr: 0, pointerEvents: 'none' },
               }}
-            />
-          )}
-          {isAddEnable && (
-            <CardActions disableSpacing sx={{ marginLeft: 3, width: '210px' }} onClick={openModal}>
-              <Button
-                variant="contained"
-                size="medium"
-                sx={{
-                  color: 'primary.info',
-                  '& .MuiButton-startIcon': { mr: 0, pointerEvents: 'none' },
-                }}
-                startIcon={<IconifyIcon icon="gridicons:plus-small" />}
-                fullWidth
-              >
-                {`Add ${btnText}`}
-              </Button>
-            </CardActions>
-          )}
-        </Stack>
+            >
+              {`Add ${btnText}`}
+            </Button>
+          </CardActions>
+        )}
       </Stack>
-    </>
+    </Stack>
   );
 };
 

@@ -43,7 +43,7 @@ const UpcomingEvents = () => {
         <EvetsForm data={data?.pet_types} isEdit={false} />
       </Popup>
     </Stack>
-  );
+  ); 
 };
 
 export default UpcomingEvents;
