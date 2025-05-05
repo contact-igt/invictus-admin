@@ -5,8 +5,15 @@ import IconifyIcon from 'components/base/IconifyIcon';
 export const Popup = ({ children, open, onClose }: any) => {
   if (!open) return null;
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     <Stack
+     onClick={handleBackdropClick}
       sx={{
         position: 'fixed',
         width: '100%',
@@ -42,12 +49,12 @@ export const Popup = ({ children, open, onClose }: any) => {
             top: -15,
             right: -15,
             fontSize: 30,
-            color: '#000',
-            backgroundColor: '#fff',
+            backgroundColor: '#E1801C',
+            color: '#fff',
             borderRadius: '50%',
             padding: 0.8,
             '&:hover': {
-              backgroundColor: '#000',
+              backgroundColor: '#ff0000',
               color: '#fff',
             },
           }}
