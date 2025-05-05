@@ -13,6 +13,7 @@ import { SnackbarProvider } from 'notistack';
 import { PersistGate } from 'redux-persist/integration/react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import ScreenGuard from 'screenGuard';
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <ScreenGuard>
                 <RouterProvider router={router} />
+                </ScreenGuard>
               </LocalizationProvider>
               {process.env.NODE_ENV === 'development' && (
                 <ReactQueryDevtools initialIsOpen={false} />

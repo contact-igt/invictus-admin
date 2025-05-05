@@ -72,3 +72,31 @@ export const eventValidationSchema = Yup.object()
       return e.isSame(s) || e.isAfter(s);
     },
   );
+
+ export const tipValidationSchema = Yup.object().shape({
+   title: Yup.string()
+     .required('Title is required')
+     .min(3, 'Title must be at least 3 characters')
+     .max(100, 'Title cannot exceed 100 characters'),
+
+   category: Yup.array()
+     .of(Yup.string().required())
+     .min(1, 'Please select at least one pet type')
+     .required('Pet types are required'),
+
+   overview: Yup.string()
+     .required('Overview is required')
+     .min(10, 'Overview must be at least 10 characters')
+     .max(300, 'Overview cannot exceed 300 characters'),
+
+   description: Yup.string()
+     .required('Description is required')
+     .min(20, 'Description must be at least 20 characters')
+     .max(1000, 'Description cannot exceed 1000 characters'),
+
+   image: Yup.mixed().test('required-image', 'Image is required', (value) => {
+     if (typeof value === 'string') return value.trim() !== '';
+     return value instanceof File;
+   }),
+ });
+

@@ -13,7 +13,7 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
   const handleSubmit = (values: any) => {
     console.log('Form Values:', values);
   };
-
+ 
   return (
     <Stack width={500} flexDirection="column" p={2} overflow={'scroll'} height={600}>
       <Typography align="left" variant="h4">

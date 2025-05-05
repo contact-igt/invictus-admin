@@ -119,7 +119,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/petpass',
+    basename: '/',
   },
 );
 
