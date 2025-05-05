@@ -9,6 +9,14 @@ export interface Tip {
   updated_at: string;
 }
 
+export interface TipFormValues {
+  title: string;
+  category: string[];
+  overview: string;
+  description: string;
+  image: File;
+}
+
 export interface PetTipsDetailsProps {
   tipId: number;
 }

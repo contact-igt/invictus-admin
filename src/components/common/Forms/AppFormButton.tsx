@@ -9,6 +9,7 @@ interface AppFormButtonProps {
   fullWidth?: boolean;
   variant?: 'text' | 'outlined' | 'contained';
   size?: 'small' | 'medium' | 'large';
+  bg?: string;
   onClick?: () => void;
 }
 
@@ -19,6 +20,7 @@ const AppFormButton: React.FC<AppFormButtonProps> = ({
   fullWidth = false,
   variant = 'contained',
   size = 'medium',
+  bg = 'primary.main',
   onClick,
 }) => {
   return (
@@ -28,14 +30,15 @@ const AppFormButton: React.FC<AppFormButtonProps> = ({
       size={size}
       fullWidth={fullWidth}
       onClick={onClick}
-      style={{ marginTop: '20px' }}
+      style={{ marginTop: '20px', background: bg }}
       disabled={isLoading}
+      
     >
       {isLoading ? (
         <ThreeDots
           height="30"
           width="30"
-          color="#E1801C"
+          color='primary.main'
           radius="9"
           ariaLabel="three-dots-loading"
         />
