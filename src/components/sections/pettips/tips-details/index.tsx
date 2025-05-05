@@ -39,7 +39,7 @@ const PetTipsDetails: FC<PetTipsDetailsProps> = ({ tipId }) => {
     : '';
 
   return (
-    <Box mx="auto" my={4}>
+    <Box mx="auto" my={4} padding="0px 50px">
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -47,7 +47,7 @@ const PetTipsDetails: FC<PetTipsDetailsProps> = ({ tipId }) => {
         mb={2}
         sx={{ display: { xs: 'none', sm: 'flex' } }}
       >
-        <Typography variant="h3" component="h1">
+        <Typography variant="h3" component="h1" mb={2}>
           {petTip.title}
         </Typography>
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -62,6 +62,7 @@ const PetTipsDetails: FC<PetTipsDetailsProps> = ({ tipId }) => {
         variant="h3"
         component="h1"
         gutterBottom
+        marginBottom={2}
         sx={{ display: { xs: 'block', sm: 'none' } }}
       >
         {petTip.title}
@@ -71,7 +72,7 @@ const PetTipsDetails: FC<PetTipsDetailsProps> = ({ tipId }) => {
         component="img"
         image={petTip.image}
         alt={petTip.title}
-        sx={{ width: '100%', borderRadius: 2, mb: 3 }}
+        sx={{ width: '100%', height: "600px", borderRadius: 2, mb: 3 }}
       />
       <Stack
         direction="row"

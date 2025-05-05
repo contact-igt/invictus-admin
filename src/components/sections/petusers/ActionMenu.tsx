@@ -1,96 +1,72 @@
+// src/components/ActionMenu.tsx
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 import IconifyIcon from 'components/base/IconifyIcon';
 
 interface Action {
   id: number;
   icon: string;
-  title: string;
+  title: 'Edit' | 'Remove';
 }
 
 const actions: Action[] = [
-  {
-    id: 2,
-    icon: 'hugeicons:pencil-edit-02',
-    title: 'Edit',
-  },
-  {
-    id: 3,
-    icon: 'hugeicons:delete-02',
-    title: 'Remove',
-  },
+  { id: 1, icon: 'hugeicons:pencil-edit-02', title: 'Edit' },
+  { id: 2, icon: 'hugeicons:delete-02', title: 'Remove' },
 ];
 
 interface ActionMenuProps {
   onEdit: () => void;
+  onRemove: () => void;
 }
 
-const ActionMenu = ({onEdit}: ActionMenuProps) => {
+const ActionMenu = ({ onEdit, onRemove }: ActionMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleActionButtonClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleActionMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleActionItemClick = () => {
-    handleActionMenuClose();
-  };
+  const handleOpen = (e: React.MouseEvent<HTMLElement>) => setAnchorEl(e.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
   return (
-    <Box pr={1.5}>
-      <IconButton
-        onClick={handleActionButtonClick}
-        sx={{ p: 0.75, border: 'none', bgcolor: 'transparent !important' }}
-        size="large"
-      >
-        <IconifyIcon icon="iconamoon:menu-kebab-horizontal-fill" color="text.primary" />
+    <Box>
+      <IconButton size="small" onClick={handleOpen}>
+        <IconifyIcon icon="iconamoon:menu-kebab-horizontal-fill" />
       </IconButton>
+
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
         open={open}
-        onClose={handleActionMenuClose}
-        onClick={handleActionMenuClose}
-        sx={{
-          mt: 0.5,
-          '& .MuiList-root': {
-            width: 140,
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        {actions.map((actionItem) => {
+        {actions.map((a) => {
+          const isRemove = a.title === 'Remove';
+
           return (
             <MenuItem
-              key={actionItem.id}
+              key={a.id}
               onClick={() => {
-                handleActionItemClick();
-                if (actionItem.title === 'Edit') onEdit();
+                handleClose();
+                if (isRemove) onRemove();
+                else onEdit();
               }}
             >
-              <ListItemIcon sx={{ mr: 1, fontSize: 'h5.fontSize' }}>
-                <IconifyIcon
-                  icon={actionItem.icon}
-                  color={actionItem.id === 3 ? 'error.main' : 'text.primary'}
-                />
+              <ListItemIcon sx={{ color: isRemove ? 'error.main' : 'inherit' }}>
+                <IconifyIcon icon={a.icon} />
               </ListItemIcon>
-              <ListItemText>
-                <Typography color={actionItem.id === 3 ? 'error.main' : 'text.primary'}>
-                  {actionItem.title}
-                </Typography>
-              </ListItemText>
+              <ListItemText
+                primary={
+                  <Typography color={isRemove ? 'error.main' : 'text.primary'}>
+                    {a.title}
+                  </Typography>
+                }
+              />
             </MenuItem>
           );
         })}

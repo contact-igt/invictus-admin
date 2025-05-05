@@ -1,4 +1,4 @@
-import { _axios } from "helper/axios";
+import { _axios } from 'helper/axios';
 
 export class TipApis {
   getAllTips = async () => {
@@ -7,5 +7,13 @@ export class TipApis {
 
   getTipById = async (id: number) => {
     return await _axios('get', `/pet-tips/${id}`);
+  };
+
+  addTip = async (formData: FormData) => {
+    return await _axios('post', '/pet-tips', formData, 'multipart/form-data');
+  };
+
+  deleteTip = async (id: number | string) => {
+    return await _axios('delete', `/pet-tips/${id}`);
   };
 }

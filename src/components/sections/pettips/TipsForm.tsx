@@ -8,10 +8,19 @@ import AppFormSelect from 'components/common/Forms/AppFormSelectFeild';
 import { tipValidationSchema } from 'schemas/validations';
 import AppFormTextArea from 'components/common/Forms/AppFormTextArea';
 import AppFormImagePicker from 'components/common/Forms/AppFormIndieImagePicker';
+import { useAddTipMutation } from 'components/hooks/useTipsQuery';
 
-const TipsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
+interface TipsFormProps extends EventsFormProps {
+  onSuccess: () => void;
+}
+const TipsForm: React.FC<TipsFormProps> = ({ isEdit, data, onSuccess }) => {
+  const { mutate, isLoading } = useAddTipMutation();
   const handleSubmit = (values: any) => {
-    console.log('Form Values:', values);
+    mutate(values, {
+      onSuccess: () => {
+        onSuccess();
+      },
+    });
   };
 
   return (
@@ -63,7 +72,13 @@ const TipsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             rows={4}
           />
 
-          <AppFormButton label="Save" type="submit" fullWidth={true} size="medium" />
+          <AppFormButton
+            label="Save"
+            type="submit"
+            fullWidth={true}
+            size="medium"
+            isLoading={isLoading}
+          />
         </AppForm>
       </Stack>
     </Stack>
