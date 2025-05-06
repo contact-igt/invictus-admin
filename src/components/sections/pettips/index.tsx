@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, ChangeEvent, FC } from 'react';
 import Grid from '@mui/material/Grid';
 import TipsCard from './TipsCard';
@@ -16,14 +18,15 @@ const PetTipsResponsive: FC = () => {
   const deleteTip = useDeleteTipMutation();
 
   const { getPetTypes } = new PetApis();
-
   const { data, isLoading: petTypeLoading } = useQuery(['pet-types'], getPetTypes, {
     staleTime: 1000 * 60 * 3,
   });
 
   const [selectedTipId, setSelectedTipId] = useState<number | string>(0);
   const [selectedTipTitle, setSelectedTipTitle] = useState<string>();
+  const [selectedTip, setSelectedTip] = useState<Tip | null>({} as Tip);
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [openConfirmAlertModal, setOpenConfirmAlertModal] = useState(false);
   const [searchText, setSearchText] = useState<string>('');
 
@@ -63,6 +66,23 @@ const PetTipsResponsive: FC = () => {
     });
   };
 
+  const handleEditTip = (id: number | string) => {
+    const tip = filteredTips?.find((tip: any) => tip.id === id);
+    if (tip) {
+      setSelectedTip(tip);
+      setOpenEditModal(!openEditModal);
+    }
+  };
+
+  const handleOpenTipModal = () => {
+    setOpenAddModal(!openAddModal);
+  };
+
+  const handleCloseTipEditModal = () => {
+    setOpenEditModal(false);
+    setSelectedTip(null);
+  };
+
   return (
     <>
       <PageTitle
@@ -78,13 +98,27 @@ const PetTipsResponsive: FC = () => {
       <Grid container spacing={2}>
         {filteredTips.map((tip) => (
           <Grid key={tip.id} item xs={12} sm={6} md={4} lg={3}>
-            <TipsCard data={tip} onEdit={() => {}} onRemove={handleOpenConfirmAlertModal} />
+            <TipsCard data={tip} onEdit={handleEditTip} onRemove={handleOpenConfirmAlertModal} />
           </Grid>
         ))}
       </Grid>
 
-      <Popup open={openAddModal} onClose={handleOpenTipsAddModal}>
-        <TipsForm data={data?.pet_types} isEdit={false} onSuccess={handleOpenTipsAddModal} />
+      <Popup
+        open={openAddModal || openEditModal}
+        onClose={openAddModal ? handleOpenTipModal : handleCloseTipEditModal}
+      >
+        <TipsForm
+          isEdit={openEditModal}
+          data={data?.pet_types}
+          tip={openEditModal ? selectedTip : undefined}
+          onSuccess={() => {
+            if (openEditModal) {
+              handleCloseTipEditModal();
+            } else {
+              handleOpenTipsAddModal();
+            }
+          }}
+        />
       </Popup>
 
       <Popup

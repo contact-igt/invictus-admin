@@ -8,19 +8,33 @@ import AppFormSelect from 'components/common/Forms/AppFormSelectFeild';
 import { tipValidationSchema } from 'schemas/validations';
 import AppFormTextArea from 'components/common/Forms/AppFormTextArea';
 import AppFormImagePicker from 'components/common/Forms/AppFormIndieImagePicker';
-import { useAddTipMutation } from 'components/hooks/useTipsQuery';
+import { useAddTipMutation, useUpdateTipMutation } from 'components/hooks/useTipsQuery';
 
 interface TipsFormProps extends EventsFormProps {
   onSuccess: () => void;
+  tip?: any;
 }
-const TipsForm: React.FC<TipsFormProps> = ({ isEdit, data, onSuccess }) => {
-  const { mutate, isLoading } = useAddTipMutation();
+const TipsForm: React.FC<TipsFormProps> = ({ isEdit, data, tip, onSuccess }) => {
+  const { mutate: AddMutate, isLoading: addTipLoading } = useAddTipMutation();
+  const { mutate: UpdateMutate, isLoading: updateTipLoading } = useUpdateTipMutation();
+
   const handleSubmit = (values: any) => {
-    mutate(values, {
-      onSuccess: () => {
-        onSuccess();
-      },
-    });
+    if (tip?.id) {
+      UpdateMutate(
+        { id: tip.id, values },
+        {
+          onSuccess: () => {
+            onSuccess();
+          },
+        },
+      );
+    } else {
+      AddMutate(values, {
+        onSuccess: () => {
+          onSuccess();
+        },
+      });
+    }
   };
 
   return (
@@ -30,7 +44,13 @@ const TipsForm: React.FC<TipsFormProps> = ({ isEdit, data, onSuccess }) => {
       </Typography>
       <Stack mt={3} direction="column" gap={2}>
         <AppForm
-          initialValues={{ title: '', category: '', overview: '', description: '', image: '' }}
+          initialValues={{
+            title: tip?.title || '',
+            category: tip?.category ? [tip.category] : '',
+            overview: tip?.overview || '',
+            description: tip?.description || '',
+            image: tip?.image || '',
+          }}
           validationSchema={tipValidationSchema}
           onSubmit={handleSubmit}
         >
@@ -77,7 +97,7 @@ const TipsForm: React.FC<TipsFormProps> = ({ isEdit, data, onSuccess }) => {
             type="submit"
             fullWidth={true}
             size="medium"
-            isLoading={isLoading}
+            isLoading={addTipLoading || updateTipLoading}
           />
         </AppForm>
       </Stack>

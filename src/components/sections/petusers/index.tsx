@@ -40,7 +40,7 @@ const UsersSection = () => {
     setSelectedUser(null);
   };
 
-  if (isLoading) return <PageLoader />
+  if (isLoading) return <PageLoader />;
 
   return (
     <>
@@ -60,12 +60,12 @@ const UsersSection = () => {
           />
         </Paper>
       </Stack>
-      <Popup open={openAddModal} onClose={handleOpenUserAddModal}>
-        <UserForm />
-      </Popup>
-
-      <Popup open={openEditModal} onClose={handleCloseUserEditModal}>
-        <UserForm isEdit={true} userData={selectedUser} />
+      
+      <Popup
+        open={openAddModal || openEditModal}
+        onClose={openAddModal ? handleOpenUserAddModal : handleCloseUserEditModal}
+      >
+        <UserForm isEdit={openEditModal} userData={openEditModal ? selectedUser : undefined} />
       </Popup>
     </>
   );

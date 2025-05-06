@@ -22,15 +22,21 @@ const AppFormImagePicker: React.FC<Props> = ({ name, size = 150, placeholderIcon
     if (field.value instanceof File) {
       const objectUrl = URL.createObjectURL(field.value);
       setPreviewUrl(objectUrl);
-      return () => URL.revokeObjectURL(objectUrl);
-    } else {
-      setPreviewUrl(null);
+      return () => {
+        URL.revokeObjectURL(objectUrl);
+      };
     }
+    if (typeof field.value === 'string' && field.value) {
+      setPreviewUrl(field.value);
+      return;
+    }
+    setPreviewUrl(null);
   }, [field.value]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      // store the File object in Formik
       setFieldValue(name, file);
     }
   };

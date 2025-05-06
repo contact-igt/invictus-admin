@@ -55,6 +55,31 @@ export const useAddTipMutation = () => {
   );
 };
 
+export const useUpdateTipMutation = () => {
+  const queryClient = useQueryClient();
+  const { enqueueSnackbar } = useSnackbar();
+  return useMutation<void, Error, { id: number; values: TipFormValues }>(
+    ({ id, values }) => {
+      const formData = new FormData();
+      formData.append('title', values.title);
+      if (values.category.length > 0) formData.append('category', values.category[0]);
+      formData.append('overview', values.overview);
+      formData.append('description', values.description);
+      formData.append('image', values.image);
+      return tipApis.updateTip(id, formData);
+    },
+    {
+      onSuccess: () => {
+        enqueueSnackbar('Tip updated successfully', { variant: 'success' });
+        queryClient.invalidateQueries(['pet-tips']);
+      },
+      onError: (error) => {
+        enqueueSnackbar(error.message || 'Failed to update tip', { variant: 'error' });
+      },
+    },
+  );
+};
+
 export const useDeleteTipMutation = () => {
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();

@@ -13,6 +13,10 @@ export class TipApis {
     return await _axios('post', '/pet-tips', formData, 'multipart/form-data');
   };
 
+  updateTip = async (id: number | string, formData: FormData) => {
+    return await _axios('put', `/pet-tips/${id}`, formData, 'multipart/form-data');
+  };
+
   deleteTip = async (id: number | string) => {
     return await _axios('delete', `/pet-tips/${id}`);
   };
