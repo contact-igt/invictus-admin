@@ -12,6 +12,7 @@ import LogoImg from 'assets/images/Logo.png';
 // import LanguageSelect from './LanguageSelect';
 import ProfileMenu from './ProfileMenu';
 import { useAuth } from 'redux/selectors/auth/authSelector';
+import { useLocation } from 'react-router-dom';
 
 interface TopbarProps {
   isClosing: boolean;
@@ -21,6 +22,8 @@ interface TopbarProps {
 
 const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
   const { user } = useAuth();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const handleDrawerToggle = () => {
     if (!isClosing) {
@@ -67,18 +70,20 @@ const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
           </IconButton>
         </Toolbar>
 
-        <TextField
-          variant="filled"
-          placeholder="Search Task"
-          sx={{ width: 350, display: { xs: 'none', md: 'flex' } }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconifyIcon icon={'mynaui:search'} />
-              </InputAdornment>
-            ),
-          }}
-        />
+        {location.pathname === '/' && (
+          <TextField
+            variant="filled"
+            placeholder="Search Pets, Tips, Events..."
+            sx={{ width: 350, display: { xs: 'none', md: 'flex' } }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconifyIcon icon={'mynaui:search'} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
       </Stack>
 
       <Stack spacing={{ xs: 1, sm: 2 }} alignItems="center">
@@ -88,7 +93,7 @@ const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
             <IconifyIcon icon="solar:bell-outline" />
           </Badge>
         </IconButton>
-        <ProfileMenu user={user}/>
+        <ProfileMenu user={user} />
       </Stack>
     </Stack>
   );

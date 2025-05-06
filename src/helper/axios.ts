@@ -10,7 +10,7 @@ export const _axios = async (
   contentType: string = 'application/json',
   params?: any,
 ) => {
-  const endpoint = `https://petpass.onrender.com/api/v1${url}`;
+  const endpoint = `https://petpass-backend.onrender.com/api/v1${url}`;
   const state: RootState = store.getState();
   const token = state.auth.token;
 
