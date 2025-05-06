@@ -7,6 +7,7 @@ import AuthLayout from 'layouts/auth-layout';
 import Splash from 'components/loader/Splash';
 import PageLoader from 'components/loader/PageLoader';
 import ProtectedRoute from './security';
+import PetEventDetails from 'pages/upcoming-events/petevent-details/PetEventDetails';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -98,6 +99,10 @@ const router = createBrowserRouter(
             {
               path: paths.events,
               element: <UpcomingEvents />,
+            },
+            {
+              path: paths.eventDetails,
+              element: <PetEventDetails />,
             },
           ],
         },
