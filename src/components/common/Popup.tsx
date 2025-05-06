@@ -1,8 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Stack, Box } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
+import { ReactNode } from 'react';
 
-export const Popup = ({ children, open, onClose }: any) => {
+interface PopupProps {
+  open: boolean;
+  children?: ReactNode;
+  showOnClose?: boolean;
+  onClose: () => void;
+}
+
+export const Popup = ({ children, open, onClose, showOnClose = true }: PopupProps) => {
   if (!open) return null;
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -41,6 +49,7 @@ export const Popup = ({ children, open, onClose }: any) => {
         }}
       >
         <IconifyIcon
+          display={showOnClose ? 'block' : 'none'}
           icon="hugeicons:cancel-01"
           onClick={onClose}
           sx={{

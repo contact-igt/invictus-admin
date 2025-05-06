@@ -4,13 +4,13 @@ import Remove from "assets/images/remove.svg"
 
 interface ConfirmAlertProps {
   title: string;
-  message: string;
+  message?: string;
   isLoading: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
-const ConfirmAlert = ({ title, isLoading, onConfirm, onCancel }: ConfirmAlertProps) => {
+const ConfirmAlert = ({ title, message, isLoading, onConfirm, onCancel }: ConfirmAlertProps) => {
   return (
     <Stack
       flexDirection={'column'}
@@ -27,10 +27,10 @@ const ConfirmAlert = ({ title, isLoading, onConfirm, onCancel }: ConfirmAlertPro
      <Typography textAlign={'center'} variant="h4" sx={{width: '100%', maxWidth: "300px"}}>
         {title}
       </Typography>
-      {/* <Typography variant="subtitle2">
+      <Typography variant="subtitle2">
         {message}
-      </Typography> */}
-      <Stack direction="row" spacing={3}>
+      </Typography>
+      <Stack direction="row" spacing={3} width={"100%"}>
         <AppFormButton
           label="Confirm"
           size="medium"

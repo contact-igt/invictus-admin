@@ -22,6 +22,7 @@ const PetTipsResponsive: FC = () => {
   });
 
   const [selectedTipId, setSelectedTipId] = useState<number | string>(0);
+  const [selectedTipTitle, setSelectedTipTitle] = useState<string>();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openConfirmAlertModal, setOpenConfirmAlertModal] = useState(false);
   const [searchText, setSearchText] = useState<string>('');
@@ -49,6 +50,8 @@ const PetTipsResponsive: FC = () => {
 
   const handleOpenConfirmAlertModal = (id: number | string) => {
     setSelectedTipId(id);
+    const selectedTipDetails = filteredTips?.find((i) => i?.id === id);
+    setSelectedTipTitle(selectedTipDetails?.title);
     setOpenConfirmAlertModal(!openConfirmAlertModal);
   };
 
@@ -84,10 +87,13 @@ const PetTipsResponsive: FC = () => {
         <TipsForm data={data?.pet_types} isEdit={false} onSuccess={handleOpenTipsAddModal} />
       </Popup>
 
-      <Popup open={openConfirmAlertModal} onClose={handleOpenConfirmAlertModal}>
+      <Popup
+        open={openConfirmAlertModal}
+        onClose={() => setOpenConfirmAlertModal(false)}
+        showOnClose={false}
+      >
         <ConfirmAlert
-          title="Are you sure you want to delete this tip?"
-          message="This action cannot be undone."
+          title={`Are you sure you want to delete Tip (${selectedTipTitle})?`}
           onConfirm={handleRemoveTip}
           onCancel={() => setOpenConfirmAlertModal(false)}
           isLoading={deleteTip.isLoading}
