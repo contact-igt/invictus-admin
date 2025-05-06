@@ -11,6 +11,7 @@ export default {
   petTipDetail: `/${rootPaths.pageRoot}/pettips/pettips-details/:tipId`,
   users: `/${rootPaths.pageRoot}/users`,
   events: `/${rootPaths.pageRoot}/upcoming-events`,
+  eventDetails: `/${rootPaths.pageRoot}/upcoming-events/petevent-details/:eventId`,
   mentors: `/${rootPaths.pageRoot}/mentors`,
   messages: `/${rootPaths.pageRoot}/messages`,
   settings: `/${rootPaths.pageRoot}/settings`,

@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { Link as RouterLink } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -29,7 +30,9 @@ const EventCard = ({ data }: EventCardProps) => {
         borderRadius: 2,
       }}
     >
-      <CardMedia component="img" height="110" image={data.thumb} alt="task_today_image" />
+      <RouterLink to={`petevent-details/${data.id}`}>
+        <CardMedia component="img" height="110" image={data.thumb} alt="task_today_image" />
+      </RouterLink>
       <CardContent>
         <Box mt={1.5}>
           <Typography variant="subtitle1" color="text.primary" fontWeight={600}>
