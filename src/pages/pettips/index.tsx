@@ -10,3 +10,4 @@ const PetTips = () => {
 };
 
 export default PetTips;
+ 

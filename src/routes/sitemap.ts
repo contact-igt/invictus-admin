@@ -46,6 +46,7 @@ const sitemap: MenuItem[] = [
     id: 'events',
     subheader: 'Future Events',
     path: paths.events,
+    active: true,
     icon: 'mdi:calendar-clock',
   },
   {
@@ -54,7 +55,7 @@ const sitemap: MenuItem[] = [
     icon: 'solar:bell-outline',
   },
   {
-    id: "helpcenter",
+    id: 'helpcenter',
     subheader: 'Help Center',
     icon: 'carbon:help',
   },
