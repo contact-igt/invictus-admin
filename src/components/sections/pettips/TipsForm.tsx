@@ -8,10 +8,33 @@ import AppFormSelect from 'components/common/Forms/AppFormSelectFeild';
 import { tipValidationSchema } from 'schemas/validations';
 import AppFormTextArea from 'components/common/Forms/AppFormTextArea';
 import AppFormImagePicker from 'components/common/Forms/AppFormIndieImagePicker';
+import { useAddTipMutation, useUpdateTipMutation } from 'components/hooks/useTipsQuery';
 
-const TipsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
+interface TipsFormProps extends EventsFormProps {
+  onSuccess: () => void;
+  tip?: any;
+}
+const TipsForm: React.FC<TipsFormProps> = ({ isEdit, data, tip, onSuccess }) => {
+  const { mutate: AddMutate, isLoading: addTipLoading } = useAddTipMutation();
+  const { mutate: UpdateMutate, isLoading: updateTipLoading } = useUpdateTipMutation();
+
   const handleSubmit = (values: any) => {
-    console.log('Form Values:', values);
+    if (tip?.id) {
+      UpdateMutate(
+        { id: tip.id, values },
+        {
+          onSuccess: () => {
+            onSuccess();
+          },
+        },
+      );
+    } else {
+      AddMutate(values, {
+        onSuccess: () => {
+          onSuccess();
+        },
+      });
+    }
   };
 
   return (
@@ -21,7 +44,13 @@ const TipsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
       </Typography>
       <Stack mt={3} direction="column" gap={2}>
         <AppForm
-          initialValues={{ title: '', category: '', overview: '', description: '', image: '' }}
+          initialValues={{
+            title: tip?.title || '',
+            category: tip?.category ? [tip.category] : '',
+            overview: tip?.overview || '',
+            description: tip?.description || '',
+            image: tip?.image || '',
+          }}
           validationSchema={tipValidationSchema}
           onSubmit={handleSubmit}
         >
@@ -63,7 +92,13 @@ const TipsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             rows={4}
           />
 
-          <AppFormButton label="Save" type="submit" fullWidth={true} size="medium" />
+          <AppFormButton
+            label="Save"
+            type="submit"
+            fullWidth={true}
+            size="medium"
+            isLoading={addTipLoading || updateTipLoading}
+          />
         </AppForm>
       </Stack>
     </Stack>

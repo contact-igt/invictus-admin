@@ -130,6 +130,7 @@ const UsersTable = ({ searchText, usersData, handleEdit }: UsersTableProps) => {
       renderCell: (params) => (
         <ActionMenu
           onEdit={() => handleEdit(params.row.id)}
+          onRemove={()=>{}}
         />
       ),
     }
