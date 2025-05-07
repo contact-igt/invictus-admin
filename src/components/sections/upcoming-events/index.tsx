@@ -7,12 +7,16 @@ import EvetsForm from './EvetsForm';
 import { useQuery } from 'react-query';
 import { PetApis } from 'services/pet';
 import PageLoader from 'components/loader/PageLoader';
-import { events } from 'data/events';
 import EventCard from './EventCard';
+import { useEventsQuery } from 'components/hooks/useEventsQuery';
+import { Event } from 'services/events/script';
 
 const UpcomingEvents = () => {
   const { getPetTypes } = new PetApis();
-  const { data, isLoading: petTypeLoading } = useQuery(['pet-types'], getPetTypes, {
+  const { data: eventData, isLoading: eventsLoading } = useEventsQuery();
+  
+
+  const { data: petTypes, isLoading: petTypeLoading } = useQuery(['pet-types'], getPetTypes, {
     staleTime: 1000 * 60 * 3,
   });
 
@@ -27,7 +31,7 @@ const UpcomingEvents = () => {
     setOpenAddModal(!openAddModal);
   };
 
-  if (petTypeLoading) return <PageLoader />;
+  if (petTypeLoading || eventsLoading) return <PageLoader />;
 
   return (
     <Stack direction="column" spacing={2} width={1}>
@@ -42,7 +46,7 @@ const UpcomingEvents = () => {
       />
 
       <Grid container spacing={2}>
-        {events.map((event) => (
+        {eventData?.upcoming_events.map((event: Event) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={event.id}>
             <EventCard data={event} />
           </Grid>
@@ -50,7 +54,7 @@ const UpcomingEvents = () => {
       </Grid>
 
       <Popup open={openAddModal} onClose={handleOpenEventsAddModal}>
-        <EvetsForm data={data?.pet_types} isEdit={false} />
+        <EvetsForm data={petTypes?.pet_types} isEdit={false} />
       </Popup>
     </Stack>
   );
