@@ -35,7 +35,6 @@ const PetEventDetails: FC<PetEventsDetailsProps> = ({ eventId }) => {
   const prevImage = () => setImgIndex((i) => (i === 0 ? images.length - 1 : i - 1));
   const nextImage = () => setImgIndex((i) => (i === images.length - 1 ? 0 : i + 1));
 
-  <Box mx="auto" my={4} padding="0px 50px"></Box>;
   return (
     <Paper elevation={3} sx={{ mx: 'auto', my: 4, padding: '0px 50px' }}>
       <Grid container spacing={4}>
