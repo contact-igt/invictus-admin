@@ -19,8 +19,8 @@ export interface Event {
   full_address: string;
   pin_location: string;
   city: string;
-  start_date: string; 
-  end_date: string; 
+  start_date: string;
+  end_date: string;
   start_time: string;
   end_time: string;
   created_at: string;
@@ -34,4 +34,8 @@ export interface Event {
 export interface EventsResponse {
   message: string;
   upcoming_events: Event[];
+}
+
+export interface PetEventsDetailsProps {
+  eventId: number | string;
 }
