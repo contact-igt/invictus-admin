@@ -29,7 +29,7 @@ const TipsForm: React.FC<TipsFormProps> = ({ isEdit, data, tip, onSuccess }) => 
         },
       );
     } else {
-      AddMutate(values, {
+      AddMutate(values, { 
         onSuccess: () => {
           onSuccess();
         },
