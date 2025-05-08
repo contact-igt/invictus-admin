@@ -8,36 +8,53 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import { Box } from '@mui/material';
 import AppErrorMessage from 'components/common/Forms/AppErrorMessage';
 
+export type PhoneValue = {
+  country_code: string;
+  phone: string;
+};
+
 export type AppFormPhoneFieldProps = Omit<TextFieldProps, 'onChange' | 'value'> & {
-  countryCodeField?: string;
+  name: string;
+  defaultCountryCode?: string;
 };
 
 const AppFormPhoneField: React.FC<AppFormPhoneFieldProps> = ({
   name,
-  countryCodeField = 'country_code',
+  defaultCountryCode = '+971',
   InputProps: inputProps,
   label = 'Phone Number',
   placeholder = 'Your Phone Number',
   ...textFieldProps
 }) => {
-  const [phoneField, phoneMeta] = useField<string>(name || 'defaultFieldName');
-  const [codeField, , codeHelpers] = useField<string>(countryCodeField);
+  const [field, meta, helpers] = useField<string | PhoneValue>(name);
 
-  const showError = Boolean(phoneMeta.touched && phoneMeta.error);
+  const raw = field.value;
+  const countryCode =
+    typeof raw === 'object' && raw.country_code?.trim() !== ''
+      ? raw.country_code
+      : defaultCountryCode;
+  const phoneNumber = typeof raw === 'object' ? raw.phone : raw || '';
+
+  const showError = Boolean(meta.touched && meta.error);
+
+  const setCombined = (code: string, phone: string) => {
+    helpers.setValue({ country_code: code, phone });
+  };
 
   return (
     <Box mb="10px">
       <TextField
-        {...phoneField}
-        {...textFieldProps}
-        name={phoneField.name}
-        id={phoneField.name}
+        name={name}
+        id={name}
         type="tel"
         variant="standard"
         fullWidth
         label={label}
         placeholder={placeholder}
         error={showError}
+        value={phoneNumber}
+        onChange={(e) => setCombined(countryCode, e.target.value)}
+        onBlur={field.onBlur}
         InputProps={{
           ...inputProps,
           sx: {
@@ -48,8 +65,8 @@ const AppFormPhoneField: React.FC<AppFormPhoneFieldProps> = ({
           startAdornment: (
             <InputAdornment position="start">
               <Select
-                value={codeField.value || '+971'}
-                onChange={(e) => codeHelpers.setValue(e.target.value)}
+                value={countryCode}
+                onChange={(e) => setCombined(e.target.value, phoneNumber)}
                 variant="standard"
                 disableUnderline
                 sx={{
@@ -70,8 +87,9 @@ const AppFormPhoneField: React.FC<AppFormPhoneFieldProps> = ({
         InputLabelProps={{
           style: { color: 'inherit' },
         }}
+        {...textFieldProps}
       />
-      <AppErrorMessage error={String(phoneMeta.error || '')} visible={showError} />
+      <AppErrorMessage error={String(meta.error || '')} visible={showError} />
     </Box>
   );
 };

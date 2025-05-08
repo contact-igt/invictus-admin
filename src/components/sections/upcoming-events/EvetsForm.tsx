@@ -8,12 +8,14 @@ import AppFormTextArea from 'components/common/Forms/AppFormTextArea';
 import AppFormDateTimePicker from 'components/common/Forms/AppFormDatePicker';
 import { EventsFormProps, PetTypes } from 'services/pet/script';
 import AppFormSelect from 'components/common/Forms/AppFormSelectFeild';
+import AppFormPhoneField from 'components/common/Forms/AppPhoneFeild';
+import AppFormMultiImagePicker from 'components/common/Forms/AppFormMultiImagePicker';
 
 const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
   const handleSubmit = (values: any) => {
     console.log('Form Values:', values);
   };
- 
+
   return (
     <Stack width={500} flexDirection="column" p={2} overflow={'scroll'} height={600}>
       <Typography align="left" variant="h4">
@@ -29,6 +31,9 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             start_time: null,
             end_date: null,
             end_time: null,
+            email: '',
+            event_images: [],
+            phone_number: { country_code: '', phone: '' },
             pin_location: '',
             pet_types: [],
           }}
@@ -62,7 +67,6 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             variant="standard"
             rows={4}
           />
-
           <AppFormTextField
             name="full_address"
             label="Full Address"
@@ -70,7 +74,6 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             icon="mdi:map-marker-outline"
             variant="standard"
           />
-
           <AppFormTextField
             name="pin_location"
             label="Pin Location Link"
@@ -78,7 +81,20 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             icon="mdi:map-marker-radius"
             variant="standard"
           />
-          <Stack fontSize={"13px"} fontFamily={'Plus Jakarta Sans, sans-serif'} fontWeight={400}>
+          <AppFormTextField
+            name="email"
+            label="Email"
+            placeholder="Contact Email"
+            icon="hugeicons:mail-at-sign-02"
+            type="email"
+            variant="standard"
+          />
+          <AppFormPhoneField name="phone_number" />
+          <Stack fontSize={'13px'} fontFamily={'Plus Jakarta Sans, sans-serif'} fontWeight={400}>
+            Event Images
+          </Stack>
+          <AppFormMultiImagePicker name="event_images" maxCount={8} itemSize={120} />
+          <Stack fontSize={'13px'} fontFamily={'Plus Jakarta Sans, sans-serif'} fontWeight={400}>
             Event Timings
           </Stack>
           <AppFormDateTimePicker
@@ -87,14 +103,12 @@ const EventsForm: React.FC<EventsFormProps> = ({ isEdit, data }) => {
             dateLabel="Start Date"
             timeLabel="Start Time"
           />
-
           <AppFormDateTimePicker
             dateName="end_date"
             timeName="end_time"
             dateLabel="End Date"
             timeLabel="End Time"
           />
-
           <AppFormButton label="Submit" type="submit" fullWidth={true} size="medium" />
         </AppForm>
       </Stack>
