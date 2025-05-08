@@ -14,11 +14,23 @@ export const userAddValidationSchema = Yup.object({
     .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
     .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
     .label('Password'),
-  phone_number: Yup.string()
-    .required('Phone number is required')
-    .min(7, 'Phone number must be at least 7 characters')
-    .matches(/^[0-9]+$/, 'Phone number must contain only digits')
-    .label('Phone Number'),
+  phone_number: Yup.mixed().test(
+    'valid-phone-object',
+    'Enter a valid phone number with 7–15 digits',
+    function (value: { phone?: string } | undefined) {
+      if (!value || typeof value.phone !== 'string') {
+        return this.createError({ message: 'Phone number is required' });
+      }
+
+      const number = value.phone;
+
+      if (!/^[0-9]{7,15}$/.test(number)) {
+        return this.createError({ message: 'Enter a valid phone number with 7–15 digits' });
+      }
+
+      return true;
+    },
+  ),
 });
 
 export const eventValidationSchema = Yup.object()

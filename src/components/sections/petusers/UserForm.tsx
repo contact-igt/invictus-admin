@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import AppForm from 'components/common/Forms/AppForm';
 import AppFormSelect from 'components/common/Forms/AppFormSelectFeild';
 import AppFormPhoneField from 'components/common/Forms/AppPhoneFeild';
@@ -32,8 +29,10 @@ const UserForm = ({ isEdit, userData }: UserForm) => {
             username: userData?.username || '',
             email: userData?.email || '',
             password: userData?.password || '',
-            phone_number: userData?.phone_number || '',
-            country_code: userData?.country_code || '+971',
+            phone_number: {
+              country_code: userData?.country_code || '',
+              phone: userData?.phone_number || '',
+            },
             profile_types: userData?.profile_types || [],
           }}
           validationSchema={userAddValidationSchema}
@@ -83,12 +82,7 @@ const UserForm = ({ isEdit, userData }: UserForm) => {
             }}
           />
 
-          <AppFormButton
-            label="Submit"
-            type="submit"
-            fullWidth={true}
-            size="medium"
-          />
+          <AppFormButton label="Submit" type="submit" fullWidth={true} size="medium" />
         </AppForm>
       </Stack>
     </Stack>

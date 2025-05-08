@@ -5,7 +5,6 @@ import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
 import { SelectChangeEvent } from '@mui/material/Select';
-import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import AppErrorMessage from 'components/common/Forms/AppErrorMessage';
 
@@ -27,7 +26,7 @@ export type AppFormSelectProps = Omit<
 
 export const AppFormSelect: React.FC<AppFormSelectProps> = ({
   name,
-  options,
+  options = [],
   icon,
   multiple = false,
   placeholder = 'Select an option',
@@ -85,7 +84,7 @@ export const AppFormSelect: React.FC<AppFormSelectProps> = ({
             }
             return Array.isArray(selected)
               ? (selected as string[])
-                  .map((val) => options.find((opt) => opt.value === val)?.label)
+                  .map((val) => options?.find((opt) => opt.value === val)?.label)
                   .filter(Boolean)
                   .join(', ')
               : String(selected);
@@ -101,82 +100,12 @@ export const AppFormSelect: React.FC<AppFormSelectProps> = ({
             {placeholder}
           </MenuItem>
         )}
-        {options.map((opt) => (
+        {options?.map((opt) => (
           <MenuItem key={opt.value} value={opt.value}>
             {opt.label}
           </MenuItem>
         ))}
       </TextField>
-      <AppErrorMessage error={String(errors[name] || '')} visible={showError} />
-    </Box>
-  );
-};
-
-export const AppFormPhoneInput: React.FC<
-  TextFieldProps & {
-    name: string;
-    icon?: string;
-    countryCode: string;
-    onCountryCodeChange: (value: string) => void;
-    countryOptions: Option[];
-  }
-> = ({
-  name,
-  icon = 'hugeicons:call',
-  countryCode,
-  onCountryCodeChange,
-  countryOptions,
-  InputProps: inputProps,
-  ...textFieldProps
-}) => {
-  const { touched, errors } = useFormikContext<FormikValues>();
-  const [field] = useField(name);
-  const showError = !!(touched[name] && errors[name]);
-
-  return (
-    <Box mb="10px">
-      <TextField
-        {...field}
-        {...textFieldProps}
-        id={name}
-        name={name}
-        fullWidth
-        error={showError}
-        helperText={null}
-        InputProps={{
-          ...inputProps,
-          startAdornment: (
-            <InputAdornment position="start">
-              <Select
-                value={countryCode}
-                onChange={(e) => onCountryCodeChange(e.target.value)}
-                variant="standard"
-                disableUnderline
-                name="country_code"
-                sx={{
-                  minWidth: 100,
-                  minHeight: 50,
-                  fontSize: '0.875rem',
-                  p: 0,
-                  border: 'none',
-                }}
-              >
-                {countryOptions.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </Select>
-              <IconifyIcon icon={icon} />
-            </InputAdornment>
-          ),
-          sx: {
-            marginTop: '30px !important',
-            paddingLeft: 0,
-            ...(inputProps?.sx || {}),
-          },
-        }}
-      />
       <AppErrorMessage error={String(errors[name] || '')} visible={showError} />
     </Box>
   );
