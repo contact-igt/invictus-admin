@@ -50,6 +50,28 @@ export const eventValidationSchema = Yup.object()
 
     start_time: Yup.string().required('Start time is required'),
 
+    email: Yup.string().email('Invalid email').required('Email is required'),
+
+    phone_number: Yup.mixed().test(
+      'valid-phone-object',
+      'Enter a valid phone number with 7–15 digits',
+      function (value: { phone?: string } | undefined) {
+        if (!value || typeof value.phone !== 'string') {
+          return this.createError({ message: 'Phone number is required' });
+        }
+
+        const number = value.phone;
+
+        if (!/^[0-9]{7,15}$/.test(number)) {
+          return this.createError({ message: 'Enter a valid phone number with 7–15 digits' });
+        }
+
+        return true;
+      },
+    ),
+
+    event_images: Yup.array().of(Yup.mixed()).min(1, 'At least one event image is required'),
+
     end_date: Yup.date()
       .required('End date is required')
       .min(Yup.ref('start_date'), 'End date cannot be before start date'),
@@ -72,6 +94,7 @@ export const eventValidationSchema = Yup.object()
       return e.isSame(s) || e.isAfter(s);
     },
   );
+
 
  export const tipValidationSchema = Yup.object().shape({
    title: Yup.string()
