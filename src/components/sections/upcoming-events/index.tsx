@@ -15,7 +15,6 @@ import ConfirmAlert from 'components/common/ConfirmAlert';
 const UpcomingEvents = () => {
   const { getPetTypes } = new PetApis();
   const { data: eventData, isLoading: eventsLoading } = useEventsQuery();
-
   const { data: petTypes, isLoading: petTypeLoading } = useQuery(['pet-types'], getPetTypes, {
     staleTime: 1000 * 60 * 3,
   });

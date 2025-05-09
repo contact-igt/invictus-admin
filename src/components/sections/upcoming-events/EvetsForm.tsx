@@ -24,11 +24,12 @@ const EventsForm: React.FC<EventsFormsProps> = ({ isEdit, data, onSuccess, selec
   const updateEventMutation = useUpdateEventMutation();
 
   const formatIfNeeded = (time: string) => {
-    if (selectedEvent?.id) {
+    if (selectedEvent?.id && /^\d{2}:\d{2}:\d{2}$/.test(time)) {
       return time.slice(0, 5);
     }
     return formatAddTime(time);
   };
+
 
   const handleSubmit = (values: any) => {
     const { phone_number, ...rest } = values;
@@ -62,8 +63,16 @@ const EventsForm: React.FC<EventsFormsProps> = ({ isEdit, data, onSuccess, selec
     }
   };
 
-  const full = selectedEvent?.contact_details?.contact_number!;
-  const { country_code, phone_number } = splitContactNumber(full);
+  let country_code = '+971';
+  let phone_number = '';
+
+  if (selectedEvent?.id) {
+    const full = selectedEvent.contact_details.contact_number || '';
+    const split = splitContactNumber(full);
+    country_code = split.country_code;
+    phone_number = split.phone_number;
+  }
+
   return (
     <Stack width={500} flexDirection="column" p={2} overflow={'scroll'} height={600}>
       <Typography align="left" variant="h4">
