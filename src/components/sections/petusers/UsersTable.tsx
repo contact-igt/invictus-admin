@@ -4,7 +4,7 @@ import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
 import { DataGrid, GridColDef, GridCellParams, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
-import ActionMenu from './ActionMenu';
+import ActionMenu from '../ActionMenu';
 import { Box } from '@mui/material';
 import { UserProps } from 'services/user/script';
 

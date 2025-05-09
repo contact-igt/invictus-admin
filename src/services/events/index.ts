@@ -10,15 +10,15 @@ export class EventApis {
   };
 
   addEvent = async (formData: FormData) => {
-    return await _axios('post', '/upcoming-events', formData, 'multipart/form-data');
+    return await _axios('post', '/upcoming-event', formData, 'multipart/form-data');
   };
 
   updateEvent = async (id: number | string, formData: FormData) => {
-    return await _axios('put', `/upcoming-events/${id}`, formData, 'multipart/form-data');
+    return await _axios('put', `/upcoming-event/${id}`, formData, 'multipart/form-data');
   };
 
   deleteEvent = async (id: number | string) => {
-    return await _axios('delete', `/upcoming-events/${id}`);
+    return await _axios('delete', `/upcoming-event/${id}`);
   };
 }
 

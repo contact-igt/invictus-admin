@@ -17,3 +17,35 @@ export const formatTimeRange = (start: string, end: string) => {
   };
   return `${format(start)}-${format(end)}`;
 };
+
+
+// src/utils/dateUtils.ts
+export function formatAddDate(iso: string): string {
+  const d = new Date(iso);
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+export function formatAddTime(iso: string): string {
+  const d = new Date(iso);
+  const h = d.getHours();
+  const m = String(d.getMinutes()).padStart(2, '0');
+  return `${h}:${m}`;
+}
+
+export function splitContactNumber(full: string) {
+  const cleaned = full.replace(/[\s-]/g, '');
+  const m = cleaned.match(/^(\+\d{1,3})(\d+)$/);
+  if (m) {
+    return {
+      country_code: m[1], 
+      phone_number: m[2],
+    };
+  }
+  return {
+    country_code: '',
+    phone_number: cleaned,
+  };
+}

@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import IconifyIcon from 'components/base/IconifyIcon';
-import ActionMenu from '../petusers/ActionMenu';
+import ActionMenu from '../ActionMenu';
 import type { Tip } from 'services/tips/script';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -45,20 +45,21 @@ const TipCard: FC<TipCardProps> = ({ data, onEdit, onRemove }) => {
       </Box>
 
       <CardContent
+        component={RouterLink}
+        to={`pettips-details/${data.id}`}
         sx={{
           flexGrow: 1,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
+          textDecoration: 'none',
+          color: 'inherit',
         }}
       >
         <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} mb={1}>
           <Typography
             variant="subtitle1"
             fontWeight={600}
-            component={RouterLink}
-            to={`pettips-details/${data.id}`}
-            sx={{ textDecoration: 'none', color: 'inherit' }}
           >
             {data.title}
           </Typography>
@@ -68,8 +69,6 @@ const TipCard: FC<TipCardProps> = ({ data, onEdit, onRemove }) => {
         </Box>
 
         <Typography
-          component={RouterLink}
-          to={`pettips-details/${data.id}`}
           variant="body2"
           color="text.secondary"
           sx={{
@@ -78,8 +77,6 @@ const TipCard: FC<TipCardProps> = ({ data, onEdit, onRemove }) => {
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
             mb: 2,
-            textDecoration: 'none',
-            color: 'inherit',
           }}
         >
           {data.overview}

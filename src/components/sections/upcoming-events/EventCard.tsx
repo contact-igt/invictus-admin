@@ -10,12 +10,15 @@ import IconButton from '@mui/material/IconButton';
 import IconifyIcon from 'components/base/IconifyIcon';
 import { Event } from 'services/events/script';
 import { formatDateRange, formatTimeRange } from 'helper/datetime';
+import ActionMenu from '../ActionMenu';
 
 interface EventCardProps {
   data: Event;
+  onEdit: (id: number) => void;
+  onRemove: (id: number) => void;
 }
 
-const EventCard = ({ data }: EventCardProps) => {
+const EventCard = ({ data, onEdit, onRemove }: EventCardProps) => {
   const [imgIndex, setImgIndex] = useState(0);
   const dateRange = formatDateRange(data.start_date, data.end_date);
   const timeRange = formatTimeRange(data.start_time, data.end_time);
@@ -51,6 +54,11 @@ const EventCard = ({ data }: EventCardProps) => {
             alt={data.event_title}
           />
         </CardActionArea>
+
+        <Box sx={{ position: 'absolute', top: 8, right: 8 }}>
+          <ActionMenu onEdit={() => onEdit(data.id)} onRemove={() => onRemove(data.id)} />
+        </Box>
+
         <IconButton
           onClick={prevImage}
           size="small"
@@ -98,10 +106,7 @@ const EventCard = ({ data }: EventCardProps) => {
         <Box
           sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap', overflow: 'hidden' }}
         >
-          <IconifyIcon
-            icon="eva:pin-outline"
-            sx={{ mr: 0.5, fontSize: 24}}
-          />
+          <IconifyIcon icon="eva:pin-outline" sx={{ mr: 0.5, fontSize: 24 }} />
           <Typography variant="body2" color="text.secondary" noWrap>
             {data.full_address}
           </Typography>

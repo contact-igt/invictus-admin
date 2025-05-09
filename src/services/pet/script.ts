@@ -6,5 +6,6 @@ export interface PetTypes {
 
 export interface EventsFormProps {
   isEdit: boolean;
-  data: PetTypes[]; 
+  data: PetTypes[];
+  onSuccess?: () => void;
 }

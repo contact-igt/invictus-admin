@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { useFormikContext, FormikValues } from 'formik';
 import Box from '@mui/material/Box';
 import { DatePicker, TimePicker, DateTimePicker } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
 import AppErrorMessage from 'components/common/Forms/AppErrorMessage';
 
 type MuiDatePickerProps = Omit<React.ComponentProps<typeof DatePicker>, 'value' | 'onChange'>;
@@ -34,8 +36,31 @@ const AppFormDateTimePicker: React.FC<AppFormDateTimePickerProps> = ({
 }) => {
   const { values, touched, errors, setFieldValue } = useFormikContext<FormikValues>();
 
-  const dateValue = values[dateName] ?? null;
-  const timeValue = timeName ? values[timeName] ?? null : null;
+  // ── PARSE DATE VALUE ─────────────────────────────────────────────────────────
+  const rawDate = values[dateName];
+  let dateValue: Dayjs | null = null;
+
+  if (typeof rawDate === 'string') {
+    dateValue = dayjs(rawDate);
+  } else if (rawDate instanceof Date) {
+    dateValue = dayjs(rawDate);
+  } else if (rawDate && (rawDate as Dayjs).isValid?.()) {
+    dateValue = rawDate as Dayjs;
+  }
+
+  // ── PARSE TIME VALUE ─────────────────────────────────────────────────────────
+  let timeValue: Dayjs | null = null;
+  if (timeName) {
+    const rawTime = values[timeName];
+    if (typeof rawTime === 'string') {
+      const [h = '0', m = '0', s = '0'] = rawTime.split(':');
+      timeValue = dayjs().hour(parseInt(h, 10)).minute(parseInt(m, 10)).second(parseInt(s, 10));
+    } else if (rawTime instanceof Date) {
+      timeValue = dayjs(rawTime);
+    } else if (rawTime && (rawTime as Dayjs).isValid?.()) {
+      timeValue = rawTime as Dayjs;
+    }
+  }
 
   const dateError = touched[dateName] && errors[dateName] ? String(errors[dateName]) : '';
   const timeError =
@@ -57,25 +82,17 @@ const AppFormDateTimePicker: React.FC<AppFormDateTimePickerProps> = ({
                 helperText: null,
                 sx: {
                   '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      border: 'none',
-                    },
-                    '&:hover fieldset': {
-                      border: 'none',
-                    },
-                    '&.Mui-focused fieldset': {
-                      border: 'none',
-                    },
+                    '& fieldset': { border: 'none' },
+                    '&:hover fieldset': { border: 'none' },
+                    '&.Mui-focused fieldset': { border: 'none' },
                   },
-                  '& .MuiInputBase-input': {
-                    height: '30px',
-                  },
+                  '& .MuiInputBase-input': { height: '30px' },
                 },
               },
             }}
             {...(datePickerProps as MuiDateTimePickerProps)}
           />
-          {dateError && <AppErrorMessage error={dateError} visible={Boolean(dateError)} />}
+          {dateError && <AppErrorMessage error={dateError} visible />}
         </Box>
       ) : (
         <>
@@ -92,25 +109,17 @@ const AppFormDateTimePicker: React.FC<AppFormDateTimePickerProps> = ({
                     helperText: null,
                     sx: {
                       '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                          border: 'none',
-                        },
-                        '&:hover fieldset': {
-                          border: 'none',
-                        },
-                        '&.Mui-focused fieldset': {
-                          border: 'none',
-                        },
+                        '& fieldset': { border: 'none' },
+                        '&:hover fieldset': { border: 'none' },
+                        '&.Mui-focused fieldset': { border: 'none' },
                       },
-                      '& .MuiInputBase-input': {
-                        height: '30px',
-                      },
+                      '& .MuiInputBase-input': { height: '30px' },
                     },
                   },
                 }}
                 {...(datePickerProps as MuiDatePickerProps)}
               />
-              {dateError && <AppErrorMessage error={dateError} visible={Boolean(dateError)} />}
+              {dateError && <AppErrorMessage error={dateError} visible />}
             </Box>
           )}
           {showTime && timeName && (
@@ -126,25 +135,17 @@ const AppFormDateTimePicker: React.FC<AppFormDateTimePickerProps> = ({
                     helperText: null,
                     sx: {
                       '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                          border: 'none',
-                        },
-                        '&:hover fieldset': {
-                          border: 'none',
-                        },
-                        '&.Mui-focused fieldset': {
-                          border: 'none',
-                        },
+                        '& fieldset': { border: 'none' },
+                        '&:hover fieldset': { border: 'none' },
+                        '&.Mui-focused fieldset': { border: 'none' },
                       },
-                      '& .MuiInputBase-input': {
-                        height: '30px',
-                      },
+                      '& .MuiInputBase-input': { height: '30px' },
                     },
                   },
                 }}
                 {...timePickerProps}
               />
-              {timeError && <AppErrorMessage error={timeError} visible={Boolean(timeError)} />}
+              {timeError && <AppErrorMessage error={timeError} visible />}
             </Box>
           )}
         </>

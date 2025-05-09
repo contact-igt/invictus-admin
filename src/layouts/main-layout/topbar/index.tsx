@@ -23,7 +23,6 @@ interface TopbarProps {
 const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
   const { user } = useAuth();
   const location = useLocation();
-  console.log(location.pathname);
 
   const handleDrawerToggle = () => {
     if (!isClosing) {
