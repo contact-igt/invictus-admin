@@ -58,7 +58,7 @@ const UpcomingEvents = () => {
   };
 
   const handleEditEvent = (id: number | string) => {
-    const event = eventData?.upcoming_events?.find((event: Event) => event.id === id); 
+    const event = eventData?.upcoming_events?.find((event: Event) => event.id === id);
     if (event) {
       setSelectedEvent(event);
       setOpenEditModal(!openEditModal);
@@ -76,6 +76,15 @@ const UpcomingEvents = () => {
 
   if (petTypeLoading || eventsLoading) return <PageLoader />;
 
+  const filteredEvents = eventData?.upcoming_events?.filter((event: Event) => {
+    const search = searchText.toLowerCase();
+    return (
+      event.event_title.toLowerCase().includes(search) ||
+      event.event_description.toLowerCase().includes(search) ||
+      event.full_address.toLowerCase().includes(search)
+    );
+  });
+
   return (
     <Stack direction="column" spacing={2} width={1}>
       <PageTitle
@@ -89,7 +98,7 @@ const UpcomingEvents = () => {
       />
 
       <Grid container spacing={2}>
-        {eventData?.upcoming_events.map((event: Event) => (
+        {filteredEvents?.map((event: Event) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={event.id}>
             <EventCard
               data={event}

@@ -8,6 +8,8 @@ import Splash from 'components/loader/Splash';
 import PageLoader from 'components/loader/PageLoader';
 import ProtectedRoute from './security';
 import PetEventDetails from 'pages/upcoming-events/petevent-details/PetEventDetails';
+import Pets from 'pages/pets';
+import PetDetailsPage from 'pages/pets/pet-details/PetDetailsPage';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -41,6 +43,28 @@ const router = createBrowserRouter(
             {
               index: true,
               element: <Dashboard />,
+            },
+          ],
+        },
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.pets,
+              element: <Pets />,
+            },
+            {
+              path: paths.petDetails,
+              element: <PetDetailsPage />,
             },
           ],
         },

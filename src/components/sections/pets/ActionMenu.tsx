@@ -12,20 +12,20 @@ import IconifyIcon from 'components/base/IconifyIcon';
 interface Action {
   id: number;
   icon: string;
-  title: 'Edit' | 'Remove';
+  title: 'Details' | 'Remove';
 }
 
 const actions: Action[] = [
-  { id: 1, icon: 'hugeicons:pencil-edit-02', title: 'Edit' },
+  { id: 1, icon: 'eva:info-outline', title: 'Details' },
   { id: 2, icon: 'hugeicons:delete-02', title: 'Remove' },
 ];
 
 interface ActionMenuProps {
-  onEdit?: () => void;
+  onDetails?: () => void;
   onRemove?: () => void;
 }
 
-const ActionMenu = ({ onEdit, onRemove }: ActionMenuProps) => {
+const ActionMenu = ({ onDetails, onRemove }: ActionMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -53,8 +53,8 @@ const ActionMenu = ({ onEdit, onRemove }: ActionMenuProps) => {
               key={a.id}
               onClick={() => {
                 handleClose();
-                if (isRemove && onRemove) onRemove();
-                else if (onEdit) onEdit();
+                if (isRemove) onRemove?.();
+                else onDetails?.();
               }}
             >
               <ListItemIcon sx={{ color: isRemove ? 'error.main' : 'inherit' }}>
