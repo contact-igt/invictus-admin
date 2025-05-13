@@ -11,8 +11,6 @@ import PageLoader from 'components/loader/PageLoader';
 
 const PetsListing = () => {
   const { data: Pets, isLoading: PetsLoading } = usePetsQuery();
-  console.log(Pets);
-  
   const [searchText, setSearchText] = useState('');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
