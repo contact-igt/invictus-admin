@@ -12,6 +12,8 @@ export default {
   users: `/${rootPaths.pageRoot}/users`,
   events: `/${rootPaths.pageRoot}/upcoming-events`,
   eventDetails: `/${rootPaths.pageRoot}/upcoming-events/petevent-details/:eventId`,
+  pets: `/${rootPaths.pageRoot}/pets`,
+  petDetails: `/${rootPaths.pageRoot}/pets/pet-details/:petId`,
   mentors: `/${rootPaths.pageRoot}/mentors`,
   messages: `/${rootPaths.pageRoot}/messages`,
   settings: `/${rootPaths.pageRoot}/settings`,

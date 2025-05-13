@@ -29,17 +29,24 @@ const sitemap: MenuItem[] = [
     active: true,
   },
   {
-    id: 'Pet Tips',
-    subheader: 'Pet Tips',
-    path: paths.pettips,
-    icon: 'mdi:paw',
-    active: true,
-  },
-  {
     id: 'users',
     subheader: 'Users',
     path: paths.users,
     icon: 'mynaui:user-hexagon',
+    active: true,
+  },
+  {
+    id: 'pets',
+    subheader: 'Pets',
+    path: paths.pets,
+    icon: 'mdi:paw',
+    active: true,
+  },
+  {
+    id: 'Pet Tips',
+    subheader: 'Pet Tips',
+    path: paths.pettips,
+    icon: 'mdi:dog',
     active: true,
   },
   {
