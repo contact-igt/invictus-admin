@@ -11,6 +11,7 @@ import { theme } from 'theme/theme';
 import PetVideoSection from './sections/PetVideosSection';
 import PetDescriptionSection from './sections/PetDescriptionSection';
 import PetVaccinationCard from './sections/PetVaccinationStates';
+import PetPassportSection from './sections/PetPassportSection';
 
 interface PetDetailsProps {
   petId: string | number;
@@ -29,10 +30,16 @@ const PetDetails: FC<PetDetailsProps> = ({ petId }) => {
     <Paper elevation={4} sx={{ width: '100%', mx: 'auto', my: 4, p: { xs: 2, md: 4 } }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} sx={{ pr: { md: 3 } }}>
-          <PetBanner imageUrl={pet.pet_profile_picture} />
+          <PetBanner
+            imageUrl={pet.pet_profile_picture}
+            completionPercent={pet.pet_profile_completeion}
+            likedCount={pet.liked_count}
+            superLikedCount={pet.super_liked_count}
+          />
           <PetAboutSection pet={pet} />
           <PetStatsCard pet={pet} />
           <PetDescriptionSection pet={pet} />
+          <PetPassportSection pet={pet} />
         </Grid>
 
         <Grid

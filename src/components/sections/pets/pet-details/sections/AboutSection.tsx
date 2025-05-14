@@ -15,6 +15,16 @@ const capitalize = (value: string = ''): string =>
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
     .join(' ');
 
+const formatDateOfBirth = (iso: string | undefined): string => {
+  if (!iso || iso === '0000-00-00') return 'NA';
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
 type Pet = {
   pet_name?: string;
   pet_type?: string;
@@ -28,6 +38,7 @@ type Pet = {
     city?: string;
     country?: string;
   };
+  date_of_birth?: string;
 };
 
 type Props = {
@@ -45,6 +56,7 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
     physically_active,
     microchip_number,
     pet_address,
+    date_of_birth,
   } = pet;
 
   const name = capitalize(getValue(pet_name));
@@ -59,6 +71,7 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
     pet_address?.city && pet_address?.country
       ? `${capitalize(getValue(pet_address.city))}, ${capitalize(getValue(pet_address.country))}`
       : 'NA';
+  const dob = formatDateOfBirth(date_of_birth);
 
   return (
     <div>
@@ -161,6 +174,20 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
         <Grid item xs={6} sx={{ textAlign: 'right' }}>
           <Typography variant="body1" fontWeight={500}>
             {location}
+          </Typography>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <IconifyIcon icon="mdi:calendar" />
+            <Typography variant="subtitle1" color="textSecondary">
+              Date of Birth
+            </Typography>
+          </Stack>
+        </Grid>
+        <Grid item xs={6} sx={{ textAlign: 'right' }}>
+          <Typography variant="body1" fontWeight={500}>
+            {dob}
           </Typography>
         </Grid>
       </Grid>
