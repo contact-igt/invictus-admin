@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
 import ActionMenu from './ActionMenu';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Pet } from 'services/user/script';
 
 interface PetsTableProps {
@@ -15,7 +15,7 @@ interface PetsTableProps {
 }
 
 const PetsTable = ({ searchText, pets }: PetsTableProps) => {
-  const navigate = useNavigate();     
+  // const navigate = useNavigate();     
   const apiRef = useGridApiRef<GridApi>();
 
   useEffect(() => {
