@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -126,7 +127,8 @@ const PetsTable = ({ searchText, pets }: PetsTableProps) => {
       headerAlign: 'center',
       renderCell: (params) => (
         <ActionMenu
-          onDetails={() => navigate(`pet-details/${params.row.id}`)}
+          // onDetails={() => navigate(`pet-details/${params.row.id}`)}
+          onDetails={()=>{}}
           onRemove={() => console.log('Remove', params.row.id)}
         />
       ),
