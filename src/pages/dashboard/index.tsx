@@ -19,7 +19,7 @@ const Dashboard = () => {
   
   return (
     <Stack direction={{ xs: 'column', md: 'row' }}>
-      <Stack p={3.5} spacing={3.5} direction="column" width={{ xs: 1, md: 'calc(100% - 460px)' }}>
+      {/* <Stack p={3.5} spacing={3.5} direction="column" width={{ xs: 1, md: 'calc(100% - 460px)' }}>
         <Stack
           width={1}
           spacing={3.5}
@@ -53,7 +53,7 @@ const Dashboard = () => {
           <WeekCalendar />
           <TaskToday />
         </Stack>
-      </Box>
+      </Box> */}
     </Stack>
   );
 };
