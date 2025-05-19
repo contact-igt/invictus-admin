@@ -58,7 +58,7 @@ export const eventValidationSchema = Yup.object()
       .of(Yup.string().required())
       .min(1, 'Please select City')
       .required('City is required'),
-      
+
     pin_location: Yup.string().required('Location link is required').url('Enter a valid URL'),
 
     start_date: Yup.date()
@@ -137,4 +137,21 @@ export const tipValidationSchema = Yup.object().shape({
     if (typeof value === 'string') return value.trim() !== '';
     return value instanceof File;
   }),
+});
+
+export const editDescriptionValidationSchema = Yup.object().shape({
+  description: Yup.string()
+    .required('Description is required')
+    .min(20, 'Description must be at least 20 characters')
+    .max(1000, 'Description cannot exceed 1000 characters'),
+});
+
+export const editPetAboutValidationSchema = Yup.object().shape({
+  pet_name: Yup.string().required().min(3).max(15).label('Pet Name'),
+  pet_profile_picture: Yup.mixed().test(
+    'is-valid-type',
+    'Pet Profile Image must be a file or a URL',
+    (value) => !value || typeof value === 'string' || value instanceof File,
+  ),
+  pet_type: Yup.string().required().label('Pet Type'),
 });
