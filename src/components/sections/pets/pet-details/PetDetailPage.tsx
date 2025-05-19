@@ -24,7 +24,6 @@ const PetDetails: FC<PetDetailsProps> = ({ petId }) => {
     return <Paper sx={{ p: 4, textAlign: 'center' }}>Failed to load pet details.</Paper>;
 
   const { pet } = data;
-  console.log(pet);
 
   return (
     <Paper elevation={4} sx={{ width: '100%', mx: 'auto', my: 4, p: { xs: 2, md: 4 } }}>

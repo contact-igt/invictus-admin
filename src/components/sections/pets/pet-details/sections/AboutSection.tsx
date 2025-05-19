@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { Grid, Typography, Chip, Stack, Divider } from '@mui/material';
+import React, { useState } from 'react';
+import { Grid, Typography, Chip, Stack, Divider, IconButton, Box } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
+import AboutForm from '../forms/AboutForm';
 import { theme } from 'theme/theme';
+import { Popup } from 'components/common/Popup';
 
 const getValue = (value: any): string =>
   value === null || value === undefined || value === '' || value === '0000-00-00'
@@ -34,18 +36,18 @@ type Pet = {
   nuetered?: string;
   physically_active?: string;
   microchip_number?: number;
-  pet_address?: {
-    city?: string;
-    country?: string;
-  };
+  pet_address?: { city?: string; country?: string };
   date_of_birth?: string;
+  pet_profile_picture: string;
 };
 
-type Props = {
-  pet: Pet;
-};
+type Props = { pet: Pet };
 
 const PetAboutSection: React.FC<Props> = ({ pet }) => {
+  const [editOpen, setEditOpen] = useState(false);
+  const handleEditOpen = () => setEditOpen(true);
+  const handleEditClose = () => setEditOpen(false);
+
   const {
     pet_name,
     pet_type,
@@ -74,8 +76,8 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
   const dob = formatDateOfBirth(date_of_birth);
 
   return (
-    <div>
-      <Grid container spacing={2} sx={{ mb: 2 }}>
+    <Box>
+      <Grid container spacing={2}>
         <Grid item xs={6}>
           <Typography variant="h4" fontWeight={600}>
             {name}
@@ -93,11 +95,10 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
             <Typography variant="h6">{sex}</Typography>
           </Stack>
         </Grid>
-
         <Grid item xs={6} sx={{ textAlign: 'right' }}>
           <Stack direction="row" alignItems="center" justifyContent="flex-end" spacing={1}>
-            <Typography variant="h6">{breed}</Typography>
             <IconifyIcon icon="mdi:shape-outline" />
+            <Typography variant="h6">{breed}</Typography>
           </Stack>
         </Grid>
 
@@ -106,7 +107,17 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
         </Grid>
       </Grid>
 
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
+        <Typography variant="h4" gutterBottom>
+          About
+        </Typography>
+        <IconButton onClick={handleEditOpen} color="primary">
+          <IconifyIcon icon="eva:edit-2-outline" />
+        </IconButton>
+      </Stack>
+
       <Grid container spacing={2} sx={{ mb: 4 }}>
+        {/* Color */}
         <Grid item xs={6}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconifyIcon icon="mdi:palette" />
@@ -120,7 +131,7 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
             {col}
           </Typography>
         </Grid>
-
+        {/* Neutered */}
         <Grid item xs={6}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconifyIcon icon="mdi:check-decagram" />
@@ -134,7 +145,7 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
             {neutered}
           </Typography>
         </Grid>
-
+        {/* Activity */}
         <Grid item xs={6}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconifyIcon icon="mdi:run" />
@@ -148,7 +159,7 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
             {activity}
           </Typography>
         </Grid>
-
+        {/* Microchip */}
         <Grid item xs={6}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconifyIcon icon="mdi:chip" />
@@ -162,7 +173,7 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
             {microchip}
           </Typography>
         </Grid>
-
+        {/* Location */}
         <Grid item xs={6}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconifyIcon icon="eva:pin-outline" />
@@ -176,7 +187,7 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
             {location}
           </Typography>
         </Grid>
-
+        {/* Date of Birth */}
         <Grid item xs={6}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconifyIcon icon="mdi:calendar" />
@@ -191,7 +202,12 @@ const PetAboutSection: React.FC<Props> = ({ pet }) => {
           </Typography>
         </Grid>
       </Grid>
-    </div>
+
+      {/* Popup for editing about */}
+      <Popup open={editOpen} onClose={handleEditClose}>
+        <AboutForm pet={pet} />
+      </Popup>
+    </Box>
   );
 };
 

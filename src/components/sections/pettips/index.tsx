@@ -19,7 +19,7 @@ const PetTipsResponsive: FC = () => {
 
   const { getPetTypes } = new PetApis();
   const { data, isLoading: petTypeLoading } = useQuery(['pet-types'], getPetTypes, {
-    staleTime: 1000 * 60 * 3,
+    staleTime: 1000 * 60 * 5,
   });
 
   const [selectedTipId, setSelectedTipId] = useState<number | string>(0);
