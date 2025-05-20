@@ -33,3 +33,4 @@ export const usePetByIdQuery = (id: number | string) => {
 
   return { data, isLoading, isError };
 };
+

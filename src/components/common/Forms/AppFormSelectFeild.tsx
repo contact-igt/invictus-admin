@@ -13,15 +13,13 @@ export type Option = {
   label: string;
 };
 
-export type AppFormSelectProps = Omit<
-  TextFieldProps,
-  'select' | 'children' | 'onChange' | 'value'
-> & {
+export type AppFormSelectProps = Omit<TextFieldProps, 'select' | 'children' | 'onChange' | 'value'> & {
   name: string;
   options: Option[];
   icon?: string;
   multiple?: boolean;
   placeholder?: string;
+  onValueChange?: (value: string | string[]) => void;
 };
 
 export const AppFormSelect: React.FC<AppFormSelectProps> = ({
@@ -31,7 +29,9 @@ export const AppFormSelect: React.FC<AppFormSelectProps> = ({
   multiple = false,
   placeholder = 'Select an option',
   InputProps: inputProps,
+  onValueChange,
   ...textFieldProps
+  
 }) => {
   const { touched, errors, setFieldValue } = useFormikContext<FormikValues>();
   const [field] = useField(name);
@@ -42,7 +42,9 @@ export const AppFormSelect: React.FC<AppFormSelectProps> = ({
 
     if (multiple) {
       setFieldValue(name, selectedValue);
+      onValueChange?.(selectedValue as string[]);
     } else {
+      onValueChange?.([selectedValue as string]);
       setFieldValue(name, [selectedValue]);
     }
   };
