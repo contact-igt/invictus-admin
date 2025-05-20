@@ -9,6 +9,8 @@ import { useQuery } from 'react-query';
 import { PetApis } from 'services/pet';
 import AppFormSelect from 'components/common/Forms/AppFormSelectFeild';
 import { PetTypes } from 'services/pet/script';
+import { useEffect, useState } from 'react';
+import ResetBreedColorOnTypeChange from 'components/common/Forms/PetBreedColorAutoUpdate';
 
 interface AboutFormProps {
   pet: {
@@ -27,7 +29,12 @@ interface AboutFormProps {
 }
 
 const AboutForm: React.FC<AboutFormProps> = ({ pet }) => {
-  const { getPetTypes } = new PetApis();
+  const { getPetTypes, getPetBreeds, getPetColors } = new PetApis();
+  const [selectedPetType, setSelectedPetType] = useState<string>(pet?.pet_type || '');
+  const [petDataLoading, setPetDataLoading] = useState(false);
+  const [petColors, setPetColors] = useState([]);
+  const [petBreeds, setPetBreeds] = useState([]);
+
   const { data: petTypesData, isLoading: petTypeLoading } = useQuery(['pet-types'], getPetTypes, {
     staleTime: 1000 * 60 * 5,
   });
@@ -37,9 +44,26 @@ const AboutForm: React.FC<AboutFormProps> = ({ pet }) => {
     console.log(values);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setPetDataLoading(true);
+        const breedData = await getPetBreeds(selectedPetType);
+        setPetBreeds(breedData?.pet_breeds);
+        const colorsData = await getPetColors(selectedPetType);
+        setPetColors(colorsData?.pet_colors);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setPetDataLoading(false);
+      }
+    };
+    fetchData();
+  }, [pet, selectedPetType]);
+
   return (
-    <Stack width={500} flexDirection="column" p={2} overflow={'scroll'}>
-      {petTypeLoading && (
+    <Stack width={500} flexDirection="column" p={2} overflow={'scroll'} height={600}>
+      {(petTypeLoading || petDataLoading) && (
         <Box
           position="absolute"
           top={0}
@@ -64,10 +88,13 @@ const AboutForm: React.FC<AboutFormProps> = ({ pet }) => {
             pet_name: pet?.pet_name || '',
             pet_profile_picture: pet?.pet_profile_picture || '',
             pet_type: pet?.pet_type || '',
+            pet_breed: pet?.pet_breed || '',
+            color: pet?.color || '',
           }}
           validationSchema={editPetAboutValidationSchema}
           onSubmit={handleSubmit}
         >
+          <ResetBreedColorOnTypeChange/>
           <AppFormImagePicker name="pet_profile_picture" />
 
           <AppFormTextField
@@ -86,8 +113,33 @@ const AboutForm: React.FC<AboutFormProps> = ({ pet }) => {
                 ? pet_types.map((pet: PetTypes) => ({ label: pet.label, value: pet.value }))
                 : []
             }
+            onValueChange={(value) => setSelectedPetType(value[0])}
             placeholder="Select Pet Type(s)"
             icon="hugeicons:type-cursor"
+            variant="standard"
+            InputProps={{
+              sx: { marginTop: '30px !important' },
+            }}
+          />
+
+          <AppFormSelect
+            name="pet_breed"
+            label="Pet Breed(s)"
+            options={petBreeds?.map((pet: PetTypes) => ({ label: pet.label, value: pet.value }))}
+            placeholder="Select Pet Breed(s)"
+            icon="hugeicons:feather"
+            variant="standard"
+            InputProps={{
+              sx: { marginTop: '30px !important' },
+            }}
+          />
+
+          <AppFormSelect
+            name="color"
+            label="Pet Color"
+            options={petColors?.map((pet: PetTypes) => ({ label: pet.label, value: pet.value }))}
+            placeholder="Select Pet Color"
+            icon="hugeicons:brush"
             variant="standard"
             InputProps={{
               sx: { marginTop: '30px !important' },

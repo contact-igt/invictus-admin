@@ -146,12 +146,24 @@ export const editDescriptionValidationSchema = Yup.object().shape({
     .max(1000, 'Description cannot exceed 1000 characters'),
 });
 
+const stringOrSingleItemArray = Yup.mixed()
+  .test('string-or-array-of-one', 'Select at least one item', (value) => {
+    if (typeof value === 'string') return true;
+    if (Array.isArray(value) && value.length === 1 && typeof value[0] === 'string') return true;
+    return false;
+  })
+  .required('Select at least one item');
+
 export const editPetAboutValidationSchema = Yup.object().shape({
   pet_name: Yup.string().required().min(3).max(15).label('Pet Name'),
+
   pet_profile_picture: Yup.mixed().test(
     'is-valid-type',
     'Pet Profile Image must be a file or a URL',
     (value) => !value || typeof value === 'string' || value instanceof File,
   ),
-  pet_type: Yup.string().required().label('Pet Type'),
+
+  pet_type: stringOrSingleItemArray.label('Pet Type'),
+  pet_breed: stringOrSingleItemArray.label('Pet Breed'),
+  color: stringOrSingleItemArray.label('Pet Color'),
 });
