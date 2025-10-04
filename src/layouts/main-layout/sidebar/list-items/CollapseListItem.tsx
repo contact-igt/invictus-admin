@@ -14,7 +14,7 @@ const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
   const handleClick = () => {
     setOpen(!open);
   };
-
+  console.log(icon)
   return (
     <>
       <ListItemButton onClick={handleClick}>
@@ -56,6 +56,7 @@ const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
                 href={route.path}
                 sx={{ ml: 1.5, bgcolor: route.active ? 'info.main' : null }}
               >
+    
                 <ListItemText
                   primary={route.name}
                   sx={{

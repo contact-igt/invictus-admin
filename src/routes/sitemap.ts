@@ -19,7 +19,6 @@ export interface MenuItem {
   items?: SubMenuItem[];
 }
 
-
 const sitemap: MenuItem[] = [
   {
     id: 'dashboard',
@@ -29,43 +28,64 @@ const sitemap: MenuItem[] = [
     active: true,
   },
   {
-    id: 'users',
-    subheader: 'Users',
-    path: paths.users,
+    id: 'vls',
+    subheader: 'Vls',
     icon: 'mynaui:user-hexagon',
     active: true,
+    items: [
+      {
+        name: 'Vls Law Practice',
+        pathName: paths.vlsLawPractice,
+        path: paths.vlsLawPractice,
+        icon: 'mynaui:user-hexagon',
+      },
+      {
+        name: 'Vls Academy',
+        pathName: paths.vlsAcademy,
+        path: paths.vlsAcademy,
+        icon: 'mynaui:user-hexagon',
+      },
+    ],
   },
-  {
-    id: 'pets',
-    subheader: 'Pets',
-    path: paths.pets,
-    icon: 'mdi:paw',
-    active: true,
-  },
-  {
-    id: 'Pet Tips',
-    subheader: 'Pet Tips',
-    path: paths.pettips,
-    icon: 'mdi:dog',
-    active: true,
-  },
-  {
-    id: 'events',
-    subheader: 'Future Events',
-    path: paths.events,
-    active: true,
-    icon: 'mdi:calendar-clock',
-  },
-  {
-    id: 'notifications',
-    subheader: 'Notifications',
-    icon: 'solar:bell-outline',
-  },
-  {
-    id: 'helpcenter',
-    subheader: 'Help Center',
-    icon: 'carbon:help',
-  },
+
+  // {
+  //   id: 'users',
+  //   subheader: 'Users',
+  //   path: paths.users,
+  //   icon: 'mynaui:user-hexagon',
+  //   active: true,
+  // },
+  // {
+  //   id: 'pets',
+  //   subheader: 'Pets',
+  //   path: paths.pets,
+  //   icon: 'mdi:paw',
+  //   active: true,
+  // },
+  // {
+  //   id: 'Pet Tips',
+  //   subheader: 'Pet Tips',
+  //   path: paths.pettips,
+  //   icon: 'mdi:dog',
+  //   active: true,
+  // },
+  // {
+  //   id: 'events',
+  //   subheader: 'Future Events',
+  //   path: paths.events,
+  //   active: true,
+  //   icon: 'mdi:calendar-clock',
+  // },
+  // {
+  //   id: 'notifications',
+  //   subheader: 'Notifications',
+  //   icon: 'solar:bell-outline',
+  // },
+  // {
+  //   id: 'helpcenter',
+  //   subheader: 'Help Center',
+  //   icon: 'carbon:help',
+  // },
 ];
 
 export default sitemap;

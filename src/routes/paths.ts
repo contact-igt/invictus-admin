@@ -17,7 +17,11 @@ export default {
   mentors: `/${rootPaths.pageRoot}/mentors`,
   messages: `/${rootPaths.pageRoot}/messages`,
   settings: `/${rootPaths.pageRoot}/settings`,
-
+  vlsRoot: `/${rootPaths.pageRoot}/vls`,
+  vlsLawPractice: `/${rootPaths.pageRoot}/vls/law-practice`,
+  vlsAcademy: `/${rootPaths.pageRoot}/vls/academy`,
+  ramananFinancial: `/${rootPaths.pageRoot}/ramananFinacial`,
+  pixelEye: `/${rootPaths.pageRoot}/pixel-eye`,
   signin: `/${rootPaths.authRoot}/signin`,
   forgotPassword: `/${rootPaths.authRoot}/forgot-password`,
   404: `/${rootPaths.errorRoot}/404`,

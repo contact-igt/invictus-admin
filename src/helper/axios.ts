@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-import { store } from '../redux/store'; 
+import { store } from '../redux/store';
 import type { RootState } from '../redux/store';
 
 export const _axios = async (
@@ -10,7 +10,7 @@ export const _axios = async (
   contentType: string = 'application/json',
   params?: any,
 ) => {
-  const endpoint = `https://petpass-backend.onrender.com/api/v1${url}`;
+  const endpoint = `http://localhost:8000/api/v1${url}`;
   const state: RootState = store.getState();
   const token = state.auth.token;
 

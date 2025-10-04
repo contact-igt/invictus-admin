@@ -7,7 +7,7 @@ const PageTitle = ({
   title,
   btnText,
   isSearchEnable = true,
-  isAddEnable = true,
+  isAddEnable = false,
   searchText,
   handleInputChange,
   openModal,

@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
-import LogoImg from 'assets/images/Logo.png';
+import LogoImg from '/public/brand-logo.png';
 import { useLoginMutation } from './hooks/useLogin';
 import { User } from '../../services/auth/script';
 import { ThreeDots } from 'react-loader-spinner';
@@ -40,7 +40,7 @@ const Signin = () => {
         bgcolor="info.lighter"
         zIndex={1000}
       >
-        <Image src={LogoImg} alt="logo" height={80} width={80} sx={{ mr: 1.25 }} />
+        <Image src={LogoImg} alt="logo" height={50} width={200} sx={{ mr: 1.25 }} />
       </Stack>
       <Typography align="center" variant="h4">
         Sign In
