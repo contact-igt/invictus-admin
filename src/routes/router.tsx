@@ -12,6 +12,7 @@ import Pets from 'pages/pets';
 import PetDetailsPage from 'pages/pets/pet-details/PetDetailsPage';
 import VlsLawPractice from 'pages/vls/vls-law-practice';
 import VlsAcademy from 'pages/vls/vls-academy';
+import PixelEye from 'pages/pixel-eye';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -78,7 +79,24 @@ const router = createBrowserRouter(
           ],
         },
 
-
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.pixelEye,
+              element: <PixelEye />,
+            },
+          ],
+        },
         {
           path: rootPaths.authRoot,
           element: (

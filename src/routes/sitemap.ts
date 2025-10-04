@@ -47,6 +47,13 @@ const sitemap: MenuItem[] = [
       },
     ],
   },
+  {
+    id:"pixel-eye",
+     path: paths.pixelEye,
+    subheader:"Pixel Eye",
+    icon: 'mynaui:eye',
+    active: true,
+  }
 
   // {
   //   id: 'users',
