@@ -24,7 +24,7 @@ const ListItem = ({ subheader, icon, path, active }: MenuItem) => {
       component={Link}
       href={path}
       onClick={handleClick}
-      sx={{ mb: 2.5, bgcolor: (active && isPathMatched) ? 'info.main' : null }}
+      sx={{ mb: 1.3, bgcolor: (active && isPathMatched) ? 'info.main' : null }}
     >
       <ListItemIcon>
         {icon && (

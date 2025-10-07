@@ -4,11 +4,11 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import PageTitle from 'components/common/PageTitle';
 import PageLoader from 'components/loader/PageLoader';
-import { useVlsLawAcademyQuery } from 'components/hooks/useVlsQuery';
-import VlsLawAcademyTable from './vlsTable';
+import InvictusLeadsTable from './invictusLeadsTable';
+import { useInvictusLeadsQuery } from 'components/hooks/useInvictusQuery';
 
-const VlsLawAcademySection = () => {
-    const { data: usersData, isLoading } = useVlsLawAcademyQuery()
+const InvictusLeadsSection = () => {
+    const { data: usersData, isLoading } = useInvictusLeadsQuery()
     const [searchText, setSearchText] = useState('');
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,13 +22,13 @@ const VlsLawAcademySection = () => {
         <>
             <Stack direction="column" spacing={1} width={1}>
                 <PageTitle
-                    title="Vls Academy Users"
-                    btnText="Vls Academy Users"
+                    title="Invictus Leads Users"
+                    btnText="Invictus Leads Users"
                     searchText={searchText}
                     handleInputChange={handleInputChange}
                 />
                 <Paper sx={{ mt: 1.5, p: 0, pb: 0.75, minHeight: 411, width: 1 }}>
-                    <VlsLawAcademyTable
+                    <InvictusLeadsTable
                         searchText={searchText}
                         usersData={usersData?.data}
                     />
@@ -39,4 +39,4 @@ const VlsLawAcademySection = () => {
     );
 };
 
-export default VlsLawAcademySection;
+export default InvictusLeadsSection;

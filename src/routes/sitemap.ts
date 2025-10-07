@@ -48,12 +48,53 @@ const sitemap: MenuItem[] = [
     ],
   },
   {
-    id:"pixel-eye",
-     path: paths.pixelEye,
-    subheader:"Pixel Eye",
+    id: 'invictus',
+    subheader: 'Invictus',
+    icon: 'mynaui:user-hexagon',
+    active: true,
+    items: [
+      {
+        name: 'Invictus Leads',
+        pathName: paths.invictusLeads,
+        path: paths.invictusLeads,
+        icon: 'mynaui:user-hexagon',
+      },
+      {
+        name: 'Invictus Meta',
+        pathName: paths.invictusMeta,
+        path: paths.invictusMeta,
+        icon: 'mynaui:user-hexagon',
+      },
+    ],
+  },
+  {
+    id: 'mirra-builders',
+    path: paths.mirraBuilders,
+    subheader: 'Mirra Builders',
+    icon: 'mynaui:user-hexagon',
+    active: true,
+  },
+  {
+    id: 'kr-institute',
+    path: paths.krInstitute,
+    subheader: 'KR Institute',
+    icon: 'mynaui:user-hexagon',
+    active: true,
+  },
+  {
+    id: 'pixel-eye',
+    path: paths.pixelEye,
+    subheader: 'Pixel Eye',
     icon: 'mynaui:eye',
     active: true,
-  }
+  },
+  {
+    id: 'ramanans-financial',
+    path: paths.ramanansFinancial,
+    subheader: 'RV Financial',
+    icon: 'mdi:finance',
+    active: true,
+  },
 
   // {
   //   id: 'users',

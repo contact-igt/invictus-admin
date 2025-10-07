@@ -13,6 +13,11 @@ import PetDetailsPage from 'pages/pets/pet-details/PetDetailsPage';
 import VlsLawPractice from 'pages/vls/vls-law-practice';
 import VlsAcademy from 'pages/vls/vls-academy';
 import PixelEye from 'pages/pixel-eye';
+import RamanansFinancial from 'pages/ramanansFinancial';
+import InvictusLeads from 'pages/invictus/invictus-leads';
+import InvictusMeta from 'pages/invictus/invictus-meta';
+import KrInstitute from 'pages/kr-institute';
+import MirraBuilders from 'pages/mirra-builders';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -78,7 +83,70 @@ const router = createBrowserRouter(
             },
           ],
         },
-
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.invictusRoot,
+              element: <Outlet />,
+              children: [
+                {
+                  path: paths.invictusLeads,
+                  element: <InvictusLeads />,
+                },
+                {
+                  path: paths.invictusMeta,
+                  element: <InvictusMeta />,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.mirraBuilders,
+              element: <MirraBuilders />,
+            },
+          ],
+        },
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.krInstitute,
+              element: <KrInstitute />,
+            },
+          ],
+        },
         {
           path: rootPaths.pageRoot,
           element: (
@@ -94,6 +162,24 @@ const router = createBrowserRouter(
             {
               path: paths.pixelEye,
               element: <PixelEye />,
+            },
+          ],
+        },
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.ramanansFinancial,
+              element: <RamanansFinancial />,
             },
           ],
         },

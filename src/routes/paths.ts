@@ -1,3 +1,4 @@
+
 export const rootPaths = {
   root: '/',
   pageRoot: 'pages',
@@ -22,6 +23,12 @@ export default {
   vlsAcademy: `/${rootPaths.pageRoot}/vls/academy`,
   ramananFinancial: `/${rootPaths.pageRoot}/ramananFinacial`,
   pixelEye: `/${rootPaths.pageRoot}/pixel-eye`,
+  ramanansFinancial:`/${rootPaths.pageRoot}/ramanans-financial`,
+  invictusRoot:`/${rootPaths.pageRoot}/invictus`,
+  invictusLeads:`/${rootPaths.pageRoot}/invictus/leads`,
+  invictusMeta:`/${rootPaths.pageRoot}/invictus/meta`,
+  krInstitute:`/${rootPaths.pageRoot}/kr-institute`,
+  mirraBuilders:`/${rootPaths.pageRoot}/mirra-builders`,
   signin: `/${rootPaths.authRoot}/signin`,
   forgotPassword: `/${rootPaths.authRoot}/forgot-password`,
   404: `/${rootPaths.errorRoot}/404`,

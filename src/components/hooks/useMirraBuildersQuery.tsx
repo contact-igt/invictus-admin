@@ -1,15 +1,15 @@
 import { useSnackbar } from "notistack";
 import { useQuery } from "react-query";
-import { PixelEyeApiData } from "services/pixelEye";
+import { MirraBuildersApiData } from "services/mirraBuilders";
 
 
-const PixelEyeApis = new PixelEyeApiData();
+const MirraBuildersApis = new MirraBuildersApiData();
 
 
-export const usePixelEyeQuery = () => {
+export const useMirraBuildersQuery = () => {
     const { enqueueSnackbar } = useSnackbar();
 
-    const { data, isLoading, isError } = useQuery(['pixel'], () => PixelEyeApis.getAllPixelEye(), {
+    const { data, isLoading, isError } = useQuery(['pixel'], () => MirraBuildersApis.getAllMirraBuilders(), {
         staleTime: 2 * 60 * 1000,
         onError: (error: Error) => {
             enqueueSnackbar(error.message || 'Failed to load user', { variant: 'error' });

@@ -7,9 +7,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import IconifyIcon from 'components/base/IconifyIcon';
+import { useLocation } from 'react-router-dom';
 
-const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
+const CollapseListItem = ({ subheader, active, items, icon, path }: MenuItem) => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname.replace('/pages/', '');
+  const isAnyChildActive = items?.some(
+    (child) => currentPath === child.path.replace('/pages/', '')
+  );
 
   const handleClick = () => {
     setOpen(!open);
@@ -17,7 +23,11 @@ const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
   console.log(icon)
   return (
     <>
-      <ListItemButton onClick={handleClick}>
+      <ListItemButton onClick={handleClick}
+        sx={{
+          mb: 1.3,
+          bgcolor: isAnyChildActive ? 'info.main' : null,
+        }}>
         <ListItemIcon>
           {icon && (
             <IconifyIcon
@@ -56,7 +66,7 @@ const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
                 href={route.path}
                 sx={{ ml: 1.5, bgcolor: route.active ? 'info.main' : null }}
               >
-    
+
                 <ListItemText
                   primary={route.name}
                   sx={{

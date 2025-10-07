@@ -1,15 +1,11 @@
-import { _axios } from "helper/axios"
+import { _axios } from 'helper/axios';
 
 export class VlsApiData {
+  getAllVlsLawPractice = async () => {
+    return await _axios('get', '/vls-law-practices');
+  };
 
-    getAllVlsLawPractice = async () => {
-        return await _axios("get", "/vls-law-practices")
-    }
-
-
-       getAllVlsLawAcademy = async () => {
-        return await _axios("get", "/vls-law-academys")
-    }
-
-
+  getAllVlsLawAcademy = async () => {
+    return await _axios('get', '/vls-law-academys');
+  };
 }
