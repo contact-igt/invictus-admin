@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Pet } from 'services/user/script';
 import ActionMenu from 'components/sections/ActionMenu';
 import { Chip, Stack } from '@mui/material';
+import dayjs from 'dayjs';
 
 interface PetsTableProps {
     searchText: string;
@@ -52,7 +53,7 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
         },
 
         {
-            field: 'course_interested',
+            field: 'message',
             headerName: 'Message',
             flex: 1.5,
             minWidth: 120,
@@ -64,6 +65,33 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
             },
 
         },
+
+
+        {
+            field: 'registered_date',
+            headerName: 'Enquiry Date',
+            flex: 1,
+            minWidth: 170,
+            sortable: false,
+            filterable: false,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params) => {
+                const data = dayjs(params?.value).format("DD-MM-YYYY");
+                return data ? data : "---";
+            },
+        },
+        {
+            field: 'time',
+            headerName: 'Enquiry Time',
+            flex: 1,
+            minWidth: 170,
+            sortable: false,
+            filterable: false,
+            align: 'center',
+            headerAlign: 'center',
+        },
+
         {
             field: 'action',
             headerName: 'Actions',

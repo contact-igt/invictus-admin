@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
-import LogoImg from '/public/brand-logo.png';
+import LogoImg from '/assets/brand-logo.png';
 import { useLoginMutation } from './hooks/useLogin';
 import { User } from '../../services/auth/script';
 import { ThreeDots } from 'react-loader-spinner';

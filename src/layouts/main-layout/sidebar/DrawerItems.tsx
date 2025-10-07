@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import CollapseListItem from './list-items/CollapseListItem';
 import ListItem from './list-items/ListItem';
 import Image from 'components/base/Image';
-import LogoImg from '/public/brand-logo.png';
+import LogoImg from '/assets/brand-logo.png';
 // import FooterImg from 'assets/images/helpCenter.png';
 
 const DrawerItems = () => {

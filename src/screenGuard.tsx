@@ -1,5 +1,5 @@
 import React from 'react';
-import secureGuard from "../src/assets/images/screenGuard.svg"
+import secureGuard from "/assets/brand-logo.png"
 
 const ScreenGuard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAllowed, setIsAllowed] = React.useState(window.innerWidth >= 600);
@@ -31,7 +31,7 @@ const ScreenGuard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           alt="Restricted Device"
           style={{ width: '150px', marginBottom: '1.5rem' }}
         />
-        <h1 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: "#E1801C" }}>
+        <h1 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: "rgb(42 177 129)" }}>
           Desktop Access Required
         </h1>
         <p style={{ fontSize: '1rem', maxWidth: '400px' }}>

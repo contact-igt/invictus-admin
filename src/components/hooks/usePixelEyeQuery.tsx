@@ -9,10 +9,10 @@ const PixelEyeApis = new PixelEyeApiData();
 export const usePixelEyeQuery = () => {
     const { enqueueSnackbar } = useSnackbar();
 
-    const { data, isLoading, isError } = useQuery(['vls-practice'], () => PixelEyeApis.getAllPixelEye(), {
+    const { data, isLoading, isError } = useQuery(['pixel'], () => PixelEyeApis.getAllPixelEye(), {
         staleTime: 2 * 60 * 1000,
         onError: (error: Error) => {
-            enqueueSnackbar(error.message || 'Failed to load pets', { variant: 'error' });
+            enqueueSnackbar(error.message || 'Failed to load data', { variant: 'error' });
         },
     });
 

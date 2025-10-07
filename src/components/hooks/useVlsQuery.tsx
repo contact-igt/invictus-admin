@@ -9,10 +9,10 @@ const VlsApis = new VlsApiData();
 export const useVlsLawpracticeQuery = () => {
     const { enqueueSnackbar } = useSnackbar();
 
-    const { data, isLoading, isError } = useQuery(['vls-practice'], () => VlsApis.getAllVlsLawPractice(), {
+    const { data, isLoading, isError } = useQuery(['vls-law-practice'], () => VlsApis.getAllVlsLawPractice(), {
         staleTime: 2 * 60 * 1000,
         onError: (error: Error) => {
-            enqueueSnackbar(error.message || 'Failed to load pets', { variant: 'error' });
+            enqueueSnackbar(error.message || 'Failed to load data', { variant: 'error' });
         },
     });
 
@@ -27,7 +27,7 @@ export const useVlsLawAcademyQuery = () => {
     const { data, isLoading, isError } = useQuery(['vls-academy'], () => VlsApis.getAllVlsLawAcademy(), {
         staleTime: 2 * 60 * 1000,
         onError: (error: Error) => {
-            enqueueSnackbar(error.message || 'Failed to load pets', { variant: 'error' });
+            enqueueSnackbar(error.message || 'Failed to load data', { variant: 'error' });
         },
     });
 

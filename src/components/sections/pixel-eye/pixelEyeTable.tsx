@@ -82,6 +82,33 @@ const PixelEyeTable = ({ searchText, usersData }: PetsTableProps) => {
                 return data ? data : "---";
             },
         },
+
+
+        {
+            field: 'registered_date',
+            headerName: 'Enquiry Date',
+            flex: 1,
+            minWidth: 170,
+            sortable: false,
+            filterable: false,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params) => {
+                const data = dayjs(params?.value).format("DD-MM-YYYY");
+                return data ? data : "---";
+            },
+        },
+        {
+            field: 'time',
+            headerName: 'Enquiry Time',
+            flex: 1,
+            minWidth: 170,
+            sortable: false,
+            filterable: false,
+            align: 'center',
+            headerAlign: 'center',
+        },
+
         {
             field: 'enquiry_count',
             headerName: 'Enquiry Count',
@@ -96,6 +123,8 @@ const PixelEyeTable = ({ searchText, usersData }: PetsTableProps) => {
                 return data ? data : "---";
             },
         },
+
+
         {
             field: 'ip_address',
             headerName: 'IP Address',
@@ -124,35 +153,7 @@ const PixelEyeTable = ({ searchText, usersData }: PetsTableProps) => {
                 return data ? data : "---";
             },
         },
-        {
-            field: 'registered_date',
-            headerName: 'Registered Date',
-            flex: 1,
-            minWidth: 170,
-            sortable: false,
-            filterable: false,
-            align: 'center',
-            headerAlign: 'center',
-            renderCell: (params) => {
-                const data = dayjs(params?.value).format("DD-MM-YYYY");
-                return data ? data : "---";
-            },
-        },
-        {
-            field: 'registered_time',
-            headerName: 'Registered Time',
-            flex: 1,
-            minWidth: 170,
-            sortable: false,
-            filterable: false,
-            align: 'center',
-            headerAlign: 'center',
-            valueGetter: (params: any) => params?.row?.registered_date,
-            renderCell: (params) => {
-                const data = dayjs(params.value).format("hh:mm A");
-                return data ? data : "---";
-            },
-        },
+
         {
             field: 'action',
             headerName: 'Actions',

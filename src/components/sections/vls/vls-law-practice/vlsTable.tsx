@@ -78,7 +78,7 @@ const VlsLawPracticeTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'razorpay_payment_id',
             headerName: 'Razorpay Payment ID',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 220,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -89,10 +89,10 @@ const VlsLawPracticeTable = ({ searchText, usersData }: PetsTableProps) => {
         },
 
         {
-            field: 'domain_source',
-            headerName: 'Domain',
+            field: 'page_name',
+            headerName: 'Page Name',
             flex: 1.5,
-            minWidth: 120,
+            minWidth:220,
             align: 'center',
             headerAlign: 'center',
 
