@@ -8,10 +8,13 @@ import dayjs from 'dayjs';
 
 interface PetsTableProps {
     searchText: string;
-    usersData: []
+    usersData: [];
+    handleRemove: (userId: number) => void;
+    handleView: (userId: number) => void;
+
 }
 
-const PixelEyeTable = ({ searchText, usersData }: PetsTableProps) => {
+const PixelEyeTable = ({ searchText, usersData, handleRemove, handleView }: PetsTableProps) => {
     const apiRef = useGridApiRef<GridApi>();
 
     useEffect(() => {
@@ -163,10 +166,11 @@ const PixelEyeTable = ({ searchText, usersData }: PetsTableProps) => {
             filterable: false,
             align: 'center',
             headerAlign: 'center',
-            renderCell: () => (
+            renderCell: (params) => (
                 <ActionMenu
                     onEdit={() => { }}
-                    onRemove={() => { }}
+                    onRemove={() => { handleRemove(params.row.id) }}
+                    onView={() => handleView(params.row.id)}
                 />
             ),
         },

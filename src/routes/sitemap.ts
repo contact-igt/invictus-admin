@@ -36,14 +36,14 @@ const sitemap: MenuItem[] = [
         name: 'Invictus Leads',
         pathName: paths.invictusLeads,
         path: paths.invictusLeads,
-        icon: 'mynaui:user-hexagon',
+
 
       },
       {
         name: 'Invictus Meta',
         pathName: paths.invictusMeta,
         path: paths.invictusMeta,
-        icon: 'mynaui:user-hexagon',
+
 
       },
     ],
@@ -51,20 +51,18 @@ const sitemap: MenuItem[] = [
   {
     id: 'vls',
     subheader: 'Vls',
-    icon: 'mynaui:user-hexagon',
+    icon: 'hugeicons:court-law',
     items: [
       {
         name: 'Vls Law Practice',
         pathName: paths.vlsLawPractice,
         path: paths.vlsLawPractice,
-        icon: 'mynaui:user-hexagon',
 
       },
       {
         name: 'Vls Academy',
         pathName: paths.vlsAcademy,
         path: paths.vlsAcademy,
-        icon: 'mynaui:user-hexagon',
 
       },
     ],
@@ -82,14 +80,14 @@ const sitemap: MenuItem[] = [
     id: 'mirra-builders',
     path: paths.mirraBuilders,
     subheader: 'Mirra Builders',
-    icon: 'mynaui:user-hexagon',
+    icon: 'hugeicons:building-05',
     active: true,
   },
   {
     id: 'kr-institute',
     path: paths.krInstitute,
     subheader: 'KR Institute',
-    icon: 'mynaui:user-hexagon',
+    icon: 'hugeicons:school',
     active: true,
   },
 
