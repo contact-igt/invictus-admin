@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Pet } from 'services/user/script';
 import ActionMenu from 'components/sections/ActionMenu';
 import { Chip, Stack } from '@mui/material';
+import dayjs from 'dayjs';
 
 interface PetsTableProps {
     searchText: string;
@@ -59,6 +60,42 @@ const VlsLawPracticeTable = ({ searchText, usersData }: PetsTableProps) => {
             headerAlign: 'center',
         },
         {
+            field: 'programm_date',
+            headerName: 'Programm Date',
+            flex: 1.5,
+            minWidth: 150,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params) => {
+                const data = dayjs(params?.value).format("YYYY-MMM-DD")
+                return data ? data : "-"
+            }
+        },
+
+        {
+            field: 'registered_date',
+            headerName: 'Registered Date',
+            flex: 1.5,
+            minWidth: 150,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params) => {
+                const data = dayjs(params?.value).format("YYYY-MMM-DD")
+                return data ? data : "-"
+            }
+        },
+
+
+        {
+            field: 'time',
+            headerName: 'Registered Time',
+            flex: 1.5,
+            minWidth: 150,
+            align: 'center',
+            headerAlign: 'center',
+
+        },
+        {
             field: 'payment_status',
             headerName: 'Payment Status',
             flex: 1.5,
@@ -92,7 +129,7 @@ const VlsLawPracticeTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'page_name',
             headerName: 'Page Name',
             flex: 1.5,
-            minWidth:220,
+            minWidth: 220,
             align: 'center',
             headerAlign: 'center',
 
