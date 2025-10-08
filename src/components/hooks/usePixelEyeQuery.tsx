@@ -1,5 +1,6 @@
+import { AxiosError } from "axios";
 import { useSnackbar } from "notistack";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { PixelEyeApiData } from "services/pixelEye";
 
 
@@ -19,3 +20,25 @@ export const usePixelEyeQuery = () => {
     return { data, isLoading, isError };
 };
 
+
+
+export const deletePixelEyeByIdQuery = () => {
+    const queryClient = useQueryClient();
+    const { enqueueSnackbar } = useSnackbar();
+
+    return useMutation<void, Error, { id: number }>(
+        ({ id }) => PixelEyeApis.deleteByIdPixelEye(id),
+        {
+            onSuccess: () => {
+                enqueueSnackbar('Pixel eye User deleted successfully', { variant: 'success' });
+                queryClient.invalidateQueries(['pixel']);
+            },
+            onError: (error) => {
+                const err = error as AxiosError<any>;
+                enqueueSnackbar(err.response?.data?.message || 'Something went wrong', {
+                    variant: 'error',
+                });
+            },
+        },
+    );
+}
