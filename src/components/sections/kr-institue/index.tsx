@@ -21,8 +21,8 @@ const KrInstituteSection = () => {
         <>
             <Stack direction="column" spacing={1} width={1}>
                 <PageTitle
-                    title="Pixel Eye Users"
-                    btnText="Pixel Eye Users"
+                    title="KR Institute Users"
+                    btnText="KR Institute Users"
                     searchText={searchText}
                     handleInputChange={handleInputChange}
                 />

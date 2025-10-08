@@ -11,6 +11,10 @@ const PageTitle = ({
   searchText,
   handleInputChange,
   openModal,
+  isXslxExportEnable,
+  isCsvExportEnable,
+  handleXslxExportData,
+  handleCsvExportData
 }: any) => {
   return (
     <Stack
@@ -47,6 +51,50 @@ const PageTitle = ({
               ),
             }}
           />
+        )}
+        
+         {isXslxExportEnable && (
+          <CardActions
+            disableSpacing
+            sx={{ p: 0, width: { xs: '100%', sm: 170 } }}
+            onClick={handleXslxExportData}
+          >
+            <Button
+              variant="contained"
+              size="medium"
+              startIcon={<IconifyIcon icon="mdi:file-report" />}
+              fullWidth
+              sx={{
+                background: '#000000',
+                color: 'primary.info',
+                '& .MuiButton-startIcon': { mr: 0.8, pointerEvents: 'none' },
+              }}
+            >
+              {`Export Excel`}
+            </Button>
+          </CardActions>
+        )}
+
+        {isCsvExportEnable && (
+          <CardActions
+            disableSpacing
+            sx={{ p: 0, width: { xs: '100%', sm: 170 } }}
+            onClick={handleCsvExportData}
+          >
+            <Button
+              variant="contained"
+              size="medium"
+              startIcon={<IconifyIcon icon="mdi:report-box-multiple" />}
+              fullWidth
+              sx={{
+                background: '#000000',
+                color: 'primary.info',
+                '& .MuiButton-startIcon': { mr: 0.8, pointerEvents: 'none' },
+              }}
+            >
+              {`Export CSV`}
+            </Button>
+          </CardActions>
         )}
 
         {isAddEnable && (

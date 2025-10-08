@@ -1,10 +1,10 @@
 import Stack from '@mui/material/Stack';
-import VlsLawAcademySection from 'components/sections/vls/vls-law-academy';
+import InvictusMetaSection from 'components/sections/invictus/invictus-meta';
 
 const InvictusMeta = () => {
     return (
         <Stack direction="column" width="100%" minHeight="100vh" p={3.5} spacing={3.5}>
-           <VlsLawAcademySection/>
+           <InvictusMetaSection />
         </Stack>
     );
 };

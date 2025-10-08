@@ -2,19 +2,19 @@
 import { useEffect } from 'react';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
-import { useNavigate } from 'react-router-dom';
 import { Pet } from 'services/user/script';
 import ActionMenu from 'components/sections/ActionMenu';
-import { Chip, Stack } from '@mui/material';
 import dayjs from 'dayjs';
 
 interface PetsTableProps {
     searchText: string;
-    usersData: []
+    usersData: [];
+    handleRemove:(userId:number) => void;
+    handleView:(userId:number) => void;
+
 }
 
-const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
-    const navigate = useNavigate();
+const VlsLawAcademyTable = ({ searchText, usersData, handleRemove, handleView }: PetsTableProps) => {
     const apiRef = useGridApiRef<GridApi>();
 
     useEffect(() => {
@@ -22,7 +22,6 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
     }, [searchText]);
 
     const columns: GridColDef<Pet>[] = [
-
         {
             field: 'name',
             headerName: 'Name',
@@ -65,8 +64,6 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
             },
 
         },
-
-
         {
             field: 'registered_date',
             headerName: 'Enquiry Date',
@@ -134,7 +131,8 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
             renderCell: (params) => (
                 <ActionMenu
                     onEdit={() => { }}
-                    onRemove={() => { }}
+                    onRemove={() => {handleRemove(params.row.id) }}
+                    onView={()=>handleView(params.row.id)}
                 />
             ),
         },

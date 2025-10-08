@@ -9,7 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import IconifyIcon from 'components/base/IconifyIcon';
 import { useLocation } from 'react-router-dom';
 
-const CollapseListItem = ({ subheader, active, items, icon, path }: MenuItem) => {
+const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname.replace('/pages/', '');
