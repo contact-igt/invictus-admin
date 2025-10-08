@@ -44,7 +44,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'business_name',
             headerName: 'Business Name',
             flex: 1.5,
-            minWidth: 120,
+             minWidth: 170,
             align: 'center',
             headerAlign: 'center',
         },
@@ -52,7 +52,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'bussiness_belongs',
             headerName: 'Bussiness Belongs',
             flex: 1.5,
-            minWidth: 120,
+             minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -64,7 +64,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'ad_budget',
             headerName: 'Ad Budget',
             flex: 1.5,
-            minWidth: 120,
+             minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -76,7 +76,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'primary_goal_metads',
             headerName: 'Primary Goal Metads',
             flex: 1.5,
-            minWidth: 120,
+             minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -88,7 +88,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'metaad_run_before',
             headerName: 'Metaad Run Before',
             flex: 1.5,
-            minWidth: 120,
+             minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -100,7 +100,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'package',
             headerName: 'Package',
             flex: 1.5,
-            minWidth: 120,
+             minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -112,7 +112,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'planning_to_start',
             headerName: 'Planning To Start',
             flex: 1.5,
-            minWidth: 120,
+             minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {

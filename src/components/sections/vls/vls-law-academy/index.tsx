@@ -71,6 +71,8 @@ const VlsLawAcademySection = () => {
     };
     if (isLoading) return <PageLoader />;
 
+    // console.log("sss" , usersData)
+
     return (
         <>
             <Stack direction="column" spacing={1} width={1}>
@@ -79,17 +81,17 @@ const VlsLawAcademySection = () => {
                     btnText="Vls Law Academy Users"
                     searchText={searchText}
                     handleInputChange={handleInputChange}
-                    isCsvExportEnable={usersData?.length > 0}
-                    isXslxExportEnable={usersData?.length > 0}
-                    handleXslxExportData={() => handleXlsxDownloadData(usersData?.data?.length > 0, "vls-law-academy")}
-                    handleCsvExportData={() => handleCSVDownloadData(usersData?.data?.length > 0, "vls-law-academy")}
+                    isCsvExportEnable={usersData?.data?.length > 0}
+                    isXslxExportEnable={usersData?.data?.length > 0}
+                    handleXslxExportData={() => handleXlsxDownloadData(usersData?.data, "vls-law-academy")}
+                    handleCsvExportData={() => handleCSVDownloadData(usersData?.data, "vls-law-academy")}
                 />
                 <Paper sx={{ mt: 1.5, p: 0, pb: 0.75, minHeight: 411, width: 1 }}>
                     <VlsLawAcademyTable
                         searchText={searchText}
                         usersData={usersData?.data}
                         handleRemove={(id) => handleOpenConfirmAlertModal(id)}
-                        handleView = {(id)=>handleOpenViewModal(id)}
+                        handleView={(id) => handleOpenViewModal(id)}
                     />
                 </Paper>
             </Stack>

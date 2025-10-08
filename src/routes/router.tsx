@@ -7,9 +7,6 @@ import AuthLayout from 'layouts/auth-layout';
 import Splash from 'components/loader/Splash';
 import PageLoader from 'components/loader/PageLoader';
 import ProtectedRoute from './security';
-import PetEventDetails from 'pages/upcoming-events/petevent-details/PetEventDetails';
-import Pets from 'pages/pets';
-import PetDetailsPage from 'pages/pets/pet-details/PetDetailsPage';
 import VlsLawPractice from 'pages/vls/vls-law-practice';
 import VlsAcademy from 'pages/vls/vls-academy';
 import PixelEye from 'pages/pixel-eye';
@@ -21,10 +18,6 @@ import MirraBuilders from 'pages/mirra-builders';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
-const PetTips = lazy(() => import('pages/pettips'));
-const Users = lazy(() => import('pages/users'));
-const UpcomingEvents = lazy(() => import('pages/upcoming-events'));
-const PetTipsDetails = lazy(() => import('pages/pettips/pettips-details/PetTipsDetails'));
 const Signin = lazy(() => import('pages/authentication/Signin'));
 
 const router = createBrowserRouter(
@@ -68,34 +61,6 @@ const router = createBrowserRouter(
           ),
           children: [
             {
-              path: paths.vlsRoot,
-              element: <Outlet />,
-              children: [
-                {
-                  path: paths.vlsLawPractice,
-                  element: <VlsLawPractice />,
-                },
-                {
-                  path: paths.vlsAcademy,
-                  element: <VlsAcademy />,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
-            {
               path: paths.invictusRoot,
               element: <Outlet />,
               children: [
@@ -111,6 +76,36 @@ const router = createBrowserRouter(
             },
           ],
         },
+
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.vlsRoot,
+              element: <Outlet />,
+              children: [
+                {
+                  path: paths.vlsLawPractice,
+                  element: <VlsLawPractice />,
+                },
+                {
+                  path: paths.vlsAcademy,
+                  element: <VlsAcademy />,
+                },
+              ],
+            },
+          ],
+        },
+
         {
           path: rootPaths.pageRoot,
           element: (
@@ -198,92 +193,6 @@ const router = createBrowserRouter(
           ],
         },
 
-
-
-        // {
-        //   path: rootPaths.pageRoot,
-        //   element: (
-        //     <MainLayout>
-        //       <Suspense fallback={<PageLoader />}>
-        //         <ProtectedRoute>
-        //           <Outlet />
-        //         </ProtectedRoute>
-        //       </Suspense>
-        //     </MainLayout>
-        //   ),
-        //   children: [
-        //     {
-        //       path: paths.pets,
-        //       element: <Pets />,
-        //     },
-        //     {
-        //       path: paths.petDetails,
-        //       element: <PetDetailsPage />,
-        //     },
-        //   ],
-        // },
-        // {
-        //   path: rootPaths.pageRoot,
-        //   element: (
-        //     <MainLayout>
-        //       <Suspense fallback={<PageLoader />}>
-        //         <ProtectedRoute>
-        //           <Outlet />
-        //         </ProtectedRoute>
-        //       </Suspense>
-        //     </MainLayout>
-        //   ),
-        //   children: [
-        //     {
-        //       path: paths.pettips,
-        //       element: <PetTips />,
-        //     },
-        //     {
-        //       path: paths.petTipDetail,
-        //       element: <PetTipsDetails />,
-        //     },
-        //   ],
-        // },
-        // {
-        //   path: rootPaths.pageRoot,
-        //   element: (
-        //     <MainLayout>
-        //       <Suspense fallback={<PageLoader />}>
-        //         <ProtectedRoute>
-        //           <Outlet />
-        //         </ProtectedRoute>
-        //       </Suspense>
-        //     </MainLayout>
-        //   ),
-        //   children: [
-        //     {
-        //       path: paths.users,
-        //       element: <Users />,
-        //     },
-        //   ],
-        // },
-        // {
-        //   path: rootPaths.pageRoot,
-        //   element: (
-        //     <MainLayout>
-        //       <Suspense fallback={<PageLoader />}>
-        //         <ProtectedRoute>
-        //           <Outlet />
-        //         </ProtectedRoute>
-        //       </Suspense>
-        //     </MainLayout>
-        //   ),
-        //   children: [
-        //     {
-        //       path: paths.events,
-        //       element: <UpcomingEvents />,
-        //     },
-        //     {
-        //       path: paths.eventDetails,
-        //       element: <PetEventDetails />,
-        //     },
-        //   ],
-        // },
 
       ],
     },

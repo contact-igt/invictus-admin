@@ -4,11 +4,11 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import PageTitle from 'components/common/PageTitle';
 import PageLoader from 'components/loader/PageLoader';
-import { usePixelEyeQuery } from 'components/hooks/usePixelEyeQuery';
 import KrInstituteTable from './krInstituteTable';
+import { useKrInstituteQuery } from 'components/hooks/useKrInstituteQuery';
 
 const KrInstituteSection = () => {
-    const { data: usersData, isLoading } = usePixelEyeQuery();
+    const { data: usersData, isLoading } = useKrInstituteQuery();
     const [searchText, setSearchText] = useState('');
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
