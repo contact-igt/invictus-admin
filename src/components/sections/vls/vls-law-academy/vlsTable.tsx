@@ -27,7 +27,7 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'name',
             headerName: 'Name',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -39,7 +39,7 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'email',
             headerName: 'Email',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
         },
@@ -47,7 +47,7 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'mobile',
             headerName: 'Mobile',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
         },
@@ -56,7 +56,7 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'message',
             headerName: 'Message',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -90,6 +90,36 @@ const VlsLawAcademyTable = ({ searchText, usersData }: PetsTableProps) => {
             filterable: false,
             align: 'center',
             headerAlign: 'center',
+        },
+
+
+        {
+            field: 'ip_address',
+            headerName: 'IP Address',
+            flex: 1,
+            minWidth: 140,
+            sortable: false,
+            filterable: false,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params) => {
+                const data = params?.value;
+                return data ? data : "---";
+            },
+        },
+        {
+            field: 'utm_source',
+            headerName: 'UTM Source',
+            flex: 1,
+            minWidth: 140,
+            sortable: false,
+            filterable: false,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params) => {
+                const data = params?.value;
+                return data ? data : "---";
+            },
         },
 
         {
