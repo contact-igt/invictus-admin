@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
-import LogoImg from 'assets/images/Logo.png';
+import LogoImg from '/assets/brand-logo.png'
 // import LanguageSelect from './LanguageSelect';
 import ProfileMenu from './ProfileMenu';
 import { useAuth } from 'redux/selectors/auth/authSelector';
@@ -48,7 +48,7 @@ const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
           disableRipple
           sx={{ lineHeight: 0, display: { xs: 'none', sm: 'block', lg: 'none' } }}
         >
-          <Image src={LogoImg} alt="logo" height={54} width={54} />
+          <Image src={LogoImg} alt="logo" height={50} width={200} sx={{ mr: 1.25 }} />
         </ButtonBase>
 
         <Toolbar sx={{ display: { xm: 'block', lg: 'none' } }}>
