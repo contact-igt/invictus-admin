@@ -20,7 +20,6 @@ export const useVlsLawpracticeQuery = () => {
     return { data, isLoading, isError };
 };
 
-
 export const deleteVlsLawPracticeByIdMutation = () => {
     const queryClient = useQueryClient();
     const { enqueueSnackbar } = useSnackbar();

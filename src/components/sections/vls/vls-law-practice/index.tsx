@@ -11,6 +11,7 @@ import { Popup } from 'components/common/Popup';
 import ConfirmAlert from 'components/common/ConfirmAlert';
 import { Typography } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
+import dayjs from 'dayjs';
 
 const VlsLawPracticeSection = () => {
     const { data: usersData, isLoading } = useVlsLawpracticeQuery();
@@ -57,8 +58,8 @@ const VlsLawPracticeSection = () => {
         `Email : ${selectedUser?.email ?? '---'} `,
         `Mobile : ${selectedUser?.mobile ?? '---'} `,
         `Amount : ₹${selectedUser?.amount ?? '---'}`,
-        `Programm Date : ${selectedUser?.programm_date ?? '---'}`,
-        `Registered Date : ${selectedUser?.registered_date ?? '---'}`,
+        `Programm Date : ${dayjs(selectedUser?.programm_date).format("YYYY-MMMM-DD") ?? '---'}`,
+        `Registered Date : ${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") ?? '---'}`,
     ]
 
     const handleurl = async () => {
@@ -82,10 +83,10 @@ const VlsLawPracticeSection = () => {
                     btnText="Vls Law  Practice Users"
                     searchText={searchText}
                     handleInputChange={handleInputChange}
-                    isCsvExportEnable={usersData?.length > 0}
-                    isXslxExportEnable={usersData?.length > 0}
-                    handleXslxExportData={() => handleXlsxDownloadData(usersData?.data?.length > 0, "vls-law-practice")}
-                    handleCsvExportData={() => handleCSVDownloadData(usersData?.data?.length > 0, "vls-law-practice")}
+                    isCsvExportEnable={usersData?.data?.length > 0}
+                    isXslxExportEnable={usersData?.data?.length > 0}
+                    handleXslxExportData={() => handleXlsxDownloadData(usersData?.data, "vls-law-practice")}
+                    handleCsvExportData={() => handleCSVDownloadData(usersData?.data, "vls-law-practice")}
                 />
                 <Paper sx={{ mt: 1.5, p: 0, pb: 0.75, minHeight: 411, width: 1 }}>
                     <VlsLawPracticeTable
@@ -156,8 +157,8 @@ const VlsLawPracticeSection = () => {
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.mobile ? selectedUser?.mobile : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.email ? selectedUser?.email : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.amount ? selectedUser?.amount : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.programm_date ? selectedUser?.programm_date : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? selectedUser?.registered_date : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.programm_date ? dayjs(selectedUser?.programm_date).format("YYYY-MMMM-DD") : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") : '---'}</Typography>
                         </Stack>
                     </Stack>
                 </Stack>

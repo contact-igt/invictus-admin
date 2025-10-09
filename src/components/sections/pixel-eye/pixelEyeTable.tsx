@@ -101,16 +101,16 @@ const PixelEyeTable = ({ searchText, usersData, handleRemove, handleView }: Pets
                 return data ? data : "---";
             },
         },
-        {
-            field: 'time',
-            headerName: 'Enquiry Time',
-            flex: 1,
-            minWidth: 170,
-            sortable: false,
-            filterable: false,
-            align: 'center',
-            headerAlign: 'center',
-        },
+        // {
+        //     field: 'time',
+        //     headerName: 'Enquiry Time',
+        //     flex: 1,
+        //     minWidth: 170,
+        //     sortable: false,
+        //     filterable: false,
+        //     align: 'center',
+        //     headerAlign: 'center',
+        // },
 
         {
             field: 'enquiry_count',

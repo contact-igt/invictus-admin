@@ -11,6 +11,7 @@ import { Popup } from 'components/common/Popup';
 import ConfirmAlert from 'components/common/ConfirmAlert';
 import { Typography } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
+import dayjs from 'dayjs';
 
 const VlsLawAcademySection = () => {
     const { data: usersData, isLoading } = useVlsLawAcademyQuery();
@@ -53,9 +54,8 @@ const VlsLawAcademySection = () => {
         `Name : ${selectedUser?.name ?? '---'} `,
         `Email : ${selectedUser?.email ?? '---'} `,
         `Mobile : ${selectedUser?.mobile ?? '---'} `,
-        `Amount : ₹${selectedUser?.amount ?? '---'}`,
-        `Programm Date : ${selectedUser?.programm_date ?? '---'}`,
-        `Registered Date : ${selectedUser?.registered_date ?? '---'}`,
+        `Message : ${selectedUser?.message ?? '---'}`,
+        `Registered Date : ${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") ?? '---'}`,
     ]
 
     const handleurl = async () => {
@@ -146,17 +146,15 @@ const VlsLawAcademySection = () => {
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Name</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Mobile</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Email</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Amount</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Programm Date</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Message</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Registered Date</Typography>
                         </Stack>
                         <Stack flexDirection={"column"} width={"100%"}>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.name ? selectedUser?.name : "---"}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.mobile ? selectedUser?.mobile : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.email ? selectedUser?.email : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.amount ? selectedUser?.amount : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.programm_date ? selectedUser?.programm_date : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? selectedUser?.registered_date : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.message ? selectedUser?.message : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") : '---'}</Typography>
                         </Stack>
                     </Stack>
                 </Stack>
