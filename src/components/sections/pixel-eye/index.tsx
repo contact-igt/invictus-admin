@@ -70,7 +70,6 @@ const PixelEyeSection = () => {
         `City : ${selectedUser?.city ?? '---'}`,
         `Enquiry Count : ${selectedUser?.enquiry_count ?? '---'}`,
         `Enquiry Date : ${dayjs(selectedUser?.registered_date).format("YYYY-MMM-DD") ?? '---'}`,
-        `Enquiry Time: ${selectedUser?.time ?? '---'}`,
 
     ]
 
@@ -170,7 +169,6 @@ const PixelEyeSection = () => {
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>City</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Count</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Date</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Time</Typography>
 
                         </Stack>
                         <Stack flexDirection={"column"} width={"100%"}>
@@ -181,7 +179,6 @@ const PixelEyeSection = () => {
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.city ? selectedUser?.city : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.enquiry_count ? selectedUser?.enquiry_count : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? `${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD")}` : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.time ? selectedUser?.time : '---'}</Typography>
                         </Stack>
                     </Stack>
                 </Stack>

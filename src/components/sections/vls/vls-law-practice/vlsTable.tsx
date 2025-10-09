@@ -88,16 +88,15 @@ const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }
             }
         },
 
+        // {
+        //     field: 'time',
+        //     headerName: 'Registered Time',
+        //     flex: 1.5,
+        //     minWidth: 150,
+        //     align: 'center',
+        //     headerAlign: 'center',
 
-        {
-            field: 'time',
-            headerName: 'Registered Time',
-            flex: 1.5,
-            minWidth: 150,
-            align: 'center',
-            headerAlign: 'center',
-
-        },
+        // },
         {
             field: 'payment_status',
             headerName: 'Payment Status',

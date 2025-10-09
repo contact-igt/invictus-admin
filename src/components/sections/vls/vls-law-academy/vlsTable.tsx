@@ -9,8 +9,8 @@ import dayjs from 'dayjs';
 interface PetsTableProps {
     searchText: string;
     usersData: [];
-    handleRemove:(userId:number) => void;
-    handleView:(userId:number) => void;
+    handleRemove: (userId: number) => void;
+    handleView: (userId: number) => void;
 
 }
 
@@ -78,16 +78,16 @@ const VlsLawAcademyTable = ({ searchText, usersData, handleRemove, handleView }:
                 return data ? data : "---";
             },
         },
-        {
-            field: 'time',
-            headerName: 'Enquiry Time',
-            flex: 1,
-            minWidth: 170,
-            sortable: false,
-            filterable: false,
-            align: 'center',
-            headerAlign: 'center',
-        },
+        // {
+        //     field: 'time',
+        //     headerName: 'Enquiry Time',
+        //     flex: 1,
+        //     minWidth: 170,
+        //     sortable: false,
+        //     filterable: false,
+        //     align: 'center',
+        //     headerAlign: 'center',
+        // },
 
 
         {
@@ -131,8 +131,8 @@ const VlsLawAcademyTable = ({ searchText, usersData, handleRemove, handleView }:
             renderCell: (params) => (
                 <ActionMenu
                     onEdit={() => { }}
-                    onRemove={() => {handleRemove(params.row.id) }}
-                    onView={()=>handleView(params.row.id)}
+                    onRemove={() => { handleRemove(params.row.id) }}
+                    onView={() => handleView(params.row.id)}
                 />
             ),
         },
