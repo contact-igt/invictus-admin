@@ -16,18 +16,17 @@ interface Action {
 }
 
 const actions: Action[] = [
-  { id: 1, icon: 'hugeicons:pencil-edit-02', title: 'Edit' },
+  // { id: 1, icon: 'hugeicons:pencil-edit-02', title: 'Edit' },
   { id: 2, icon: 'hugeicons:view', title: 'View' },
   { id: 3, icon: 'hugeicons:delete-02', title: 'Remove' },
 ];
 
 interface ActionMenuProps {
-  onEdit?: () => void;
   onRemove?: () => void;
   onView?: () => void;
 }
 
-const ActionMenu = ({ onEdit, onRemove, onView }: ActionMenuProps) => {
+const ActionMenu = ({ onRemove, onView }: ActionMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -56,9 +55,9 @@ const ActionMenu = ({ onEdit, onRemove, onView }: ActionMenuProps) => {
               onClick={() => {
                 handleClose();
                 switch (a.title) {
-                  case 'Edit':
-                    onEdit?.();
-                    break;
+                  // case 'Edit':
+                  //   onEdit?.();
+                  //   break;
                   case 'Remove':
                     onRemove?.();
                     break;

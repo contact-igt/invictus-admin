@@ -64,10 +64,10 @@ const PixelEyeSection = () => {
 
     const shareurl: any = [
         `Name : ${selectedUser?.name ?? '---'} `,
-        `Email : ${selectedUser?.email ?? '---'} `,
         `Mobile : ${selectedUser?.mobile ?? '---'} `,
         `Age: ${selectedUser?.age ?? '---'}`,
         `City : ${selectedUser?.city ?? '---'}`,
+        `Page Name : ${selectedUser?.page_name ?? '---'} `,
         `Enquiry Count : ${selectedUser?.enquiry_count ?? '---'}`,
         `Enquiry Date : ${dayjs(selectedUser?.registered_date).format("YYYY-MMM-DD") ?? '---'}`,
 
@@ -164,9 +164,9 @@ const PixelEyeSection = () => {
                         <Stack flexDirection={"column"} width={"350px"} >
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Name</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Mobile</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Email</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Age</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>City</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Page Name</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Count</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Date</Typography>
 
@@ -174,9 +174,9 @@ const PixelEyeSection = () => {
                         <Stack flexDirection={"column"} width={"100%"}>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.name ? selectedUser?.name : "---"}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.mobile ? selectedUser?.mobile : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.email ? selectedUser?.email : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.age ? selectedUser?.age : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.city ? selectedUser?.city : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.page_name ? selectedUser?.page_name : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.enquiry_count ? selectedUser?.enquiry_count : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? `${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD")}` : '---'}</Typography>
                         </Stack>

@@ -168,7 +168,6 @@ const PixelEyeTable = ({ searchText, usersData, handleRemove, handleView }: Pets
             headerAlign: 'center',
             renderCell: (params) => (
                 <ActionMenu
-                    onEdit={() => { }}
                     onRemove={() => { handleRemove(params.row.id) }}
                     onView={() => handleView(params.row.id)}
                 />
