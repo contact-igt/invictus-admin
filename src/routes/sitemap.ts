@@ -93,11 +93,49 @@ const sitemap: MenuItem[] = [
 
   {
     id: 'ramanans-financial',
-    path: paths.ramanansFinancial,
+    path: paths.ramananFinancial,
     subheader: 'RV Financial',
     icon: 'mdi:finance',
     active: true,
   },
+
+
+  {
+    id: 'naitrika',
+    path: paths.naitrika,
+    subheader: 'Naitrika',
+    icon: 'mdi:eye-circle',
+    active: true,
+  },
+
+
+  {
+    id: 'antardrashtinetralaya',
+    path: paths.netralya,
+    subheader: 'Netralaya',
+    icon: 'hugeicons:eye',
+    active: true,
+  },
+
+
+  {
+    id: 'wellinit',
+    path: paths.wellinit,
+    subheader: 'Wellinit',
+    icon: 'mdi:phone-plus',
+    active: true,
+  },
+
+
+  {
+    id: 'mahimmy-foods',
+    path: paths.mahimmyFoods,
+    subheader: 'Mahimmy Foods',
+    icon: 'mdi:bread-slice',
+    active: true,
+  },
+
+
 
 ];
 
