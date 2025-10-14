@@ -19,3 +19,16 @@ export const useNaitrikaQuery = () => {
     return { data, isLoading, isError };
 };
 
+
+export const useDeleteNaitrika = () => {
+    const { enqueueSnackbar } = useSnackbar();
+    return useMutation((id: string) => NaitrikaApis.deleteNaitrika(id), {
+        onSuccess: () => {
+            enqueueSnackbar('Naitrika deleted successfully', { variant: 'success' });
+        }
+        , onError: (error: Error) => {
+
+            enqueueSnackbar(error.message || 'Failed to delete Naitrika', { variant: 'error' });
+        },
+    });
+}

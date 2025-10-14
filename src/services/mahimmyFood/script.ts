@@ -1,9 +1,10 @@
-export interface naitrikaprops {
+export interface mahimmyfoodprops {
     id: number;
-    name: string;
+    first_name: string;
+    last_name: string;
     mobile: string;
     email: string;
-    service: string;
+    menu: string;
     message: string;
     registered_date: string;
     ip_address: string;

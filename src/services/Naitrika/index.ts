@@ -6,4 +6,8 @@ export class NaitrikaApiData {
         return await _axios('get', '/naitrikas');
     };
 
+    deleteNaitrika = async (id: string) => {
+        return await _axios('delete', `/naitrika/${id}`);
+    }
+
 }

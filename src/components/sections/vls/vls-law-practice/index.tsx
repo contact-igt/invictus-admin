@@ -73,6 +73,10 @@ const VlsLawPracticeSection = () => {
             console.log(err);
         }
     };
+
+
+
+
     if (isLoading) return <PageLoader />;
 
     return (

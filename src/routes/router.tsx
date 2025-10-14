@@ -16,6 +16,9 @@ import InvictusMeta from 'pages/invictus/invictus-meta';
 import KrInstitute from 'pages/kr-institute';
 import MirraBuilders from 'pages/mirra-builders';
 import Naitrika from 'pages/naitrika';
+import Netralaya from 'pages/netralaya';
+import Wellinit from 'pages/wellinit';
+import Mahimmyfood from 'pages/mahimmyfoods';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -221,7 +224,7 @@ const router = createBrowserRouter(
           children: [
             {
               path: paths.netralya,
-              element: <RamanansFinancial />,
+              element: <Netralaya />,
             },
           ],
         },
@@ -243,7 +246,7 @@ const router = createBrowserRouter(
           children: [
             {
               path: paths.wellinit,
-              element: <RamanansFinancial />,
+              element: <Wellinit />,
             },
           ],
         },
@@ -263,7 +266,7 @@ const router = createBrowserRouter(
           children: [
             {
               path: paths.mahimmyFoods,
-              element: <RamanansFinancial />,
+              element: <Mahimmyfood />,
             },
           ],
         },
