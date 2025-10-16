@@ -60,10 +60,14 @@ const sitemap: MenuItem[] = [
 
       },
       {
+        name: 'Vls AIBE',
+        pathName: paths.vlsAibe,
+        path: paths.vlsAibe,
+      },
+      {
         name: 'Vls Academy',
         pathName: paths.vlsAcademy,
         path: paths.vlsAcademy,
-
       },
     ],
   },

@@ -15,6 +15,7 @@ import InvictusLeads from 'pages/invictus/invictus-leads';
 import InvictusMeta from 'pages/invictus/invictus-meta';
 import KrInstitute from 'pages/kr-institute';
 import MirraBuilders from 'pages/mirra-builders';
+import VlsAibe from 'pages/vls/vls-aibe';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -100,6 +101,10 @@ const router = createBrowserRouter(
                 {
                   path: paths.vlsAcademy,
                   element: <VlsAcademy />,
+                },
+                 {
+                  path: paths.vlsAibe,
+                  element: <VlsAibe />,
                 },
               ],
             },

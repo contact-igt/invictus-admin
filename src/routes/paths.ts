@@ -21,6 +21,7 @@ export default {
   vlsRoot: `/${rootPaths.pageRoot}/vls`,
   vlsLawPractice: `/${rootPaths.pageRoot}/vls/law-practice`,
   vlsAcademy: `/${rootPaths.pageRoot}/vls/academy`,
+  vlsAibe : `/${rootPaths.pageRoot}/vls/aibe`,
   ramananFinancial: `/${rootPaths.pageRoot}/ramananFinacial`,
   pixelEye: `/${rootPaths.pageRoot}/pixel-eye`,
   ramanansFinancial:`/${rootPaths.pageRoot}/ramanans-financial`,

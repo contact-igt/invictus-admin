@@ -9,12 +9,30 @@ export class VlsApiData {
     return await _axios('delete', `/vls-law-practice/${id}`);
   };
 
+  //vls Academy
+
   getAllVlsLawAcademy = async () => {
     return await _axios('get', '/vls-law-academys');
   };
-  
+
   deleteVlsLawAcademyById = async (id: number) => {
-  return await _axios('delete', `/vls-law-academy/${id}`);
-};
+    return await _axios('delete', `/vls-law-academy/${id}`);
+
+  };
+
+  // vls AIBE
+
+
+
+  getAllVlsAibe = async () => {
+    return await _axios('get', '/vls-law-aibes');
+  };
+
+  deleteVlsLawAibe = async (id: number) => {
+    return await _axios('delete', `/vls-law-aibe/${id}`);
+
+  };
+
+
 }
 

@@ -41,6 +41,8 @@ export const deleteVlsLawPracticeByIdMutation = () => {
     );
 }
 
+// vls Academy
+
 export const useVlsLawAcademyQuery = () => {
     const { enqueueSnackbar } = useSnackbar();
 
@@ -60,6 +62,46 @@ export const deleteVlsLawAcademyByIdMutation = () => {
 
     return useMutation<void, Error, { id: number }>(
         ({ id }) => VlsApis.deleteVlsLawAcademyById(id),
+        {
+            onSuccess: () => {
+                enqueueSnackbar('Vls Law Academy User deleted successfully', { variant: 'success' });
+                queryClient.invalidateQueries(['vls-law-academy']);
+            },
+            onError: (error) => {
+                const err = error as AxiosError<any>;
+                enqueueSnackbar(err.response?.data?.message || 'Something went wrong', {
+                    variant: 'error',
+                });
+            },
+        },
+    );
+}
+
+
+// vls AIBE
+
+
+
+
+export const useVlsLawAibeQuery = () => {
+    const { enqueueSnackbar } = useSnackbar();
+
+    const { data, isLoading, isError } = useQuery(['vls-law-academy'], () => VlsApis.getAllVlsAibe(), {
+        staleTime: 2 * 60 * 1000,
+        onError: (error: Error) => {
+            enqueueSnackbar(error.message || 'Failed to load data', { variant: 'error' });
+        },
+    });
+
+    return { data, isLoading, isError };
+};
+
+export const deleteVlsLawAibeByIdMutation = () => {
+    const queryClient = useQueryClient();
+    const { enqueueSnackbar } = useSnackbar();
+
+    return useMutation<void, Error, { id: number }>(
+        ({ id }) => VlsApis.deleteVlsLawAibe(id),
         {
             onSuccess: () => {
                 enqueueSnackbar('Vls Law Academy User deleted successfully', { variant: 'success' });
