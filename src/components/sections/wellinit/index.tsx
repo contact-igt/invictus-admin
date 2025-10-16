@@ -4,7 +4,6 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import PageTitle from 'components/common/PageTitle';
 import PageLoader from 'components/loader/PageLoader';
-import { useNaitrikaQuery } from 'components/hooks/useNaitrikaQuery';
 import WellinitTable from './wellinitTable';
 import { useWellinitQuery } from 'components/hooks/useWellinitQuery';
 
