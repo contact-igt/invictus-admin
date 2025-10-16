@@ -64,7 +64,7 @@ const VlsAibeTable = ({ searchText, usersData, handleRemove, handleView }: PetsT
         },
         {
             field: 'programm_start_date',
-            headerName: 'Programm Start Date',
+            headerName: 'Start Date',
             flex: 1.5,
             minWidth: 150,
             align: 'center',
@@ -77,7 +77,7 @@ const VlsAibeTable = ({ searchText, usersData, handleRemove, handleView }: PetsT
 
         {
             field: 'programm_end_date',
-            headerName: 'Programm End Date',
+            headerName: 'End Date',
             flex: 1.5,
             minWidth: 150,
             align: 'center',
@@ -92,7 +92,7 @@ const VlsAibeTable = ({ searchText, usersData, handleRemove, handleView }: PetsT
             field: 'registered_date',
             headerName: 'Registered Date',
             flex: 1.5,
-            minWidth: 150,
+            minWidth: 180,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -105,7 +105,7 @@ const VlsAibeTable = ({ searchText, usersData, handleRemove, handleView }: PetsT
             field: 'payment_status',
             headerName: 'Payment Status',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 150,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
