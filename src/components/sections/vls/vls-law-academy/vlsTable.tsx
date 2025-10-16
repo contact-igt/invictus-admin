@@ -130,7 +130,6 @@ const VlsLawAcademyTable = ({ searchText, usersData, handleRemove, handleView }:
             headerAlign: 'center',
             renderCell: (params) => (
                 <ActionMenu
-                    // onEdit={() => { }}
                     onRemove={() => { handleRemove(params.row.id) }}
                     onView={() => handleView(params.row.id)}
                 />

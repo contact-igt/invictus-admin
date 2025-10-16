@@ -140,20 +140,6 @@ const RamanansFinancialTable = ({ searchText, usersData }: PetsTableProps) => {
             },
         },
         {
-            field: 'enquiry_count',
-            headerName: 'Enquiry Count',
-            flex: 1,
-            minWidth: 120,
-            sortable: false,
-            filterable: false,
-            align: 'center',
-            headerAlign: 'center',
-            renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
-            },
-        },
-        {
             field: 'ip_address',
             headerName: 'IP Address',
             flex: 1,
@@ -178,7 +164,6 @@ const RamanansFinancialTable = ({ searchText, usersData }: PetsTableProps) => {
             headerAlign: 'center',
             renderCell: () => (
                 <ActionMenu
-                    // onEdit={() => { }}
                     onRemove={() => { }}
                 />
             ),
