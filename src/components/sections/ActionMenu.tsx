@@ -22,12 +22,11 @@ const actions: Action[] = [
 ];
 
 interface ActionMenuProps {
-  onEdit?: () => void;
   onRemove?: () => void;
   onView?: () => void;
 }
 
-const ActionMenu = ({ onEdit, onRemove, onView }: ActionMenuProps) => {
+const ActionMenu = ({ onRemove, onView }: ActionMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -56,9 +55,9 @@ const ActionMenu = ({ onEdit, onRemove, onView }: ActionMenuProps) => {
               onClick={() => {
                 handleClose();
                 switch (a.title) {
-                  case 'Edit':
-                    onEdit?.();
-                    break;
+                  // case 'Edit':
+                  //   onEdit?.();
+                  //   break;
                   case 'Remove':
                     onRemove?.();
                     break;
