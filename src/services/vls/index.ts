@@ -16,5 +16,15 @@ export class VlsApiData {
   deleteVlsLawAcademyById = async (id: number) => {
   return await _axios('delete', `/vls-law-academy/${id}`);
 };
+
+  // vls AIBE
+
+  getAllVlsAibe = async () => {
+    return await _axios('get', '/vls-law-aibes');
+  };
+
+  deleteVlsLawAibe = async (id: number) => {
+    return await _axios('delete', `/vls-law-aibe/${id}`);
+  };
 }
 

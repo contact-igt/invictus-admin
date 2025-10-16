@@ -19,6 +19,7 @@ import Naitrika from 'pages/naitrika';
 import Netralaya from 'pages/netralaya';
 import Wellinit from 'pages/wellinit';
 import Mahimmyfood from 'pages/mahimmyfoods';
+import VlsAibe from 'pages/vls/vls-aibe';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -104,6 +105,10 @@ const router = createBrowserRouter(
                 {
                   path: paths.vlsAcademy,
                   element: <VlsAcademy />,
+                },
+                  {
+                  path: paths.vlsAibe,
+                  element: <VlsAibe />,
                 },
               ],
             },

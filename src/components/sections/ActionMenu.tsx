@@ -16,7 +16,7 @@ interface Action {
 }
 
 const actions: Action[] = [
-  { id: 1, icon: 'hugeicons:pencil-edit-02', title: 'Edit' },
+  // { id: 1, icon: 'hugeicons:pencil-edit-02', title: 'Edit' },
   { id: 2, icon: 'hugeicons:view', title: 'View' },
   { id: 3, icon: 'hugeicons:delete-02', title: 'Remove' },
 ];

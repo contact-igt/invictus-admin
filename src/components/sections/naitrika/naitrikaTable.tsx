@@ -139,7 +139,7 @@ const NaitrikaTable = ({ searchText, usersData }: PetsTableProps) => {
             headerAlign: 'center',
             renderCell: () => (
                 <ActionMenu
-                    onEdit={() => { }}
+                    // onEdit={() => { }}
                     onRemove={() => { }}
                 />
             ),

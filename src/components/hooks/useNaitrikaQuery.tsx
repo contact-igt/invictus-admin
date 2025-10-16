@@ -1,5 +1,5 @@
 import { useSnackbar } from "notistack";
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { NaitrikaApiData } from "services/Naitrika";
 
 

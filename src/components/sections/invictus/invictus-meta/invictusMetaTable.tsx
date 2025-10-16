@@ -6,12 +6,14 @@ import { Pet } from 'services/user/script';
 import ActionMenu from 'components/sections/ActionMenu';
 import dayjs from 'dayjs';
 
-interface PetsTableProps {
+interface InvictusMetaTableProps {
     searchText: string;
-    usersData: []
+    usersData: [];
+    handleView: (userId: number) => void;
+    handleRemove: (userId: number) => void;
 }
 
-const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
+const InvictusMetaTable = ({ searchText, usersData, handleView, handleRemove }: InvictusMetaTableProps) => {
     const apiRef = useGridApiRef<GridApi>();
 
     useEffect(() => {
@@ -44,7 +46,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'business_name',
             headerName: 'Business Name',
             flex: 1.5,
-             minWidth: 170,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
         },
@@ -52,7 +54,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'bussiness_belongs',
             headerName: 'Bussiness Belongs',
             flex: 1.5,
-             minWidth: 170,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -64,7 +66,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'ad_budget',
             headerName: 'Ad Budget',
             flex: 1.5,
-             minWidth: 170,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -76,7 +78,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'primary_goal_metads',
             headerName: 'Primary Goal Metads',
             flex: 1.5,
-             minWidth: 170,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -88,7 +90,7 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'metaad_run_before',
             headerName: 'Metaad Run Before',
             flex: 1.5,
-             minWidth: 170,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -96,11 +98,11 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
                 return data ? data : "---";
             },
         },
-                {
+        {
             field: 'package',
             headerName: 'Package',
             flex: 1.5,
-             minWidth: 170,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -108,11 +110,11 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
                 return data ? data : "---";
             },
         },
-                        {
+        {
             field: 'planning_to_start',
             headerName: 'Planning To Start',
             flex: 1.5,
-             minWidth: 170,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -158,10 +160,11 @@ const InvictusMetaTable = ({ searchText, usersData }: PetsTableProps) => {
             filterable: false,
             align: 'center',
             headerAlign: 'center',
-            renderCell: () => (
+            renderCell: (params) => (
                 <ActionMenu
-                    onEdit={() => { }}
-                    onRemove={() => { }}
+                    // onEdit={() => { }}
+                    onView={() => handleView(params.row.id)}
+                    onRemove={() => handleRemove(params.row.id)}
                 />
             ),
         },

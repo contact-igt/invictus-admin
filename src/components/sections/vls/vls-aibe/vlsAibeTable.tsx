@@ -2,27 +2,27 @@
 import { useEffect } from 'react';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
-import { Pet } from 'services/user/script';
 import ActionMenu from 'components/sections/ActionMenu';
 import dayjs from 'dayjs';
+import { VlsAibe } from 'services/vls/script';
+import { Chip, Stack } from '@mui/material';
 
 interface PetsTableProps {
     searchText: string;
-    usersData: [];
+    usersData: VlsAibe[];
     handleRemove: (userId: number) => void;
     handleView: (userId: number) => void;
 
 }
 
-const PixelEyeTable = ({ searchText, usersData, handleRemove, handleView }: PetsTableProps) => {
+const VlsAibeTable = ({ searchText, usersData, handleRemove, handleView }: PetsTableProps) => {
     const apiRef = useGridApiRef<GridApi>();
 
     useEffect(() => {
         apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((w) => w));
     }, [searchText]);
 
-    const columns: GridColDef<Pet>[] = [
-
+    const columns: GridColDef<VlsAibe>[] = [
         {
             field: 'name',
             headerName: 'Name',
@@ -36,6 +36,14 @@ const PixelEyeTable = ({ searchText, usersData, handleRemove, handleView }: Pets
             },
         },
         {
+            field: 'email',
+            headerName: 'Email',
+            flex: 1.5,
+            minWidth: 190,
+            align: 'center',
+            headerAlign: 'center',
+        },
+        {
             field: 'mobile',
             headerName: 'Mobile',
             flex: 1.5,
@@ -43,134 +51,99 @@ const PixelEyeTable = ({ searchText, usersData, handleRemove, handleView }: Pets
             align: 'center',
             headerAlign: 'center',
         },
-
         {
-            field: 'age',
-            headerName: 'Age',
+            field: 'amount',
+            headerName: 'Amount',
             flex: 1.5,
             minWidth: 120,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
-            },
-
+                return params.value ? `₹${params.value}` : "-"
+            }
         },
         {
-            field: 'city',
-            headerName: 'City',
-            flex: 1,
-            minWidth: 130,
-            sortable: false,
-            filterable: false,
+            field: 'programm_start_date',
+            headerName: 'Programm Start Date',
+            flex: 1.5,
+            minWidth: 150,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
-            },
+                const data = dayjs(params?.value).format("YYYY-MMM-DD")
+                return data ? data : "-"
+            }
         },
+
         {
-            field: 'page_name',
-            headerName: 'Page Name',
-            flex: 1,
-            minWidth: 120,
-            sortable: false,
-            filterable: false,
+            field: 'programm_end_date',
+            headerName: 'Programm End Date',
+            flex: 1.5,
+            minWidth: 150,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
-            },
+                const data = dayjs(params?.value).format("YYYY-MMM-DD")
+                return data ? data : "-"
+            }
         },
-
 
         {
             field: 'registered_date',
-            headerName: 'Enquiry Date',
-            flex: 1,
-            minWidth: 170,
-            sortable: false,
-            filterable: false,
+            headerName: 'Registered Date',
+            flex: 1.5,
+            minWidth: 150,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                const data = dayjs(params?.value).format("DD-MM-YYYY");
-                return data ? data : "---";
-            },
+                const data = dayjs(params?.value).format("YYYY-MMM-DD")
+                return data ? data : "-"
+            }
         },
-        // {
-        //     field: 'time',
-        //     headerName: 'Enquiry Time',
-        //     flex: 1,
-        //     minWidth: 170,
-        //     sortable: false,
-        //     filterable: false,
-        //     align: 'center',
-        //     headerAlign: 'center',
-        // },
 
         {
-            field: 'enquiry_count',
-            headerName: 'Enquiry Count',
-            flex: 1,
+            field: 'payment_status',
+            headerName: 'Payment Status',
+            flex: 1.5,
             minWidth: 120,
-            sortable: false,
-            filterable: false,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
-            },
-        },
-
-
-        {
-            field: 'ip_address',
-            headerName: 'IP Address',
-            flex: 1,
-            minWidth: 140,
-            sortable: false,
-            filterable: false,
-            align: 'center',
-            headerAlign: 'center',
-            renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
-            },
+                const color = params.value === 'paid' ? 'success' : 'error';
+                return (
+                    <Stack direction="column" alignItems="center" justifyContent="center" height={1}>
+                        <Chip label={params.value ? params?.value : "failed"} size="small" color={color} />
+                    </Stack>
+                );
+            }
         },
         {
-            field: 'utm_source',
-            headerName: 'UTM Source',
-            flex: 1,
-            minWidth: 140,
-            sortable: false,
-            filterable: false,
+            field: 'razorpay_payment_id',
+            headerName: 'Razorpay Payment ID',
+            flex: 1.5,
+            minWidth: 220,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
                 const data = params?.value;
                 return data ? data : "---";
             },
+
         },
 
         {
             field: 'action',
             headerName: 'Actions',
             flex: 1,
-            minWidth: 120,
+            minWidth: 100,
             sortable: false,
             filterable: false,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => (
                 <ActionMenu
-                    // onEdit={() => { }}
                     onRemove={() => { handleRemove(params.row.id) }}
-                    onView={() => handleView(params.row.id)}
+                    onView={() => { handleView(params.row.id) }}
                 />
             ),
         },
@@ -203,4 +176,4 @@ const PixelEyeTable = ({ searchText, usersData, handleRemove, handleView }: Pets
     );
 };
 
-export default PixelEyeTable;
+export default VlsAibeTable;

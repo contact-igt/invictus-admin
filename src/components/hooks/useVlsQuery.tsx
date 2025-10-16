@@ -74,3 +74,42 @@ export const deleteVlsLawAcademyByIdMutation = () => {
         },
     );
 }
+
+// vls AIBE
+
+
+
+
+export const useVlsLawAibeQuery = () => {
+    const { enqueueSnackbar } = useSnackbar();
+
+    const { data, isLoading, isError } = useQuery(['vls-aibe'], () => VlsApis.getAllVlsAibe(), {
+        staleTime: 2 * 60 * 1000,
+        onError: (error: Error) => {
+            enqueueSnackbar(error.message || 'Failed to load data', { variant: 'error' });
+        },
+    });
+    console.log("data",data);
+    return { data, isLoading, isError };
+};
+
+export const deleteVlsLawAibeByIdMutation = () => {
+    const queryClient = useQueryClient();
+    const { enqueueSnackbar } = useSnackbar();
+
+    return useMutation<void, Error, { id: number }>(
+        ({ id }) => VlsApis.deleteVlsLawAibe(id),
+        {
+            onSuccess: () => {
+                enqueueSnackbar('Vls Law Academy aibe User deleted successfully', { variant: 'success' });
+                queryClient.invalidateQueries(['vls-aibe']);
+            },
+            onError: (error) => {
+                const err = error as AxiosError<any>;
+                enqueueSnackbar(err.response?.data?.message || 'Something went wrong', {
+                    variant: 'error',
+                });
+            },
+        },
+    );
+}
