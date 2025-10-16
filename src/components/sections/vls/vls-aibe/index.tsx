@@ -4,20 +4,19 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import PageTitle from 'components/common/PageTitle';
 import PageLoader from 'components/loader/PageLoader';
-import { deletePixelEyeByIdQuery, usePixelEyeQuery } from 'components/hooks/usePixelEyeQuery';
-import PixelEyeTable from './pixelEyeTable';
+import { deleteVlsLawAibeByIdMutation, useVlsLawAibeQuery } from 'components/hooks/useVlsQuery';
 import { handleCSVDownloadData, handleXlsxDownloadData } from 'components/hooks/useExportDataToExcel';
-import ConfirmAlert from 'components/common/ConfirmAlert';
 import { Popup } from 'components/common/Popup';
+import ConfirmAlert from 'components/common/ConfirmAlert';
 import { Typography } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
 import dayjs from 'dayjs';
+import VlsAibeTable from './vlsAibeTable';
 
-
-const PixelEyeSection = () => {
-    const { data: usersData, isLoading } = usePixelEyeQuery();
+const VlsAibeSection = () => {
+    const { data: usersData, isLoading } = useVlsLawAibeQuery();
+    const { mutate: deleteVlsLawAcademyUserMutate, isLoading: deleteLoading } = deleteVlsLawAibeByIdMutation();
     const [searchText, setSearchText] = useState('');
-    const { mutate: deletePixelEyeUserMutate, isLoading: deleteLoading } = deletePixelEyeByIdQuery();
     const [openConfirmAlertModal, setOpenConfirmAlertModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState<number>(0);
     const [viewModal, setviewModal] = useState(false);
@@ -27,27 +26,19 @@ const PixelEyeSection = () => {
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchText(e.target.value);
     };
-
-
     const handleOpenConfirmAlertModal = (id: number) => {
         setSelectedUserId(id);
         setOpenConfirmAlertModal(true);
-
-
     }
     const handleRemoveTip = () => {
-        deletePixelEyeUserMutate({
+        deleteVlsLawAcademyUserMutate({
             id: selectedUserId
         }, {
             onSuccess: () => {
                 setOpenConfirmAlertModal(false)
             }
         })
-
-        console.log("hh", selectedUserId)
     }
-
-
     const handleOpenViewModal = (id: number) => {
         const user = usersData?.data?.find((user: any) => user.id === id);
         setviewModal(!viewModal);
@@ -55,22 +46,21 @@ const PixelEyeSection = () => {
         setSelectedUser(user);
     }
 
-
     const handleCloseViewModal = () => {
         setviewModal(false);
         setSelectedUser(null);
     }
-
-
     const shareurl: any = [
         `Name : ${selectedUser?.name ?? '---'} `,
+        `Email : ${selectedUser?.email ?? '---'} `,
         `Mobile : ${selectedUser?.mobile ?? '---'} `,
-        `Age: ${selectedUser?.age ?? '---'}`,
-        `City : ${selectedUser?.city ?? '---'}`,
-        `Page Name : ${selectedUser?.page_name ?? '---'} `,
-        `Enquiry Count : ${selectedUser?.enquiry_count ?? '---'}`,
-        `Enquiry Date : ${dayjs(selectedUser?.registered_date).format("YYYY-MMM-DD") ?? '---'}`,
-
+        `Amount : ${selectedUser?.amount ?? '---'}`,
+        `Payment Status : ${(selectedUser?.payment_status) ?? '---'}`,
+        `Razorpay order Id : ${(selectedUser?.razorpay_order_id) ?? '---'}`,
+        `Razorpay Payment Id : ${(selectedUser?.razorpay_payment_id) ?? '---'}`,
+        `Registered Date : ${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") ?? '---'}`,
+        `IP Address : ${(selectedUser?.ip_address) ?? '---'}`,
+        `UTM Source : ${(selectedUser?.utm_source) ?? '---'}`,
     ]
 
     const handleurl = async () => {
@@ -84,35 +74,32 @@ const PixelEyeSection = () => {
             console.log(err);
         }
     };
-
     if (isLoading) return <PageLoader />;
+
+    // console.log("sss" , usersData)
 
     return (
         <>
             <Stack direction="column" spacing={1} width={1}>
                 <PageTitle
-                    title="Pixel Eye Users"
-                    btnText="Pixel Eye Users"
+                    title="Vls AIBE Users"
+                    btnText="Vls AIBE Users"
                     searchText={searchText}
                     handleInputChange={handleInputChange}
                     isCsvExportEnable={usersData?.data?.length > 0}
                     isXslxExportEnable={usersData?.data?.length > 0}
-                    handleXslxExportData={() => handleXlsxDownloadData(usersData?.data, "Pixel eye")}
-                    handleCsvExportData={() => handleCSVDownloadData(usersData?.data, "Pixel eye")}
+                    handleXslxExportData={() => handleXlsxDownloadData(usersData?.data, "vls-aibe")}
+                    handleCsvExportData={() => handleCSVDownloadData(usersData?.data, "vls-aibe")}
                 />
                 <Paper sx={{ mt: 1.5, p: 0, pb: 0.75, minHeight: 411, width: 1 }}>
-                    <PixelEyeTable
+                    <VlsAibeTable
                         searchText={searchText}
                         usersData={usersData?.data}
                         handleRemove={(id) => handleOpenConfirmAlertModal(id)}
                         handleView={(id) => handleOpenViewModal(id)}
                     />
                 </Paper>
-
             </Stack>
-
-
-
             <Popup
                 open={openConfirmAlertModal}
                 onClose={() => setOpenConfirmAlertModal(false)}
@@ -137,7 +124,7 @@ const PixelEyeSection = () => {
                     sx={{ padding: 4 }}
                 >
                     <Typography textAlign={'center'} variant="h4" sx={{ width: '100%' }}>
-                        Pixel Eye User
+                        Vls Law Practice User
                     </Typography>
 
                     <Stack flexDirection={"column"} position={"absolute"} bottom={"15px"} right={"10px"} >
@@ -162,32 +149,33 @@ const PixelEyeSection = () => {
                     <Stack width={"100%"} display={"flex"} gap={"5px"} marginTop={"20px"}>
                         <Stack flexDirection={"column"} width={"350px"} >
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Name</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Email</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Mobile</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Age</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>City</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Page Name</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Count</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Date</Typography>
-
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Amount</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Payment Status</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Razorpay Order Id</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Razorpay Payment Id</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Registered Date</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>IP Address</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Source</Typography>
                         </Stack>
                         <Stack flexDirection={"column"} width={"100%"}>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.name ? selectedUser?.name : "---"}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.email ? selectedUser?.email : '---'}</Typography>
                             <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.mobile ? selectedUser?.mobile : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.age ? selectedUser?.age : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.city ? selectedUser?.city : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.page_name ? selectedUser?.page_name : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.enquiry_count ? selectedUser?.enquiry_count : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? `${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD")}` : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.amount ? selectedUser?.amount : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.payment_status ? selectedUser?.payment_status : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.razorpay_order_id ? selectedUser?.razorpay_order_id : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.razorpay_payment_id ? selectedUser?.razorpay_payment_id : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.ip_address ? selectedUser?.ip_address : '---'}</Typography>
+                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_source ? selectedUser?.utm_source : '---'}</Typography>
                         </Stack>
                     </Stack>
                 </Stack>
             </Popup>
-
-
-
-
         </>
     );
 };
 
-export default PixelEyeSection;
+export default VlsAibeSection;

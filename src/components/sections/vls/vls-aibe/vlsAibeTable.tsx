@@ -2,32 +2,32 @@
 import { useEffect } from 'react';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
-import { Pet } from 'services/user/script';
 import ActionMenu from 'components/sections/ActionMenu';
-import { Chip, Stack } from '@mui/material';
 import dayjs from 'dayjs';
+import { VlsAibe } from 'services/vls/script';
+import { Chip, Stack } from '@mui/material';
 
 interface PetsTableProps {
     searchText: string;
-    usersData: [];
+    usersData: VlsAibe[];
     handleRemove: (userId: number) => void;
     handleView: (userId: number) => void;
+
 }
 
-const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }: PetsTableProps) => {
+const VlsAibeTable = ({ searchText, usersData, handleRemove, handleView }: PetsTableProps) => {
     const apiRef = useGridApiRef<GridApi>();
 
     useEffect(() => {
         apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((w) => w));
     }, [searchText]);
 
-    const columns: GridColDef<Pet>[] = [
-
+    const columns: GridColDef<VlsAibe>[] = [
         {
             field: 'name',
             headerName: 'Name',
             flex: 1.5,
-            minWidth: 180,
+            minWidth: 170,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -39,7 +39,7 @@ const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }
             field: 'email',
             headerName: 'Email',
             flex: 1.5,
-            minWidth: 200,
+            minWidth: 190,
             align: 'center',
             headerAlign: 'center',
         },
@@ -47,7 +47,7 @@ const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }
             field: 'mobile',
             headerName: 'Mobile',
             flex: 1.5,
-            minWidth: 180,
+            minWidth: 120,
             align: 'center',
             headerAlign: 'center',
         },
@@ -63,10 +63,23 @@ const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }
             }
         },
         {
-            field: 'programm_date',
-            headerName: 'Programm Date',
+            field: 'programm_start_date',
+            headerName: 'Programm Start Date',
             flex: 1.5,
-            minWidth: 180,
+            minWidth: 150,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params) => {
+                const data = dayjs(params?.value).format("YYYY-MMM-DD")
+                return data ? data : "-"
+            }
+        },
+
+        {
+            field: 'programm_end_date',
+            headerName: 'Programm End Date',
+            flex: 1.5,
+            minWidth: 150,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -79,7 +92,7 @@ const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }
             field: 'registered_date',
             headerName: 'Registered Date',
             flex: 1.5,
-            minWidth: 180,
+            minWidth: 150,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -88,20 +101,11 @@ const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }
             }
         },
 
-        // {
-        //     field: 'time',
-        //     headerName: 'Registered Time',
-        //     flex: 1.5,
-        //     minWidth: 150,
-        //     align: 'center',
-        //     headerAlign: 'center',
-
-        // },
         {
             field: 'payment_status',
             headerName: 'Payment Status',
             flex: 1.5,
-            minWidth: 180,
+            minWidth: 120,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -127,15 +131,6 @@ const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }
 
         },
 
-        {
-            field: 'page_name',
-            headerName: 'Page Name',
-            flex: 1.5,
-            minWidth: 220,
-            align: 'center',
-            headerAlign: 'center',
-
-        },
         {
             field: 'action',
             headerName: 'Actions',
@@ -181,4 +176,4 @@ const VlsLawPracticeTable = ({ searchText, usersData, handleRemove, handleView }
     );
 };
 
-export default VlsLawPracticeTable;
+export default VlsAibeTable;

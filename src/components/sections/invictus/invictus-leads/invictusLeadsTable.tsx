@@ -8,10 +8,12 @@ import dayjs from 'dayjs';
 
 interface PetsTableProps {
     searchText: string;
-    usersData: []
+    usersData: [];
+    handleView: (userId: number) => void;
+    handleRemove: (userId: number) => void;
 }
 
-const InvictusLeadsTable = ({ searchText, usersData }: PetsTableProps) => {
+const InvictusLeadsTable = ({ searchText, usersData, handleView, handleRemove }: PetsTableProps) => {
     const apiRef = useGridApiRef<GridApi>();
 
     useEffect(() => {
@@ -44,7 +46,7 @@ const InvictusLeadsTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'email',
             headerName: 'Email',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 200,
             align: 'center',
             headerAlign: 'center',
         },
@@ -52,7 +54,7 @@ const InvictusLeadsTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'service',
             headerName: 'Service',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 180,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -110,10 +112,11 @@ const InvictusLeadsTable = ({ searchText, usersData }: PetsTableProps) => {
             filterable: false,
             align: 'center',
             headerAlign: 'center',
-            renderCell: () => (
+            renderCell: (params) => (
                 <ActionMenu
-                    onEdit={() => { }}
-                    onRemove={() => { }}
+                    // onEdit={() => { }}
+                    onView={() => {handleView(params.row.id) }}
+                    onRemove={() => {handleRemove(params.row.id) }}
                 />
             ),
         },

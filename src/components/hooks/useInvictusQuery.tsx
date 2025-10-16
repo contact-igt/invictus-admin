@@ -1,5 +1,6 @@
+import { AxiosError } from "axios";
 import { useSnackbar } from "notistack";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { InvictusApiData } from "services/invictus";
 
 
@@ -19,6 +20,26 @@ export const useInvictusLeadsQuery = () => {
     return { data, isLoading, isError };
 };
 
+export const deleteInvictusLeadByIdQuery = () => {
+    const queryClient = useQueryClient();
+    const { enqueueSnackbar } = useSnackbar();
+
+    return useMutation<void, Error, { id: number }>(
+        ({ id }) => InvictusApis.deleteByIdInvictusLead(id),
+        {
+            onSuccess: () => {
+                enqueueSnackbar('Invictus Lead User deleted successfully', { variant: 'success' });
+                queryClient.invalidateQueries(['invictus-leads']);
+            },
+            onError: (error) => {
+                const err = error as AxiosError<any>;
+                enqueueSnackbar(err.response?.data?.message || 'Something went wrong', {
+                    variant: 'error',
+                });
+            },
+        },
+    );
+}
 
 export const useInvictusMetaQuery = () => {
     const { enqueueSnackbar } = useSnackbar();
@@ -29,6 +50,27 @@ export const useInvictusMetaQuery = () => {
             enqueueSnackbar(error.message || 'Failed to load pets', { variant: 'error' });
         },
     });
-
+    console.log(data);
     return { data, isLoading, isError };
 };
+
+export const deleteInvictusMetaByIdQuery = () => {
+    const queryClient = useQueryClient();
+    const { enqueueSnackbar } = useSnackbar();
+
+    return useMutation<void, Error, { id: number }>(
+        ({ id }) => InvictusApis.deleteByIdInvictusMeta(id),
+        {
+            onSuccess: () => {
+                enqueueSnackbar('Invictus Meta User deleted successfully', { variant: 'success' });
+                queryClient.invalidateQueries(['invictus-meta']);
+            },
+            onError: (error) => {
+                const err = error as AxiosError<any>;
+                enqueueSnackbar(err.response?.data?.message || 'Something went wrong', {
+                    variant: 'error',
+                });
+            },
+        },
+    );
+}

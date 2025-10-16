@@ -38,7 +38,7 @@ const VlsLawAcademyTable = ({ searchText, usersData, handleRemove, handleView }:
             field: 'email',
             headerName: 'Email',
             flex: 1.5,
-            minWidth: 170,
+            minWidth: 190,
             align: 'center',
             headerAlign: 'center',
         },

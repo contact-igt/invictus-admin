@@ -45,7 +45,7 @@ const RamanansFinancialTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'email',
             headerName: 'Email',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 190,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
@@ -72,7 +72,7 @@ const RamanansFinancialTable = ({ searchText, usersData }: PetsTableProps) => {
             field: 'area_of_interest',
             headerName: 'Area Of Interest',
             flex: 1,
-            minWidth: 120,
+            minWidth: 190,
             sortable: false,
             filterable: false,
             align: 'center',

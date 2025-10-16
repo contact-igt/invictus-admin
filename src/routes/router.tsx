@@ -15,6 +15,11 @@ import InvictusLeads from 'pages/invictus/invictus-leads';
 import InvictusMeta from 'pages/invictus/invictus-meta';
 import KrInstitute from 'pages/kr-institute';
 import MirraBuilders from 'pages/mirra-builders';
+import Naitrika from 'pages/naitrika';
+import Netralaya from 'pages/netralaya';
+import Wellinit from 'pages/wellinit';
+import Mahimmyfood from 'pages/mahimmyfoods';
+import VlsAibe from 'pages/vls/vls-aibe';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -101,6 +106,10 @@ const router = createBrowserRouter(
                   path: paths.vlsAcademy,
                   element: <VlsAcademy />,
                 },
+                  {
+                  path: paths.vlsAibe,
+                  element: <VlsAibe />,
+                },
               ],
             },
           ],
@@ -160,6 +169,9 @@ const router = createBrowserRouter(
             },
           ],
         },
+
+
+
         {
           path: rootPaths.pageRoot,
           element: (
@@ -173,11 +185,101 @@ const router = createBrowserRouter(
           ),
           children: [
             {
-              path: paths.ramanansFinancial,
+              path: paths.ramananFinancial,
               element: <RamanansFinancial />,
             },
           ],
         },
+
+
+
+
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.naitrika,
+              element: <Naitrika />,
+            },
+          ],
+        },
+
+
+
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.netralya,
+              element: <Netralaya />,
+            },
+          ],
+        },
+
+
+
+
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.wellinit,
+              element: <Wellinit />,
+            },
+          ],
+        },
+
+
+        {
+          path: rootPaths.pageRoot,
+          element: (
+            <MainLayout>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <Outlet />
+                </ProtectedRoute>
+              </Suspense>
+            </MainLayout>
+          ),
+          children: [
+            {
+              path: paths.mahimmyFoods,
+              element: <Mahimmyfood />,
+            },
+          ],
+        },
+
+
+
+
+
         {
           path: rootPaths.authRoot,
           element: (
