@@ -23,6 +23,10 @@ const VlsView = ({ selectedUser }: viewProps) => {
         `Page Name : ${(selectedUser?.page_name) ?? '---'}`,
         `IP Address : ${(selectedUser?.ip_address) ?? '---'}`,
         `UTM Source : ${(selectedUser?.utm_source) ?? '---'}`,
+        `UTM Medium : ${(selectedUser?.utm_medium) ?? '---'}`,
+        `UTM Campaign : ${(selectedUser?.utm_campaign) ?? '---'}`,
+        `UTM Term : ${(selectedUser?.utm_term) ?? '---'}`,
+        `UTM Content : ${(selectedUser?.utm_content) ?? '---'}`,
     ]
 
     const handleurl = async () => {
@@ -84,19 +88,27 @@ const VlsView = ({ selectedUser }: viewProps) => {
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Page Name</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>IP Address</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Source</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Medium</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Campaign</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Term</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Content</Typography>
                 </Stack>
                 <Stack flexDirection={"column"} width={"100%"}>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.name ? selectedUser?.name : "---"}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.mobile ? selectedUser?.mobile : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.email ? selectedUser?.email : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.amount ? selectedUser?.amount : '---'}</Typography>
-                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.razorpay_order_id ? selectedUser?.razorpay_order_id : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.razorpay_order_id ? selectedUser?.razorpay_order_id : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.razorpay_payment_id ? selectedUser?.razorpay_payment_id : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.programm_date ? dayjs(selectedUser?.programm_date).format("YYYY-MMMM-DD") : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.page_name ? selectedUser?.page_name : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.ip_address ? selectedUser?.ip_address : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_source ? selectedUser?.utm_source : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_medium ? selectedUser?.utm_medium : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_campaign ? selectedUser?.utm_campaign : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_term ? selectedUser?.utm_term : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_content ? selectedUser?.utm_content : '---'}</Typography>
                 </Stack>
             </Stack>
         </Stack>
