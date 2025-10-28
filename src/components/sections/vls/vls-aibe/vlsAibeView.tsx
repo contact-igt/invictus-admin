@@ -11,7 +11,7 @@ interface viewProps {
 
 const VlsAibeView = ({ selectedUser }: viewProps) => {
     const [copied, setcopied] = useState(false);
-        const shareurl: any = [
+    const shareurl: any = [
         `Name : ${selectedUser?.name ?? '---'} `,
         `Email : ${selectedUser?.email ?? '---'} `,
         `Mobile : ${selectedUser?.mobile ?? '---'} `,
@@ -22,6 +22,10 @@ const VlsAibeView = ({ selectedUser }: viewProps) => {
         `Registered Date : ${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") ?? '---'}`,
         `IP Address : ${(selectedUser?.ip_address) ?? '---'}`,
         `UTM Source : ${(selectedUser?.utm_source) ?? '---'}`,
+        `UTM Medium : ${(selectedUser?.utm_medium) ?? '---'}`,
+        `UTM Campaign : ${(selectedUser?.utm_campaign) ?? '---'}`,
+        `UTM Term : ${(selectedUser?.utm_term) ?? '---'}`,
+        `UTM Content : ${(selectedUser?.utm_content) ?? '---'}`,
     ]
 
     const handleurl = async () => {
@@ -81,6 +85,10 @@ const VlsAibeView = ({ selectedUser }: viewProps) => {
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Registered Date</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>IP Address</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Source</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Medium</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Campaign</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Term</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Content</Typography>
                 </Stack>
                 <Stack flexDirection={"column"} width={"100%"}>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.name ? selectedUser?.name : "---"}</Typography>
@@ -93,6 +101,10 @@ const VlsAibeView = ({ selectedUser }: viewProps) => {
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.ip_address ? selectedUser?.ip_address : '---'}</Typography>
                     <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_source ? selectedUser?.utm_source : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_medium ? selectedUser?.utm_medium : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_source ? selectedUser?.utm_campaign : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_campaign ? selectedUser?.utm_term : '---'}</Typography>
+                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_source ? selectedUser?.utm_content : '---'}</Typography>
                 </Stack>
             </Stack>
         </Stack>
