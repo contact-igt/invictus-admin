@@ -21,7 +21,7 @@ export const _axios = async (
     import.meta.env.VITE_SERVER_PORT === 'production'
       ? import.meta.env.VITE_PRODUCTION_API_URL
       : import.meta.env.VITE_SERVER_PORT === 'development'
-        ? '/api/v1'
+        ? import.meta.env.VITE_DEVELOPMENT_API_URL
         : import.meta.env.VITE_LOCALHOST_API_URL;
 
   const endpoint = `${APIURL}${url}`;
