@@ -52,8 +52,6 @@ export const _axios = async (
       headers: {
         ...(isFormData ? {} : { 'Content-Type': contentType }),
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        'ngrok-skip-browser-warning': 'true',
-        'User-Agent': 'Custom',
       },
       method: method,
       url: endpoint,
