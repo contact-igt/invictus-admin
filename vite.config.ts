@@ -20,13 +20,9 @@ export default defineConfig({
     port: 4000,
     proxy: {
       '/api': {
-        target: 'https://fringilline-celsa-unreasoned.ngrok-free.dev/api/v1',
+        target: 'https://stageapi.invictusglobaltech.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-        headers: {
-          'ngrok-skip-browser-warning': 'true',
-          'User-Agent': 'Custom',
-        },
+        secure: true,
       },
     },
   },
