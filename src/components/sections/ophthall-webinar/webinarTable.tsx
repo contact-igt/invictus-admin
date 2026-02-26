@@ -1,147 +1,127 @@
-
 import { useEffect } from 'react';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
 import ActionMenu from 'components/sections/ActionMenu';
+import { Chip, Stack } from '@mui/material';
 import dayjs from 'dayjs';
-import { naitrikaprops } from 'services/Naitrika/script';
 
-interface PetsTableProps {
+interface WebinarTableProps {
     searchText: string;
-    usersData: naitrikaprops[];
+    usersData: any[];
+    handleRemove: (userId: number) => void;
+    handleView: (userId: number) => void;
 }
 
-const NaitrikaTable = ({ searchText, usersData }: PetsTableProps) => {
+const WebinarTable = ({ searchText, usersData, handleRemove, handleView }: WebinarTableProps) => {
     const apiRef = useGridApiRef<GridApi>();
 
     useEffect(() => {
         apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((w) => w));
     }, [searchText]);
 
-
-    const columns: GridColDef<naitrikaprops>[] = [
-
+    const columns: GridColDef[] = [
         {
             field: 'name',
             headerName: 'Name',
             flex: 1.5,
-            minWidth: 170,
+            minWidth: 180,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
                 const data = params?.value;
-                return data ? data : "---";
+                return data ? data : '---';
             },
+        },
+        {
+            field: 'email',
+            headerName: 'Email',
+            flex: 1.5,
+            minWidth: 200,
+            align: 'center',
+            headerAlign: 'center',
         },
         {
             field: 'mobile',
             headerName: 'Mobile',
             flex: 1.5,
-            minWidth: 120,
+            minWidth: 180,
             align: 'center',
             headerAlign: 'center',
         },
-
         {
-            field: 'email',
-            headerName: 'Email',
+            field: 'amount',
+            headerName: 'Amount',
             flex: 1.5,
             minWidth: 120,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
-            },
-
-        },
-        {
-            field: 'service',
-            headerName: 'Services',
-            flex: 1,
-            minWidth: 130,
-            sortable: false,
-            filterable: false,
-            align: 'center',
-            headerAlign: 'center',
-            renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
+                return params.value ? `₹${params.value}` : '-';
             },
         },
         {
-            field: 'message',
-            headerName: 'Message',
-            flex: 1,
-            minWidth: 120,
-            sortable: false,
-            filterable: false,
+            field: 'programm_date',
+            headerName: 'Programm Date',
+            flex: 1.5,
+            minWidth: 180,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
+                const data = dayjs(params?.value).format('YYYY-MMM-DD');
+                return data !== 'Invalid Date' ? data : '-';
             },
         },
-
         {
             field: 'registered_date',
             headerName: 'Registered Date',
-            flex: 1,
-            minWidth: 170,
-            sortable: false,
-            filterable: false,
+            flex: 1.5,
+            minWidth: 180,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
-                const data = dayjs(params?.value).format("DD-MM-YYYY");
-                return data ? data : "---";
+                const data = dayjs(params?.value).format('YYYY-MMM-DD');
+                return data !== 'Invalid Date' ? data : '-';
             },
         },
-
         {
-            field: 'utm_source',
-            headerName: 'UTM Source',
-            flex: 1,
-            minWidth: 140,
-            sortable: false,
-            filterable: false,
+            field: 'payment_status',
+            headerName: 'Payment Status',
+            flex: 1.5,
+            minWidth: 180,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params) => {
+                const color = params.value === 'success' || params.value === 'paid' ? 'success' : 'error';
+                return (
+                    <Stack direction="column" alignItems="center" justifyContent="center" height={1}>
+                        <Chip label={params.value ? params?.value : 'failed'} size="small" color={color} />
+                    </Stack>
+                );
+            },
+        },
+        {
+            field: 'razorpay_payment_id',
+            headerName: 'Razorpay Payment ID',
+            flex: 1.5,
+            minWidth: 220,
             align: 'center',
             headerAlign: 'center',
             renderCell: (params) => {
                 const data = params?.value;
-                return data ? data : "---";
-            },
-        },
-
-        {
-            field: 'ip_address',
-            headerName: 'IP Address',
-            flex: 1,
-            minWidth: 140,
-            sortable: false,
-            filterable: false,
-            align: 'center',
-            headerAlign: 'center',
-            renderCell: (params) => {
-                const data = params?.value;
-                return data ? data : "---";
+                return data ? data : '---';
             },
         },
         {
             field: 'action',
             headerName: 'Actions',
             flex: 1,
-            minWidth: 120,
+            minWidth: 100,
             sortable: false,
             filterable: false,
             align: 'center',
             headerAlign: 'center',
-            renderCell: () => (
-                <ActionMenu
-                    // onEdit={() => { }}
-                    onRemove={() => { }}
-                />
+            renderCell: (params) => (
+                <ActionMenu onRemove={() => handleRemove(params.row.id)} onView={() => handleView(params.row.id)} />
             ),
         },
     ];
@@ -173,4 +153,4 @@ const NaitrikaTable = ({ searchText, usersData }: PetsTableProps) => {
     );
 };
 
-export default NaitrikaTable;
+export default WebinarTable;

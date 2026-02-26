@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
+import { Typography, Box, Button, Divider } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
 import dayjs from 'dayjs';
 
@@ -11,107 +11,81 @@ interface viewProps {
 
 const VlsView = ({ selectedUser }: viewProps) => {
     const [copied, setcopied] = useState(false);
-    const shareurl: any = [
-        `Name : ${selectedUser?.name ?? '---'} `,
-        `Email : ${selectedUser?.email ?? '---'} `,
-        `Mobile : ${selectedUser?.mobile ?? '---'} `,
-        `Amount : ₹${selectedUser?.amount ?? '---'}`,
-        `Razorpay order Id : ${(selectedUser?.razorpay_order_id) ?? '---'}`,
-        `Razorpay Payment Id : ${(selectedUser?.razorpay_payment_id) ?? '---'}`,
-        `Programm Date : ${dayjs(selectedUser?.programm_date).format("YYYY-MMMM-DD") ?? '---'}`,
-        `Registered Date : ${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") ?? '---'}`,
-        `Page Name : ${(selectedUser?.page_name) ?? '---'}`,
-        `IP Address : ${(selectedUser?.ip_address) ?? '---'}`,
-        `UTM Source : ${(selectedUser?.utm_source) ?? '---'}`,
-        `UTM Medium : ${(selectedUser?.utm_medium) ?? '---'}`,
-        `UTM Campaign : ${(selectedUser?.utm_campaign) ?? '---'}`,
-        `UTM Term : ${(selectedUser?.utm_term) ?? '---'}`,
-        `UTM Content : ${(selectedUser?.utm_content) ?? '---'}`,
-    ]
 
-    const handleurl = async () => {
+    const details = [
+        { label: 'Name', value: selectedUser?.name },
+        { label: 'Email', value: selectedUser?.email },
+        { label: 'Mobile', value: selectedUser?.mobile },
+        { label: 'Amount', value: selectedUser?.amount ? `₹${selectedUser.amount}` : null },
+        { label: 'Razorpay Order Id', value: selectedUser?.razorpay_order_id },
+        { label: 'Razorpay Payment Id', value: selectedUser?.razorpay_payment_id },
+        { label: 'Program Date', value: selectedUser?.programm_date ? dayjs(selectedUser.programm_date).format("DD MMM YYYY") : null },
+        { label: 'Registered Date', value: selectedUser?.registered_date ? dayjs(selectedUser.registered_date).format("DD MMM YYYY") : null },
+        { label: 'Page Name', value: selectedUser?.page_name },
+        { label: 'IP Address', value: selectedUser?.ip_address },
+        { label: 'UTM Source', value: selectedUser?.utm_source },
+        { label: 'UTM Medium', value: selectedUser?.utm_medium },
+        { label: 'UTM Campaign', value: selectedUser?.utm_campaign },
+    ];
+
+    const handleCopy = async () => {
+        const textToCopy = details
+            .filter(d => d.value)
+            .map(d => `${d.label}: ${d.value}`)
+            .join('\n');
         try {
-            await navigator.clipboard.writeText(shareurl);
+            await navigator.clipboard.writeText(textToCopy);
             setcopied(true);
-            setTimeout(() => {
-                setcopied(false);
-            }, 2000);
+            setTimeout(() => setcopied(false), 2000);
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 
-
     return (
-        <Stack
-            flexDirection={'column'}
-            justifyContent={'center'}
-            alignItems="center"
-            spacing={2}
-            width={"600px"}
-            position={"relative"}
-            sx={{ padding: 4 }}
-        >
-            <Typography textAlign={'center'} variant="h4" sx={{ width: '100%' }}>
-                Vls Law Practice User
+        <Box sx={{ p: 4, width: { xs: '100%', sm: 400, md: 450 } }}>
+            <Typography variant="h5" mb={4} sx={{ fontWeight: 700, color: 'text.primary' }}>
+                VLS Law Practice User
             </Typography>
 
-            <Stack flexDirection={"column"} position={"absolute"} bottom={"15px"} right={"10px"} >
-                <IconifyIcon
-                    onClick={handleurl}
-                    icon="hugeicons:copy-01"
-                    sx={{
-                        cursor: 'pointer',
-                        fontSize: "35px",
-                        backgroundColor: '#47b4ec',
-                        color: '#fff',
-                        borderRadius: '10px',
-                        padding: 0.8,
-                        '&:hover': {
-                            backgroundColor: '#000000ff',
-                            color: '#fff',
-                        },
-                    }}
-                />
-                <Typography sx={{ fontSize: "10px", fontWeight: "600", textAlign: "center" }}>{copied ? 'Copied' : ''}</Typography>
+            <Stack direction="column" spacing={3} mb={4} alignItems="flex-start">
+                {details.map((detail, index) => (
+                    detail.value && (
+                        <Stack key={index} direction="column" spacing={0.5} width="100%">
+                            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                                {detail.label}
+                            </Typography>
+                            <Typography variant="body1" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                                {detail.value || '---'}
+                            </Typography>
+                        </Stack>
+                    )
+                ))}
             </Stack>
-            <Stack width={"100%"} display={"flex"} gap={"5px"} marginTop={"20px"}>
-                <Stack flexDirection={"column"} width={"350px"} >
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Name</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Mobile</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Email</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Amount</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Razorpay Order Id</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Razorpay Payment Id</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Programm Date</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Registered Date</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Page Name</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>IP Address</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Source</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Medium</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Campaign</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Term</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>UTM Content</Typography>
-                </Stack>
-                <Stack flexDirection={"column"} width={"100%"}>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.name ? selectedUser?.name : "---"}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.mobile ? selectedUser?.mobile : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.email ? selectedUser?.email : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.amount ? selectedUser?.amount : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.razorpay_order_id ? selectedUser?.razorpay_order_id : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.razorpay_payment_id ? selectedUser?.razorpay_payment_id : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.programm_date ? dayjs(selectedUser?.programm_date).format("YYYY-MMMM-DD") : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.page_name ? selectedUser?.page_name : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.ip_address ? selectedUser?.ip_address : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_source ? selectedUser?.utm_source : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_medium ? selectedUser?.utm_medium : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_campaign ? selectedUser?.utm_campaign : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_term ? selectedUser?.utm_term : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.utm_content ? selectedUser?.utm_content : '---'}</Typography>
-                </Stack>
-            </Stack>
-        </Stack>
+
+            <Divider sx={{ mb: 3 }} />
+
+            <Button
+                fullWidth
+                variant="outlined"
+                startIcon={<IconifyIcon icon={copied ? "mingcute:check-fill" : "hugeicons:copy-01"} />}
+                onClick={handleCopy}
+                sx={{
+                    textTransform: 'none',
+                    fontWeight: 600,
+                    py: 1.2,
+                    borderRadius: '8px',
+                    borderColor: copied ? 'success.main' : 'divider',
+                    color: copied ? 'success.main' : 'text.primary',
+                    '&:hover': {
+                        borderColor: copied ? 'success.dark' : 'text.primary',
+                        backgroundColor: 'transparent'
+                    }
+                }}
+            >
+                {copied ? 'Details Copied' : 'Copy All Details'}
+            </Button>
+        </Box>
     );
 };
 

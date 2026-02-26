@@ -26,11 +26,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <ScreenGuard>
-                <RouterProvider router={router} />
+                <ScreenGuard>
+                  <RouterProvider router={router} />
                 </ScreenGuard>
               </LocalizationProvider>
-              {process.env.NODE_ENV === 'development' && (
+              {import.meta.env.MODE === 'development' && (
                 <ReactQueryDevtools initialIsOpen={false} />
               )}
             </ThemeProvider>

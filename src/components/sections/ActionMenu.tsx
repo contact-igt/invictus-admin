@@ -16,7 +16,7 @@ interface Action {
 }
 
 const actions: Action[] = [
-  // { id: 1, icon: 'hugeicons:pencil-edit-02', title: 'Edit' },
+  { id: 1, icon: 'hugeicons:pencil-edit-02', title: 'Edit' },
   { id: 2, icon: 'hugeicons:view', title: 'View' },
   { id: 3, icon: 'hugeicons:delete-02', title: 'Remove' },
 ];
@@ -24,9 +24,10 @@ const actions: Action[] = [
 interface ActionMenuProps {
   onRemove?: () => void;
   onView?: () => void;
+  onEdit?: () => void;
 }
 
-const ActionMenu = ({ onRemove, onView }: ActionMenuProps) => {
+const ActionMenu = ({ onRemove, onView, onEdit }: ActionMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -49,15 +50,20 @@ const ActionMenu = ({ onRemove, onView }: ActionMenuProps) => {
         {actions.map((a) => {
           const isRemove = a.title === 'Remove';
 
+          // Only show action if the handler is provided
+          if (a.title === 'Edit' && !onEdit) return null;
+          if (a.title === 'Remove' && !onRemove) return null;
+          if (a.title === 'View' && !onView) return null;
+
           return (
             <MenuItem
               key={a.id}
               onClick={() => {
                 handleClose();
                 switch (a.title) {
-                  // case 'Edit':
-                  //   onEdit?.();
-                  //   break;
+                  case 'Edit':
+                    onEdit?.();
+                    break;
                   case 'Remove':
                     onRemove?.();
                     break;
