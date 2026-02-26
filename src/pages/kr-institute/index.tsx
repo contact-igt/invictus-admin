@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack';
-import KrInstituteSection from 'components/sections/kr-institue';
+import KrInstituteSection from 'components/sections/kr-institute';
 
 const KrInstitute = () => {
   return (

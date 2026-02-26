@@ -126,7 +126,7 @@ const TaskOverviewTable = ({ searchText }: TaskOverviewTableProps) => {
       apiRef={apiRef}
       density="standard"
       columns={columns}
-      rows={rows}
+      rows={rows || []}
       rowHeight={60}
       disableColumnResize
       disableColumnMenu

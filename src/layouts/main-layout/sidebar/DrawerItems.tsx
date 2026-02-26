@@ -1,16 +1,34 @@
-import sitemap from 'routes/sitemap';
+import sitemap, { MenuItem } from 'routes/sitemap';
 import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
 import ButtonBase from '@mui/material/ButtonBase';
 import CollapseListItem from './list-items/CollapseListItem';
 import ListItem from './list-items/ListItem';
 import Image from 'components/base/Image';
 import LogoImg from '/assets/brand-logo.png';
-// import FooterImg from 'assets/images/helpCenter.png';
+import { useAuth } from 'redux/selectors/auth/authSelector';
 
 const DrawerItems = () => {
+  const { user } = useAuth();
+
+  const filteredSitemap = sitemap.filter((item: MenuItem) => {
+    // 1. Super-admin and admin see everything
+    if (user?.role === 'super-admin' || user?.role === 'admin') {
+      return true;
+    }
+
+    // 2. Client role: only show matching client_key and standard items (dashboard)
+    if (user?.role === 'client') {
+      if (!item.clientKey) {
+        return item.id === 'dashboard';
+      }
+      return item.clientKey === user.client_key;
+    }
+
+    return false;
+  });
+
   return (
     <>
       <Stack
@@ -24,12 +42,11 @@ const DrawerItems = () => {
       >
         <ButtonBase component={Link} href="/" disableRipple>
           <Image src={LogoImg} alt="logo" height={50} width={200} sx={{ mr: 1.25 }} />
-
         </ButtonBase>
       </Stack>
 
       <List component="nav" sx={{ mt: 4, mb: 15, px: 0 }}>
-        {sitemap.map((route) =>
+        {filteredSitemap.map((route) =>
           route.items ? (
             <CollapseListItem key={route.id} {...route} />
           ) : (

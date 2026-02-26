@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
+import { Typography, Box, Button, Divider } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
 import dayjs from 'dayjs';
 
@@ -12,85 +12,74 @@ interface viewProps {
 const InvictusLeadsView = ({ selectedUser }: viewProps) => {
     const [copied, setcopied] = useState(false);
 
+    const details = [
+        { label: 'Name', value: selectedUser?.name },
+        { label: 'Email', value: selectedUser?.email },
+        { label: 'Mobile', value: selectedUser?.mobile },
+        { label: 'Service', value: selectedUser?.service },
+        { label: 'Description', value: selectedUser?.description },
+        { label: 'Registered Date', value: selectedUser?.registered_date ? dayjs(selectedUser.registered_date).format("DD MMM YYYY") : null },
+        { label: 'Registered Time', value: selectedUser?.registered_time },
+    ];
 
-    const shareurl: any = [
-        `Name : ${selectedUser?.name ?? '---'} `,
-        `Email : ${selectedUser?.email ?? '---'} `,
-        `Mobile : ${selectedUser?.mobile ?? '---'} `,
-        `Service: ${selectedUser?.service ?? '---'}`,
-        `Description : ${selectedUser?.description
-        ?? '---'}`,
-        `Registered Date : ${selectedUser?.registered_date ?? '---'}`,
-        `Registered Time: ${dayjs(selectedUser?.registered_time).format("YYYY-MMM-DD") ?? '---'}`,
-
-    ]
-
-    const handleurl = async () => {
+    const handleCopy = async () => {
+        const textToCopy = details
+            .filter(d => d.value)
+            .map(d => `${d.label}: ${d.value}`)
+            .join('\n');
         try {
-            await navigator.clipboard.writeText(shareurl);
+            await navigator.clipboard.writeText(textToCopy);
             setcopied(true);
-            setTimeout(() => {
-                setcopied(false);
-            }, 2000);
+            setTimeout(() => setcopied(false), 2000);
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 
     return (
-        <Stack
-            flexDirection={'column'}
-            justifyContent={'center'}
-            alignItems="center"
-            spacing={2}
-            width={"600px"}
-            position={"relative"}
-            sx={{ padding: 4 }}
-        >
-            <Typography textAlign={'center'} variant="h4" sx={{ width: '100%' }}>
+        <Box sx={{ p: 4, width: { xs: '100%', sm: 400, md: 450 } }}>
+            <Typography variant="h5" mb={4} sx={{ fontWeight: 700, color: 'text.primary' }}>
                 Invictus Lead User
             </Typography>
 
-            <Stack flexDirection={"column"} position={"absolute"} bottom={"15px"} right={"10px"} >
-                <IconifyIcon
-                    onClick={handleurl}
-                    icon="hugeicons:copy-01"
-                    sx={{
-                        cursor: 'pointer',
-                        fontSize: "35px",
-                        backgroundColor: '#47b4ec',
-                        color: '#fff',
-                        borderRadius: '10px',
-                        padding: 0.8,
-                        '&:hover': {
-                            backgroundColor: '#000000ff',
-                            color: '#fff',
-                        },
-                    }}
-                />
-                <Typography sx={{ fontSize: "10px", fontWeight: "600", textAlign: "center" }}>{copied ? 'Copied' : ''}</Typography>
+            <Stack direction="column" spacing={3} mb={4} alignItems="flex-start">
+                {details.map((detail, index) => (
+                    detail.value && (
+                        <Stack key={index} direction="column" spacing={0.5} width="100%">
+                            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                                {detail.label}
+                            </Typography>
+                            <Typography variant="body1" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                                {detail.value || '---'}
+                            </Typography>
+                        </Stack>
+                    )
+                ))}
             </Stack>
-            <Stack width={"100%"} display={"flex"} gap={"5px"} marginTop={"20px"}>
-                <Stack flexDirection={"column"} width={"350px"} >
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Name</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Mobile</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Email</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Service</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Description</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Registered Date</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Registered Time</Typography>
-                </Stack>
-                <Stack flexDirection={"column"} width={"100%"}>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.name ? selectedUser?.name : "---"}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.mobile ? selectedUser?.mobile : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.email ? selectedUser?.email : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.service ? selectedUser?.service : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.description ? selectedUser?.description : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD") : '---'}</Typography>
-                    <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_time ? `${selectedUser?.registered_time}` : '---'}</Typography>
-                </Stack>
-            </Stack>
-        </Stack>
+
+            <Divider sx={{ mb: 3 }} />
+
+            <Button
+                fullWidth
+                variant="outlined"
+                startIcon={<IconifyIcon icon={copied ? "mingcute:check-fill" : "hugeicons:copy-01"} />}
+                onClick={handleCopy}
+                sx={{
+                    textTransform: 'none',
+                    fontWeight: 600,
+                    py: 1.2,
+                    borderRadius: '8px',
+                    borderColor: copied ? 'success.main' : 'divider',
+                    color: copied ? 'success.main' : 'text.primary',
+                    '&:hover': {
+                        borderColor: copied ? 'success.dark' : 'text.primary',
+                        backgroundColor: 'transparent'
+                    }
+                }}
+            >
+                {copied ? 'Details Copied' : 'Copy All Details'}
+            </Button>
+        </Box>
     );
 };
 

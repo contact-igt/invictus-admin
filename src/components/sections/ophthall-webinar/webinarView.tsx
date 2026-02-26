@@ -9,15 +9,26 @@ interface viewProps {
     selectedUser: any;
 }
 
-const VlsAcademyView = ({ selectedUser }: viewProps) => {
+const WebinarView = ({ selectedUser }: viewProps) => {
     const [copied, setcopied] = useState(false);
 
     const details = [
         { label: 'Name', value: selectedUser?.name },
         { label: 'Email', value: selectedUser?.email },
         { label: 'Mobile', value: selectedUser?.mobile },
-        { label: 'Message', value: selectedUser?.message },
+        { label: 'Amount', value: selectedUser?.amount ? `₹${selectedUser.amount}` : null },
+        { label: 'Razorpay Order Id', value: selectedUser?.razorpay_order_id },
+        { label: 'Razorpay Payment Id', value: selectedUser?.razorpay_payment_id },
+        { label: 'Razorpay Signature', value: selectedUser?.razorpay_signature },
+        { label: 'Captured', value: selectedUser?.captured ? 'Yes' : 'No' },
+        { label: 'Program Date', value: selectedUser?.programm_date ? dayjs(selectedUser.programm_date).format("DD MMM YYYY") : null },
         { label: 'Registered Date', value: selectedUser?.registered_date ? dayjs(selectedUser.registered_date).format("DD MMM YYYY") : null },
+        { label: 'IP Address', value: selectedUser?.ip_address },
+        { label: 'UTM Source', value: selectedUser?.utm_source },
+        { label: 'UTM Medium', value: selectedUser?.utm_medium },
+        { label: 'UTM Campaign', value: selectedUser?.utm_campaign },
+        { label: 'UTM Term', value: selectedUser?.utm_term },
+        { label: 'UTM Content', value: selectedUser?.utm_content },
     ];
 
     const handleCopy = async () => {
@@ -37,7 +48,7 @@ const VlsAcademyView = ({ selectedUser }: viewProps) => {
     return (
         <Box sx={{ p: 4, width: { xs: '100%', sm: 400, md: 450 } }}>
             <Typography variant="h5" mb={4} sx={{ fontWeight: 700, color: 'text.primary' }}>
-                VLS Law Academy User
+                Ophthall Webinar User
             </Typography>
 
             <Stack direction="column" spacing={3} mb={4} alignItems="flex-start">
@@ -81,4 +92,4 @@ const VlsAcademyView = ({ selectedUser }: viewProps) => {
     );
 };
 
-export default VlsAcademyView;
+export default WebinarView;

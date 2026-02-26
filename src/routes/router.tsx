@@ -20,6 +20,10 @@ import Netralaya from 'pages/netralaya';
 import Wellinit from 'pages/wellinit';
 import Mahimmyfood from 'pages/mahimmyfoods';
 import VlsAibe from 'pages/vls/vls-aibe';
+import OphthallWebinar from 'pages/ophthall-webinar';
+import UserManagement from 'pages/management';
+
+import ErrorPage from 'components/common/ErrorPage';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -33,7 +37,9 @@ const router = createBrowserRouter(
           <App />
         </Suspense>
       ),
+      errorElement: <ErrorPage />,
       children: [
+        // Root dashboard route
         {
           path: '/',
           element: (
@@ -53,6 +59,7 @@ const router = createBrowserRouter(
           ],
         },
 
+        // All protected page routes — consolidated into one group
         {
           path: rootPaths.pageRoot,
           element: (
@@ -65,6 +72,7 @@ const router = createBrowserRouter(
             </MainLayout>
           ),
           children: [
+            // Invictus
             {
               path: paths.invictusRoot,
               element: <Outlet />,
@@ -79,21 +87,8 @@ const router = createBrowserRouter(
                 },
               ],
             },
-          ],
-        },
 
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
+            // VLS
             {
               path: paths.vlsRoot,
               element: <Outlet />,
@@ -106,180 +101,58 @@ const router = createBrowserRouter(
                   path: paths.vlsAcademy,
                   element: <VlsAcademy />,
                 },
-                  {
+                {
                   path: paths.vlsAibe,
                   element: <VlsAibe />,
                 },
               ],
             },
-          ],
-        },
 
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
+            // Individual client pages
             {
               path: paths.mirraBuilders,
               element: <MirraBuilders />,
             },
-          ],
-        },
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
             {
               path: paths.krInstitute,
               element: <KrInstitute />,
             },
-          ],
-        },
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
             {
               path: paths.pixelEye,
               element: <PixelEye />,
             },
-          ],
-        },
-
-
-
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
             {
               path: paths.ramananFinancial,
               element: <RamanansFinancial />,
             },
-          ],
-        },
-
-
-
-
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
             {
               path: paths.naitrika,
               element: <Naitrika />,
             },
-          ],
-        },
-
-
-
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
             {
-              path: paths.netralya,
+              path: paths.netralaya,
               element: <Netralaya />,
             },
-          ],
-        },
-
-
-
-
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
             {
               path: paths.wellinit,
               element: <Wellinit />,
             },
-          ],
-        },
-
-
-        {
-          path: rootPaths.pageRoot,
-          element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>
-                  <Outlet />
-                </ProtectedRoute>
-              </Suspense>
-            </MainLayout>
-          ),
-          children: [
             {
               path: paths.mahimmyFoods,
               element: <Mahimmyfood />,
             },
+            {
+              path: paths.ophthallWebinar,
+              element: <OphthallWebinar />,
+            },
+            {
+              path: paths.management,
+              element: <UserManagement />,
+            },
           ],
         },
 
-
-
-
-
+        // Auth routes
         {
           path: rootPaths.authRoot,
           element: (
@@ -294,8 +167,6 @@ const router = createBrowserRouter(
             },
           ],
         },
-
-
       ],
     },
   ],

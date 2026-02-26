@@ -18,6 +18,17 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 4000,
+    proxy: {
+      '/api': {
+        target: 'https://fringilline-celsa-unreasoned.ngrok-free.dev/api/v1',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          'User-Agent': 'Custom',
+        },
+      },
+    },
   },
   preview: {
     port: 5000,

@@ -9,7 +9,7 @@ import PixelEyeTable from './pixelEyeTable';
 import { handleCSVDownloadData, handleXlsxDownloadData } from 'components/hooks/useExportDataToExcel';
 import ConfirmAlert from 'components/common/ConfirmAlert';
 import { Popup } from 'components/common/Popup';
-import { Typography } from '@mui/material';
+import { Typography, Box, Divider, Button } from '@mui/material';
 import IconifyIcon from 'components/base/IconifyIcon';
 import dayjs from 'dayjs';
 
@@ -127,60 +127,57 @@ const PixelEyeSection = () => {
             </Popup>
 
             <Popup open={viewModal} onClose={handleCloseViewModal}>
-                <Stack
-                    flexDirection={'column'}
-                    justifyContent={'center'}
-                    alignItems="center"
-                    spacing={2}
-                    width={"600px"}
-                    position={"relative"}
-                    sx={{ padding: 4 }}
-                >
-                    <Typography textAlign={'center'} variant="h4" sx={{ width: '100%' }}>
+                <Box sx={{ p: 4, width: { xs: '100%', sm: 400, md: 450 } }}>
+                    <Typography variant="h5" mb={4} sx={{ fontWeight: 700, color: 'text.primary' }}>
                         Pixel Eye User
                     </Typography>
 
-                    <Stack flexDirection={"column"} position={"absolute"} bottom={"15px"} right={"10px"} >
-                        <IconifyIcon
-                            onClick={handleurl}
-                            icon="hugeicons:copy-01"
-                            sx={{
-                                cursor: 'pointer',
-                                fontSize: "35px",
-                                backgroundColor: '#47b4ec',
-                                color: '#fff',
-                                borderRadius: '10px',
-                                padding: 0.8,
-                                '&:hover': {
-                                    backgroundColor: '#000000ff',
-                                    color: '#fff',
-                                },
-                            }}
-                        />
-                        <Typography sx={{ fontSize: "10px", fontWeight: "600", textAlign: "center" }}>{copied ? 'Copied' : ''}</Typography>
+                    <Stack direction="column" spacing={3} mb={4} alignItems="flex-start">
+                        {[
+                            { label: 'Name', value: selectedUser?.name },
+                            { label: 'Mobile', value: selectedUser?.mobile },
+                            { label: 'Age', value: selectedUser?.age },
+                            { label: 'City', value: selectedUser?.city },
+                            { label: 'Page Name', value: selectedUser?.page_name },
+                            { label: 'Enquiry Count', value: selectedUser?.enquiry_count },
+                            { label: 'Enquiry Date', value: selectedUser?.registered_date ? dayjs(selectedUser.registered_date).format("DD MMM YYYY") : null },
+                        ].map((detail, index) => (
+                            detail.value && (
+                                <Stack key={index} direction="column" spacing={0.5} width="100%">
+                                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                                        {detail.label}
+                                    </Typography>
+                                    <Typography variant="body1" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                                        {detail.value || '---'}
+                                    </Typography>
+                                </Stack>
+                            )
+                        ))}
                     </Stack>
-                    <Stack width={"100%"} display={"flex"} gap={"5px"} marginTop={"20px"}>
-                        <Stack flexDirection={"column"} width={"350px"} >
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Name</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Mobile</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Age</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>City</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Page Name</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Count</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>Enquiry Date</Typography>
 
-                        </Stack>
-                        <Stack flexDirection={"column"} width={"100%"}>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.name ? selectedUser?.name : "---"}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.mobile ? selectedUser?.mobile : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.age ? selectedUser?.age : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.city ? selectedUser?.city : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.page_name ? selectedUser?.page_name : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.enquiry_count ? selectedUser?.enquiry_count : '---'}</Typography>
-                            <Typography sx={{ fontWeight: "600", marginBottom: "10px", fontSize: "15px", height: "35px" }}>: {selectedUser?.registered_date ? `${dayjs(selectedUser?.registered_date).format("YYYY-MMMM-DD")}` : '---'}</Typography>
-                        </Stack>
-                    </Stack>
-                </Stack>
+                    <Divider sx={{ mb: 3 }} />
+
+                    <Button
+                        fullWidth
+                        variant="outlined"
+                        startIcon={<IconifyIcon icon={copied ? "mingcute:check-fill" : "hugeicons:copy-01"} />}
+                        onClick={handleurl}
+                        sx={{
+                            textTransform: 'none',
+                            fontWeight: 600,
+                            py: 1.2,
+                            borderRadius: '8px',
+                            borderColor: copied ? 'success.main' : 'divider',
+                            color: copied ? 'success.main' : 'text.primary',
+                            '&:hover': {
+                                borderColor: copied ? 'success.dark' : 'text.primary',
+                                backgroundColor: 'transparent'
+                            }
+                        }}
+                    >
+                        {copied ? 'Details Copied' : 'Copy All Details'}
+                    </Button>
+                </Box>
             </Popup>
 
 

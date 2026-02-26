@@ -140,7 +140,7 @@ const VlsLawAcademyTable = ({ searchText, usersData, handleRemove, handleView }:
     return (
         <DataGrid
             apiRef={apiRef}
-            rows={usersData}
+            rows={usersData || []}
             columns={columns}
             pageSizeOptions={[5, 10, 20]}
             initialState={{ pagination: { paginationModel: { pageSize: 5 } } }}

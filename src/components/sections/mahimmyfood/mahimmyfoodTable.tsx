@@ -149,7 +149,7 @@ const MahimmyfoodTable = ({ searchText, usersData }: PetsTableProps) => {
     return (
         <DataGrid
             apiRef={apiRef}
-            rows={usersData}
+            rows={usersData || []}
             columns={columns}
             pageSizeOptions={[5, 10, 20]}
             initialState={{ pagination: { paginationModel: { pageSize: 5 } } }}
